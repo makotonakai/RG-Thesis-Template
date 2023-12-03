@@ -1,10 +1,10 @@
-\documentclass[12pt]{jreport}
+\documentclass[12pt]{report}
 \usepackage{comment}
 \usepackage{./sty/eclepsf}
 \usepackage{tascmac}
 \usepackage{tabularx}
 \usepackage{listliketab}
-\usepackage[longnamesfirst]{natbib}
+\usepackage[longnamesfirst,numbers]{natbib}
 \usepackage[dvipdfmx]{graphics}
 \usepackage[dvipdfmx]{graphicx}
 \usepackage[dvipdfmx]{color}
@@ -14,11 +14,7 @@
 \usepackage{afterpage}
 \usepackage{./sty/ncodeline}
 %\usepackage[dvipdfmx, colorlinks, breaklinks,%
-\usepackage[dvipdfmx, breaklinks,%
-bookmarks=true, bookmarksnumbered=true,%
-bookmarkstype=toc, bookmarksopen=true,bookmarksopenlevel=3,%
-pdftitle={RG},%
-]{hyperref}
+\usepackage[dvipdfmx, breaklinks,bookmarks=true, bookmarksnumbered=true,bookmarkstype=toc, bookmarksopen=true,bookmarksopenlevel=3,pdftitle={RG}]{hyperref}
 \usepackage{bookmark}
 
 \AtBeginDvi{\special{pdf:tounicode EUC-UCS2}}
@@ -76,21 +72,16 @@ pdftitle={RG},%
 \pagestyle{fancy}
 \lhead[]{}
 
-\makeatletter
-\def\chaptermark#1{\markboth {\ifnum \c@secnumdepth>\m@ne
-\@chapapp\ \thechapter \@chappos\ \fi #1}{}}
-\makeatother
-
 % タイトル
-\def\title{RGにおける卒論\LaTeX テンプレート2019}
+\def\title{Link Management For Quantum Network}
 % 英語タイトル
-\def\etitle{\LaTeX Template for RG 2019}
+\def\etitle{Link Management For Quantum Network}
 % 著者(日本語)
-\def\author{阿部涼介}
+\def\author{Makoto Nakai}
 % 著者(英語)
-\def\eauthor{Ryosuke Abe}
+\def\eauthor{Makoto Nakai}
 % 学部・研究科
-\def\dept{慶應義塾大学大学院 政策・メディア研究科}
+\def\dept{Keio University Graduate School of Media and Governance}
 % 学部・研究科(英語)
 \def\edept{Keio University Graduate School of Media and Governance}
 
@@ -100,12 +91,7 @@ pdftitle={RG},%
 \input{src/titlepage}
 \thispagestyle{empty}
 
-
-\input{src/abstract_japanese}
-\thispagestyle{plain}
-\clearpage
-
-\input{src/abstract_english}
+\input{src/abstract}
 \thispagestyle{plain}
 \clearpage
 
@@ -118,22 +104,21 @@ pdftitle={RG},%
 
 \pagenumbering{arabic}
 \input{src/1_introduction}
-\input{src/2_background}
-\input{src/3_issue}
-\input{src/4_proposed}
-\input{src/5_implementation}
-\input{src/6_evaluation}
-\input{src/7_conclusion}
-%\input{src/appendix}
-\input{src/acknowledgement}
+% \input{src/2_background}
+% \input{src/3_issue}
+% \input{src/4_proposed}
+% \input{src/5_implementation}
+% \input{src/6_evaluation}
+% \input{src/7_conclusion}
+% \input{src/appendix}
+% \input{src/acknowledgement}
 
-\renewcommand{\thechapter}{\Alph{chapter}}
-\setcounter{chapter}{0}
-\vspace{-5mm}
+% \renewcommand{\thechapter}{\Alph{chapter}}
+% \setcounter{chapter}{0}
+% \vspace{-5mm}
 
 
 \input{bib/biblio}\thispagestyle{plain}%bibtex
-
 
 \end{document}
 
