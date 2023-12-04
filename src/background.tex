@@ -520,6 +520,31 @@ $$.
 \end{tabular}
 
 \subsection{Quantum Teleportation}
+
+Unlike classical communication, quantum states cannot be just copied and transmit to other nodes due to the no-cloning theorem, which forbids duplication of any quantum state.  However, a method called quantum teleportation \cite{teleportation} was proposed, which overcomes the restriction and allows sender to transmit single qubit state to a distant location. 
+ 		
+This method requires both the single qubit state and a new Bell pair, and also the sender have to prepare two qubits and the receiver have to prepare one qubit.  After applying a CNOT gate and an H gate in the figure above, the sender have to measure both qubits and send those measurement results over the classical network.  After the receiver get those measurement results and apply some quantum gates if the measurement results of corresponding qubits on the sender's side are 1, in order to correct on the quantum state on the receiver's side.
+
+\begin{figure}[ht]
+  	\begin{center}
+  		\begin{tikzpicture}
+			\begin{yquant}
+	 			qubit {$\ket{\reg_{\idx}}$} a[2];
+	 			qubit {$\ket{\reg_{\idx}}$} b[1];	 
+	 			h a[1];
+	 			cnot b[0] | a[1];
+	 			cnot a[1] | a[0];
+	 			h a[0];
+	 			measure a[0];
+	 			z b[0] | a[0];
+	 			measure a[1];
+	 			x b[0] | a[1]; 	 
+ 			\end{yquant}
+		\end{tikzpicture}
+	\caption{Quantum circuit for quantum teleportation}
+	\end{center}
+\end{figure}
+
 \subsection{Entanglement Swapping}
 \subsection{Entanglement Purification}
 
