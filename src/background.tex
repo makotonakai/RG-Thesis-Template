@@ -453,6 +453,18 @@ Also, the sum of the measurement probability of each possible measurement outcom
 $$\sum_{m} p(m) = \langle \psi|\sum_{m} M^{\dagger}_m M_m|\psi\rangle = 1$$
 
 \section{Quantum Circuit}
+Here is the example of a quantum circuit.
+
+$$
+\begin{quantikz}
+\ket{0} & \gate{H} & \qw & \ctrl{1} & \gate{X} & \gate{Y} &\meter{} && \\
+\ket{0} & \gate{H} & \qw & \targ{} & \ctrl{1} & \gate{H} & \meter{}\\
+\ket{0} & \gate{H} & \qw & \gate{X} & \targ{} & \qw & \meter{} \
+\end{quantikz}
+$$.
+
+Each horizontal line represents each qubit and the square boxes that contain alphabets mean single quantum gates.  The sign which involves a vertical line means a CNOT gate, and the box on the most right side indicates measurement. 
+
 \section{Quantum Entanglement}
 \subsection{Bell Pair}
 \subsection{Multipartite Entanglement}
