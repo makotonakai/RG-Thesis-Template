@@ -1,9 +1,115 @@
 \chapter{Background}
 \label{background}
 
-\section{Quantum Bit}
-\subsection{Definition}
-\subsection{Bloch Sphere}
+\section{Quantum State}
+\subsection{Quantum Bit}
+A classical bit has two different states, which are 0 and 1.   Instead, those of a quantum bit (or \textbf{qubit} in short) are $|0\rangle$ and $|1\rangle$, each of which can be described as a vector. For example  
+ $$|0\rangle = \Big[
+\begin{array}{c}
+1 \\
+0 \\
+\end{array}
+\Big]
+$$
+
+$$|1\rangle = \Big[
+\begin{array}{c}
+0 \\
+1 \\
+\end{array}
+\Big]$$
+
+The state of a single 	qubit $|\psi\rangle$ can be described as follows.
+$$ |\psi\rangle = \alpha |0\rangle + \beta |1\rangle \,(\alpha, \beta \in \mathbb{C}, |\alpha|^2+|\beta|^2=1)$$.
+ After the operation called measurement, the quantum state would be collapsed into either 0 or 1.  The measurement probability of 0 is $|\alpha|^2$ and that of 1 is $|\beta|^2$. In other words, a single qubit can take both states probabilistically at the same time.  For instance, a qubit can be 
+ 
+ \begin{equation}
+	|\psi\rangle = \frac{1}{\sqrt{2}}|0\rangle + \frac{1}{\sqrt{2}}|1\rangle \tag{1}
+\end{equation}
+
+ which can be 50\% 0 and 50\% 1.
+
+ \subsection{Bloch sphere}
+ Because $|\alpha|^2 + |\beta|^2 = 1$, the notation of a single qubit state can be represented like this.
+
+\begin{equation}
+|\psi\rangle = e^{i\gamma} (\cos{\frac{\theta}{2}} + e^{i\phi} \sin{\frac{\theta}{2}}) (\gamma, \phi, \theta \in \mathbb{R})
+\end{equation}.
+
+Because $e^{i\gamma}$ is just a global state, it can be ignored and the same state can be rewritten like this.
+
+\begin{equation}
+ |\psi\rangle =  \cos{\frac{\theta}{2}} + e^{i\phi} \sin{\frac{\theta}{2}} (\phi, \theta \in \mathbb{C})
+\end{equation}
+
+Because the equation above has two parameters,  any pure single qubit state can be considered as a point on the surface and its geometric representation is called \textbf{Bloch sphere}.
+
+\begin{figure}[ht]
+  \centering
+  \tikz{
+    \tikzstyle{st}=[lightgray, fill, fill opacity=0.2];
+    \coordinate(o)at(0,0); 
+    \draw(o)circle(2cm); 
+    \draw[fill](o)circle(1.5pt);%origin
+    \draw[st](o)--(56.7:0.4)arc(56.7:90.:0.4)--cycle;%theta angle
+    \draw(0.18,0.6)node{$\theta$};
+    \draw[st](o)--(-135.7:0.4)arc(-135.7:-33.2:0.4)--cycle;%varphi angle
+    \draw(0.14,-0.58)node{$\varphi$};
+    \draw[->](o)--(-0.81,-0.79) node[above left]{\ $x$};%x
+    \draw[->](o)--(2,0)node[right]{$y$};%y
+    \draw[->](o)--(0,2)node[below right]{$z$}node[above]{\ $\ket{0}$};%z |0>
+    \draw[rotate around={0.:(0.,0.)},dashed](0,0)ellipse(2cm and 0.9cm);%ellipse
+    \draw[thick,->](o)--(0.70,1.07)node[above]{\ $\ket{\psi}$};%state vector
+    \draw[densely dotted,->](o)--(0,-2)node[below]{\ $\ket{1}$};%-z |1>
+    \draw[dotted](o)--(0.7,-0.46)--(0.7,1);%triangle
+  }
+    
+\newpage
+\caption{Bloch Sphere}
+\end{figure}
+
+\subsection{Multi-Qubit State}
+  The quantum state for multi-qubits is a \textbf{tensor product} of a state vector of each qubit.  The general notation of two qubit state is
+  
+\begin{flalign}
+    |\psi\rangle & = (\alpha |0\rangle + \beta |1\rangle) \otimes  (\gamma |0\rangle + \delta |1\rangle) \\
+    & = \alpha \gamma |00\rangle + \alpha \delta |01\rangle + \beta \gamma |10\rangle + \beta \delta |11\rangle \\ 
+   & (\alpha, \beta, \gamma, \delta \in \mathbb{C}, |\alpha|^2+|\beta|^2+|\gamma|^2+|\delta|^2=1)
+ \end{flalign}.
+  
+  For example, the state $|00\rangle$ is equal to 
+  
+\begin{equation}
+  \Big[
+\begin{array}{c}
+1 \\
+0 \\
+\end{array}
+\Big]
+\otimes
+ \Big[
+\begin{array}{c}
+1 \\
+0 \\
+\end{array}
+\Big]
+= \Big[
+\begin{array}{c}
+1 \\
+0 \\
+0 \\
+0 \\
+\end{array}
+\Big]
+\end{equation}.
+
+ However, some quantum states such as
+ 
+ \begin{equation}
+ 	|\psi\rangle = \frac{1}{\sqrt{2}}|00\rangle + \frac{1}{\sqrt{2}}|11\rangle
+ \end{equation}
+ 
+ cannot be decomposed into quantum state of each qubit.  These special quantum states are called \textbf{entangled} states.
 
 \section{Quantum Operations}
 \subsection{X Gate}
