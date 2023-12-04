@@ -112,12 +112,345 @@ Because the equation above has two parameters,  any pure single qubit state can 
  cannot be decomposed into quantum state of each qubit.  These special quantum states are called \textbf{entangled} states.
 
 \section{Quantum Operations}
+\subsection{I gate}
+
+I gate is equal to the 2x2 identity matrix, which is 
+
+\begin{equation}
+I = \begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+\end{bmatrix}
+\end{equation}.
+
+For example,
+
+\begin{equation}
+ I|0\rangle = \begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+\end{bmatrix} 
+\left[
+\begin{array}{c}
+1 \\
+0 \\
+\end{array}
+\right]
+= \left[
+\begin{array}{c}
+1 \\
+0 \\
+\end{array}
+\right]
+= |0\rangle
+\end{equation}
+
+\begin{equation}
+I|1\rangle = \begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+\end{bmatrix} 
+\left[
+\begin{array}{c}
+0 \\
+1  \\
+\end{array}
+\right]
+= \left[
+\begin{array}{c}
+0 \\
+1 \\
+\end{array}
+\right]
+= |1\rangle
+\end{equation}.
+
 \subsection{X Gate}
-\subsection{Y Gate}
+\subsubsection{X gate}
+
+X gate flips the logical value of a qubit.
+
+\begin{equation}
+X = \begin{bmatrix}
+0 & 1 \\
+1 & 0 \\
+\end{bmatrix}
+\end{equation}.
+
+For example,
+\begin{equation}
+X|0\rangle = \begin{bmatrix}
+0 & 1 \\
+1 & 0 \\
+\end{bmatrix} 
+\left[
+\begin{array}{c}
+1 \\
+0 \\
+\end{array}
+\right]
+= \left[
+\begin{array}{c}
+0 \\
+1 \\
+\end{array}
+\right]
+= |1\rangle
+\end{equation}
+
+\begin{equation}
+ X|1\rangle = \begin{bmatrix}
+0 & 1 \\
+1 & 0 \\
+\end{bmatrix} 
+\left[
+\begin{array}{c}
+0 \\
+1  \\
+\end{array}
+\right]
+= \left[
+\begin{array}{c}
+1 \\
+0 \\
+\end{array}
+\right]
+= |0\rangle
+\end{equation}.
+
+\subsection{Y gate}
+
+Y gate flips the logical value of a qubit and add an imaginary number.
+
+\begin{equation}
+ Y = \begin{bmatrix}
+0 & -i \\
+i & 0 \\
+\end{bmatrix}
+\end{equation}.
+
+For example,
+\begin{equation}
+Y|0\rangle = \begin{bmatrix}
+0 & -i \\
+i & 0 \\
+\end{bmatrix} 
+\left[
+\begin{array}{c}
+1 \\
+0 \\
+\end{array}
+\right]
+= \left[
+\begin{array}{c}
+0 \\
+i \\
+\end{array}
+\right]
+= i|1\rangle
+\end{equation}
+
+\begin{equation}
+Y|1\rangle = \begin{bmatrix}
+0 & -i \\
+i & 0 \\
+\end{bmatrix} 
+\left[
+\begin{array}{c}
+0 \\
+1  \\
+\end{array}
+\right]
+= \left[
+\begin{array}{c}
+-i \\
+0 \\
+\end{array}
+\right]
+= -i|0\rangle
+\end{equation}.
+
 \subsection{Z Gate}
+Z gate flips the phase of $ |1\rangle$
+
+\begin{equation}
+ Z = \begin{bmatrix}
+1 & 0 \\
+0 & -1 \\
+\end{bmatrix}
+\end{equation}.
+
+For example,
+\begin{equation}
+ Z|0\rangle = \begin{bmatrix}
+1 & 0 \\
+0 & -1 \\
+\end{bmatrix} 
+\left[
+\begin{array}{c}
+1 \\
+0 \\
+\end{array}
+\right]
+= \left[
+\begin{array}{c}
+1 \\
+0 \\
+\end{array}
+\right]
+= |0\rangle
+\end{equation}
+
+\begin{equation}
+Z|1\rangle = \begin{bmatrix}
+1 & 0 \\
+0 & -1 \\
+\end{bmatrix} 
+\left[
+\begin{array}{c}
+0 \\
+1  \\
+\end{array}
+\right]
+= \left[
+\begin{array}{c}
+0 \\
+-1 \\
+\end{array}
+\right]
+= -|1\rangle
+\end{equation}.
+
 \subsection{H Gate}
+H gate creates superposition.
+\begin{equation}
+ H = \frac{1}{\sqrt{2}}\begin{bmatrix}
+1 & 1\\
+1 & -1 \\
+\end{bmatrix}
+\end{equation}.
+
+For example,
+\begin{equation}
+H|0\rangle = \frac{1}{\sqrt{2}}\begin{bmatrix}
+1 & 1\\
+1 & -1 \\
+\end{bmatrix}\left[
+\begin{array}{c}
+1 \\
+0 \\
+\end{array}
+\right]
+= \frac{1}{\sqrt{2}} \left[
+\begin{array}{c}
+1 \\
+1 \\
+\end{array}
+\right]
+= \frac{1}{\sqrt{2}} (|0\rangle + |1\rangle)
+\end{equation}
+
+\begin{equation}
+H|1\rangle = \begin{bmatrix}
+1 & 1\\
+1 & -1 \\
+\end{bmatrix} 
+\left[
+\begin{array}{c}
+0 \\
+1  \\
+\end{array}
+\right]
+= \frac{1}{\sqrt{2}} \left[
+\begin{array}{c}
+1 \\
+-1 \\
+\end{array}
+\right]
+=\frac{1}{\sqrt{2}} (|0\rangle - |1\rangle)
+\end{equation}.
+
 \subsection{CNOT Gate}
+A CNOT gate involves two qubits, one is called \textbf{controlled qubit} and the other is called \textbf{target qubit}.  If the controlled qubit is 1, the bit value of the target qubit is flipped.
+
+\begin{equation}
+CNOT = \begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0 \\
+\end{bmatrix}
+\end{equation}.
+
+For example,
+\begin{equation}
+CNOT_{0,1}|10\rangle = 
+\begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0 \\
+\end{bmatrix}
+ \left[
+\begin{array}{c}
+0 \\
+0 \\
+1 \\
+0 \\
+\end{array}
+\right]
+=  \left[
+\begin{array}{c}
+0 \\
+0 \\
+0 \\
+1 \\
+\end{array}
+\right] 
+= |11\rangle 
+\end{equation}
+
+\begin{equation}
+CNOT_{0,1}|11\rangle = 
+\begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0 \\
+\end{bmatrix}
+ \left[
+\begin{array}{c}
+0 \\
+0 \\
+0 \\
+1 \\
+\end{array}
+\right]
+=  \left[
+\begin{array}{c}
+0 \\
+0 \\
+1 \\
+0 \\
+\end{array}
+\right] 
+= |10\rangle 
+\end{equation}.
+
 \subsection{Measurement}
+Quantum measurement can be described by using a group of measurement operators $\{M_m\}$
+($m$ is the measurement result that is expected to get).
+ If the quantum state before measurement is $|\psi\rangle$, the measurement probability of value $m$ is 
+ $$p(m) = \langle \psi|M^{\dagger}_m M_m|\psi\rangle$$
+
+ The quantum state after the measurement is 
+ $$\frac{M_m|\psi\rangle}{\sqrt{\langle \psi|M^{\dagger}_m M_m|\psi\rangle}}$$
+
+The measurement operators satisfy the completeness equation
+$$\sum_{m} M^{\dagger}_m M_m = I$$
+
+Also, the sum of the measurement probability of each possible measurement outcome is equal to one.
+$$\sum_{m} p(m) = \langle \psi|\sum_{m} M^{\dagger}_m M_m|\psi\rangle = 1$$
 
 \section{Quantum Circuit}
 \section{Quantum Entanglement}
