@@ -457,7 +457,7 @@ Here is the example of a quantum circuit.
 
 $$
 \begin{quantikz}
-\ket{0} & \gate{H} & \qw & \ctrl{1} & \gate{X} & \gate{Y} &\meter{} && \\
+\ket{0} & \gate{H} & \qw & \ctrl{1} & \gate{X} & \gate{Y} & \meter{} && \\
 \ket{0} & \gate{H} & \qw & \targ{} & \ctrl{1} & \gate{H} & \meter{}\\
 \ket{0} & \gate{H} & \qw & \gate{X} & \targ{} & \qw & \meter{} \
 \end{quantikz}
@@ -466,9 +466,59 @@ $$.
 Each horizontal line represents each qubit and the square boxes that contain alphabets mean single quantum gates.  The sign which involves a vertical line means a CNOT gate, and the box on the most right side indicates measurement. 
 
 \section{Quantum Entanglement}
+
+Quantum entanglement is a special type of quantum state that cannot be described in the form of tensor product of the state of each particle.
+
 \subsection{Bell Pair}
+The entangled states between two qubits are called bell pairs, and each of four states has a special notation.
+
+\begin{equation}
+  |\Phi^+\rangle = \frac{|00\rangle + |11\rangle}{\sqrt{2}}
+  \end{equation}
+  
+  \begin{equation}
+ |\Phi^-\rangle = \frac{|00\rangle - |11\rangle}{\sqrt{2}}
+ \end{equation}
+ 
+ \begin{equation}
+ |\Psi^+\rangle = \frac{|01\rangle + |10\rangle}{\sqrt{2}}
+ \end{equation}
+ 
+ \begin{equation}
+  |\Psi^-\rangle = \frac{|01\rangle - |10\rangle}{\sqrt{2}}
+  \end{equation}.
+
 \subsection{Multipartite Entanglement}
-\subsection{CHSH Inequality}
+There are cases that more than two qubits are entangled and that state is called Greenberger–Horne–Zeilinger state or GHZ state.
+
+Here is the braket notation of the GHZ state that involves three qubits.
+\begin{equation}
+  |GHZ\rangle = \frac{|000\rangle + |111\rangle}{\sqrt{2}}
+\end{equation}.
+
+In the general case, the braket notation of the GHZ state of N qubits is the following.
+\begin{equation}
+  |GHZ\rangle = \frac{|0\rangle^{\otimes N} + |1\rangle^{\otimes N}}{\sqrt{2}}
+\end{equation}.
+
+\subsection{Bell State Measurement}
+Bell state measurement is a special type of quantum measurement that determines which bell pair the given two qubit entangled state is.
+
+$$
+\begin{quantikz}
+  \lstick[2]{\ket{\text{Bell Pair}}}  & \ctrl{1} & \gate{H} & \meter{} && \\
+  \qw & \targ{} & \qw{} & \meter{} 
+\end{quantikz}
+$$.
+
+\begin{tabular}{|l|r|} \hline
+  Measurement results & Bell state \\ \hline \cline{1-2}
+  00 &  $|\Phi^+\rangle$ \\ \cline{1-2}
+  01 & $|\Phi^-\rangle$ \\  \cline{1-2}
+  10 &  $|\Psi^+\rangle$ \\ \cline{1-2}
+  11 & $|\Psi^-\rangle$ \\  \hline  \cline{1-2}
+\end{tabular}
+
 \subsection{Quantum Teleportation}
 \subsection{Entanglement Swapping}
 \subsection{Entanglement Purification}
