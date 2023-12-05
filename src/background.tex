@@ -529,17 +529,22 @@ Bell state measurement is a special type of quantum measurement that determines 
 \end{center}
 \end{figure}
 
-\begin{tabular}{|l|r|} \hline
-  Measurement results & Bell state \\ \hline \cline{1-2}
-  00 &  $|\Phi^+\rangle$ \\ \cline{1-2}
-  01 & $|\Phi^-\rangle$ \\  \cline{1-2}
-  10 &  $|\Psi^+\rangle$ \\ \cline{1-2}
-  11 & $|\Psi^-\rangle$ \\  \hline  \cline{1-2}
-\end{tabular}
+\begin{table}[ht]
+  \begin{center}
+    \begin{tabular}{|l|r|} \hline
+      Measurement results & Bell state \\ \hline \cline{1-2}
+      00 &  $|\Phi^+\rangle$ \\ \cline{1-2}
+      01 & $|\Phi^-\rangle$ \\  \cline{1-2}
+      10 &  $|\Psi^+\rangle$ \\ \cline{1-2}
+      11 & $|\Psi^-\rangle$ \\  \hline  \cline{1-2}
+    \end{tabular}
+    \caption{A table of correspondence between measurement result and Bell pair}
+  \end{center}
+\end{table}
 
 \subsection{Quantum Teleportation}
 
-Unlike classical communication, quantum states cannot be just copied and transmit to other nodes due to the no-cloning theorem, which forbids duplication of any quantum state.  However, a method called quantum teleportation \cite{teleportation} was proposed, which overcomes the restriction and allows sender to transmit single qubit state to a distant location. 
+Unlike classical communication, quantum states cannot be just copied and transmit to other nodes due to the no-cloning theorem, which forbids duplication of any quantum state.  However, a method called quantum teleportation was proposed, which overcomes the restriction and allows sender to transmit single qubit state to a distant location. 
  		
 This method requires both the single qubit state and a new Bell pair, and also the sender have to prepare two qubits and the receiver have to prepare one qubit.  After applying a CNOT gate and an H gate in the figure above, the sender have to measure both qubits and send those measurement results over the classical network.  After the receiver get those measurement results and apply some quantum gates if the measurement results of corresponding qubits on the sender's side are 1, in order to correct on the quantum state on the receiver's side.
 
