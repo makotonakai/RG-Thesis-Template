@@ -482,6 +482,7 @@ Quantum entanglement is a special type of quantum state that cannot be described
 
 \subsection{Bell Pair}
 The entangled states between two qubits are called bell pairs, and each of four states has a special notation.
+%% TODO: Add reference of EPR pair
 
 \begin{equation}
   |\Phi^+\rangle = \frac{|00\rangle + |11\rangle}{\sqrt{2}}
@@ -514,7 +515,7 @@ In the general case, the braket notation of the GHZ state of N qubits is the fol
 
 \subsection{Bell State Measurement}
 Bell state measurement is a special type of quantum measurement that determines which bell pair the given two qubit entangled state is.
-
+%% TODO: Add reference of BSM
 \begin{figure}[ht]
   \begin{center}
     \begin{tikzpicture}
@@ -547,6 +548,9 @@ Bell state measurement is a special type of quantum measurement that determines 
 Unlike classical communication, quantum states cannot be just copied and transmit to other nodes due to the no-cloning theorem, which forbids duplication of any quantum state.  However, a method called quantum teleportation was proposed, which overcomes the restriction and allows sender to transmit single qubit state to a distant location. 
  		
 This method requires both the single qubit state and a new Bell pair, and also the sender have to prepare two qubits and the receiver have to prepare one qubit.  After applying a CNOT gate and an H gate in the figure above, the sender have to measure both qubits and send those measurement results over the classical network.  After the receiver get those measurement results and apply some quantum gates if the measurement results of corresponding qubits on the sender's side are 1, in order to correct on the quantum state on the receiver's side.
+%% TODO: Add reference of quantum teleportation (both idea and circuit)
+%% TODO: Show that it works in the form of equations
+%% TODO: Add reference of experimental works
 
 \begin{figure}[ht]
   	\begin{center}
@@ -567,7 +571,19 @@ This method requires both the single qubit state and a new Bell pair, and also t
 	\end{center}
 \end{figure}
 
+\newpage
+
 \subsection{Entanglement Swapping}
+
+Entanglement swapping is the method to extend quantum entanglement by performing joint measurement on several quantum entanglement.
+For example, assume Alice has a single qubit, Bob has two qubits, and Charlie has one qubit. Then, there are Bell pairs between Alice's qubit and Bob's first qubit, and Bob's second qubit and Charlie's qubit, respectively.
+If Bob performs Bell state measurement on both of his qubits, Alice's qubit and Charlie's qubit are eventually entangled, even though they have not interacted with each other.
+This can be also seen as the teleporatation of a Bell pair by sending one of its particles.
+Here is the figure of quantum circuit to perform entanglement swapping.
+%% TODO: Add reference of entanglement swapping (both idea and circuit)
+%% TODO: Show that it works in the form of equations
+%% TODO: Add reference of experimental works
+
 \begin{figure}[ht]
   \begin{center}
     \begin{tikzpicture}
