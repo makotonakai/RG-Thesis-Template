@@ -531,15 +531,13 @@ This method requires both the single qubit state and a new Bell pair, and also t
 			\begin{yquant}
 	 			qubit {$\ket{\reg_{\idx}}$} a[2];
 	 			qubit {$\ket{\reg_{\idx}}$} b[1];
-	 			h a[0];
-        h c[0];
-	 			cnot a[0] | b[0];
-	 			cnot c[0] | b[1];
-        cnot b[0] | b[1];
-        h b[0];	 
-        measure b[0-1];	
-        z a[0] | b[0];	
-        x c[0] | b[1];		 
+	 			h a[1];
+        cnot a[1] | b[0];
+	 			cnot a[0] | a[1];
+        h a[0];	 
+        measure a[0-1];	
+        z b[0] | a[0];	
+        x b[0] | a[1];				 
  			\end{yquant}
 		\end{tikzpicture}
 	\caption{Quantum circuit for quantum teleportation}
