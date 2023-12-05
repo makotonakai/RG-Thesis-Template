@@ -455,13 +455,24 @@ $$\sum_{m} p(m) = \langle \psi|\sum_{m} M^{\dagger}_m M_m|\psi\rangle = 1$$
 \section{Quantum Circuit}
 Here is the example of a quantum circuit.
 
-$$
-\begin{quantikz}
-\ket{0} & \gate{H} & \qw & \ctrl{1} & \gate{X} & \gate{Y} & \meter{} && \\
-\ket{0} & \gate{H} & \qw & \targ{} & \ctrl{1} & \gate{H} & \meter{}\\
-\ket{0} & \gate{H} & \qw & \gate{X} & \targ{} & \qw & \meter{} \
-\end{quantikz}
-$$.
+\begin{figure}[ht]
+  \begin{center}
+    \begin{tikzpicture}
+    \begin{yquant}
+      qubit {$\ket{\reg_{\idx}}$} a[3];
+      h a[0];
+      h a[1];
+      h a[2];
+      cnot a[0] | a[1];
+      x a[2];	
+      y a[0];	 
+      cnot a[1] | a[2]; 
+      measure a[0-2];					 
+     \end{yquant}
+  \end{tikzpicture}
+\caption{A example of quantum circuit}
+\end{center}
+\end{figure}
 
 Each horizontal line represents each qubit and the square boxes that contain alphabets mean single quantum gates.  The sign which involves a vertical line means a CNOT gate, and the box on the most right side indicates measurement. 
 
@@ -504,12 +515,19 @@ In the general case, the braket notation of the GHZ state of N qubits is the fol
 \subsection{Bell State Measurement}
 Bell state measurement is a special type of quantum measurement that determines which bell pair the given two qubit entangled state is.
 
-$$
-\begin{quantikz}
-  \lstick[2]{\ket{\text{Bell Pair}}}  & \ctrl{1} & \gate{H} & \meter{} && \\
-  \qw & \targ{} & \qw{} & \meter{} 
-\end{quantikz}
-$$.
+\begin{figure}[ht]
+  \begin{center}
+    \begin{tikzpicture}
+    \begin{yquant}
+      qubit {$\ket{\reg_{\idx}}$} a[2];
+      cnot a[0] | a[1];
+      h a[0];	 
+      measure a[0-1];					 
+     \end{yquant}
+  \end{tikzpicture}
+\caption{Quantum circuit for bell state measurement}
+\end{center}
+\end{figure}
 
 \begin{tabular}{|l|r|} \hline
   Measurement results & Bell state \\ \hline \cline{1-2}
