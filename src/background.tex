@@ -623,6 +623,31 @@ Any mixed state can be converted to Werner state by applying Pauli operations an
 
 $$ \rho^{'}_{AB} = F|\Phi^+\rangle\langle\Phi^+| + \frac{1-F}{3}(|\Phi^-\rangle\langle\Phi^-| + |\Psi^+\rangle\langle\Psi^+| + |\Psi^-\rangle\langle\Psi^-|)$$
 
+\begin{table}[ht]
+  \begin{center}
+    \begin{tabular}{|c|c|} \hline
+      Before applying a CNOT gate & After a applying CNOT gate \\ \hline \cline{1-2}
+      $|\Phi^+\rangle|\Phi^+\rangle$ &  $|\Phi^+\rangle|\Phi^+\rangle$ \\ \cline{1-2}
+      $|\Phi^+\rangle|\Phi^-\rangle$ &  $|\Phi^-\rangle|\Phi^-\rangle$ \\ \cline{1-2}
+      $|\Phi^+\rangle|\Psi^+\rangle$ &  $|\Phi^+\rangle|\Psi^+\rangle$ \\ \cline{1-2}
+      $|\Phi^+\rangle|\Psi^-\rangle$ &  $|\Phi^-\rangle|\Psi^-\rangle$ \\ \cline{1-2}
+      $|\Phi^-\rangle|\Phi^+\rangle$ &  $|\Phi^-\rangle|\Phi^+\rangle$ \\ \cline{1-2}
+      $|\Phi^-\rangle|\Psi^-\rangle$ &  $|\Phi^+\rangle|\Phi^-\rangle$ \\ \cline{1-2}
+      $|\Phi^-\rangle|\Psi^+\rangle$ &  $|\Phi^-\rangle|\Psi^+\rangle$ \\ \cline{1-2}
+      $|\Phi^-\rangle|\Psi^-\rangle$ &  $|\Phi^+\rangle|\Psi^-\rangle$ \\ \cline{1-2}
+      $|\Psi^+\rangle|\Phi^+\rangle$ &  $|\Psi^+\rangle|\Psi^+\rangle$ \\ \cline{1-2}
+      $|\Psi^+\rangle|\Phi^-\rangle$ &  $|\Psi^+\rangle|\Psi^-\rangle$ \\ \cline{1-2}
+      $|\Psi^+\rangle|\Psi^+\rangle$ &  $|\Psi^+\rangle|\Phi^+\rangle$ \\ \cline{1-2}
+      $|\Psi^+\rangle|\Psi^-\rangle$ &  $|\Psi^+\rangle|\Phi^-\rangle$ \\ \cline{1-2}
+      $|\Psi^-\rangle|\Phi^+\rangle$ &  $|\Psi^-\rangle|\Psi^+\rangle$ \\ \cline{1-2}
+      $|\Psi^-\rangle|\Phi^-\rangle$ &  $|\Psi^-\rangle|\Psi^-\rangle$ \\ \cline{1-2}
+      $|\Psi^-\rangle|\Psi^+\rangle$ &  $|\Psi^-\rangle|\Phi^+\rangle$ \\ \cline{1-2}
+      $|\Psi^-\rangle|\Psi^-\rangle$ &  $|\Psi^-\rangle|\Phi^-\rangle$ \\ \cline{1-2}
+    \end{tabular}
+    \caption{A table of correspondence between Bell pairs before and after applying a CNOT gate}
+  \end{center}
+\end{table}
+
 Two noisy bell pairs are required for entanglement purification, so assume the quantum state of the entire system can be described as follows.
 \begin{multline*}
 \rho^{'}_{a_1 b_1} \otimes \rho^{'}_{a_2 b_2} = F^2|\Phi^+\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Phi^+| \\ 
@@ -643,31 +668,6 @@ The entire quantum state on this point would be as follows.
   + |\Psi^+\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Psi^+|+|\Psi^-\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Psi^+|+|\Psi^+\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Psi^+| \\
   +|\Psi^-\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Psi^-|+|\Psi^-\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Psi^-|+|\Psi^-\rangle|\Phi^-\rangle\langle\Phi^-|\langle\Psi^-|)
   \end{multline*}
-
-  \begin{table}[ht]
-    \begin{center}
-      \begin{tabular}{|c|c|} \hline
-        Before applying a CNOT gate & After a applying CNOT gate \\ \hline \cline{1-2}
-        $|\Phi^+\rangle|\Phi^+\rangle$ &  $|\Phi^+\rangle|\Phi^+\rangle$ \\ \cline{1-2}
-        $|\Phi^+\rangle|\Phi^-\rangle$ &  $|\Phi^-\rangle|\Phi^-\rangle$ \\ \cline{1-2}
-        $|\Phi^+\rangle|\Psi^+\rangle$ &  $|\Phi^+\rangle|\Psi^+\rangle$ \\ \cline{1-2}
-        $|\Phi^+\rangle|\Psi^-\rangle$ &  $|\Phi^-\rangle|\Psi^-\rangle$ \\ \cline{1-2}
-        $|\Phi^-\rangle|\Phi^+\rangle$ &  $|\Phi^-\rangle|\Phi^+\rangle$ \\ \cline{1-2}
-        $|\Phi^-\rangle|\Psi^-\rangle$ &  $|\Phi^+\rangle|\Phi^-\rangle$ \\ \cline{1-2}
-        $|\Phi^-\rangle|\Psi^+\rangle$ &  $|\Phi^-\rangle|\Psi^+\rangle$ \\ \cline{1-2}
-        $|\Phi^-\rangle|\Psi^-\rangle$ &  $|\Phi^+\rangle|\Psi^-\rangle$ \\ \cline{1-2}
-        $|\Psi^+\rangle|\Phi^+\rangle$ &  $|\Psi^+\rangle|\Psi^+\rangle$ \\ \cline{1-2}
-        $|\Psi^+\rangle|\Phi^-\rangle$ &  $|\Psi^+\rangle|\Psi^-\rangle$ \\ \cline{1-2}
-        $|\Psi^+\rangle|\Psi^+\rangle$ &  $|\Psi^+\rangle|\Phi^+\rangle$ \\ \cline{1-2}
-        $|\Psi^+\rangle|\Psi^-\rangle$ &  $|\Psi^+\rangle|\Phi^-\rangle$ \\ \cline{1-2}
-        $|\Psi^-\rangle|\Phi^+\rangle$ &  $|\Psi^-\rangle|\Psi^+\rangle$ \\ \cline{1-2}
-        $|\Psi^-\rangle|\Phi^-\rangle$ &  $|\Psi^-\rangle|\Psi^-\rangle$ \\ \cline{1-2}
-        $|\Psi^-\rangle|\Psi^+\rangle$ &  $|\Psi^-\rangle|\Phi^+\rangle$ \\ \cline{1-2}
-        $|\Psi^-\rangle|\Psi^-\rangle$ &  $|\Psi^-\rangle|\Phi^-\rangle$ \\ \cline{1-2}
-      \end{tabular}
-      \caption{A table of correspondence between Bell pairs before and after applying a CNOT gate}
-    \end{center}
-  \end{table}
 
 After that, they measure $a_2$ and $b_2$ respectively, which is the qubit on the target bell pair on their side and exchange the measurement results.  
 
