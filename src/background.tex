@@ -3,9 +3,17 @@
 
 \section{Quantum Physics}
 
+This subsection provide the fundamental knowledge of quantum physics, which will make readers feel familiar with the concept and notations that they will encounter throughout this thesis.
+
 \subsection{Pure State}
+
+Pure state is the representation of quantum state of the whole system without the assumption of external noise.
+
 \subsubsection{Quantum Bit}
-A classical bit has two different states, which are 0 and 1.   Instead, those of a quantum bit (or \textbf{qubit} in short) are $|0\rangle$ and $|1\rangle$, each of which can be described as a vector. For example  
+
+A conventional computer uses a bit to represent a basic unit of information, which are 0 and 1. A basic unit of quantum information, on the other hand is called a quantum bit (or \textbf{qubit} in short) are $|0\rangle$ and $|1\rangle$, each of which can be described in the form of a vector. 
+
+For example  
  $$|0\rangle = \Big[
 \begin{array}{c}
 1 \\
@@ -23,13 +31,15 @@ $$|1\rangle = \Big[
 
 The state of a single 	qubit $|\psi\rangle$ can be described as follows.
 $$ |\psi\rangle = \alpha |0\rangle + \beta |1\rangle \,(\alpha, \beta \in \mathbb{C}, |\alpha|^2+|\beta|^2=1)$$.
- After the operation called measurement, the quantum state would be collapsed into either 0 or 1.  The measurement probability of 0 is $|\alpha|^2$ and that of 1 is $|\beta|^2$. In other words, a single qubit can take both states probabilistically at the same time.  For instance, a qubit can be 
+ After the operation called measurement, the quantum state would be collapsed into either 0 or 1.  The measurement probability of 0 is $|\alpha|^2$ and that of 1 is $|\beta|^2$. In other words, a single qubit can take both states probabilistically at the same time.  
+ 
+ For instance, a qubit can be 
  
  \begin{equation}
 	|\psi\rangle = \frac{1}{\sqrt{2}}|0\rangle + \frac{1}{\sqrt{2}}|1\rangle \tag{1}
 \end{equation}
 
- which can be 50\% 0 and 50\% 1.
+ whose measurement probability of 0 and 1 is 50\% and 50\% respectively.
 
 \subsubsection{Bloch Sphere}
 Because $|\alpha|^2 + |\beta|^2 = 1$, the notation of a single qubit state can be represented like this.
@@ -95,14 +105,14 @@ Because the equation above has two parameters,  any pure single qubit state can 
 0 \\
 \end{array}
 \Big]
-= \Big[
+= \Bigg[
 \begin{array}{c}
 1 \\
 0 \\
 0 \\
 0 \\
 \end{array}
-\Big]
+\Bigg]
 \end{equation}.
 
  However, some quantum states such as
