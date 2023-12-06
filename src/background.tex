@@ -5,6 +5,8 @@
 
 This subsection provide the fundamental knowledge of quantum physics, which will make readers feel familiar with the concept and notations that they will encounter throughout this thesis.
 
+%TODO: List four postulate of quantum physics 
+
 \subsection{Pure State}
 
 Pure state is the representation of quantum state of the whole system without the assumption of external noise.
@@ -29,7 +31,7 @@ $$|1\rangle = \Big[
 \end{array}
 \Big]$$
 
-The state of a single 	qubit $|\psi\rangle$ can be described as follows.
+The state of a single qubit $|\psi\rangle$ can be described as follows.
 $$ |\psi\rangle = \alpha |0\rangle + \beta |1\rangle \,(\alpha, \beta \in \mathbb{C}, |\alpha|^2+|\beta|^2=1)$$.
  After the operation called measurement, the quantum state would be collapsed into either 0 or 1.  The measurement probability of 0 is $|\alpha|^2$ and that of 1 is $|\beta|^2$. In other words, a single qubit can take both states probabilistically at the same time.  
  
@@ -124,13 +126,79 @@ Because the equation above has two parameters,  any pure single qubit state can 
  cannot be decomposed into quantum state of each qubit.  These special quantum states are called \textbf{entangled} states.
 
  \subsection{Mixed State}
+
+ Mixed state is another representation of quantum state in more general cases, such as the presense of physical error.
+Mixed state is described in the form of a matrix which is called density matrix.  Assume quantum system takes one of their collections $\{|\psi_i\rangle\}$ ($i$ is an index) with the probability of $p_i$.
+
+\subsubsection{Mixed State}
+
+The density matrix of this system $\rho$ is described by 
+
+\begin{equation}
+  \rho = \sum_i p_i |\psi_i\rangle\langle\psi_i|
+\end{equation}
+
+\subsubsection{Evolution}
+
+The quantum system after applying a unitary operator $U$ is the following.
+\begin{equation}
+  \rho = \sum_i p_i |\psi_i\rangle\langle\psi_i| \xrightarrow{U} \sum_i p_i U|\psi_i\rangle\langle\psi_i|U^{\dagger}
+\end{equation}
+
+\subsubsection{Measurement}
+
+Suppose one performs measurement on a quantum state $|\psi_i\rangle$ using a measurement operator $M_m$. 
+
+Then, the measurement probability of $m$ is 
+\begin{equation}
+  p(m|i) = \langle\psi_i|M^{\dagger}_m M_m|\psi_i\rangle = tr(M^{\dagger}_m M_m|\psi_i\rangle\langle\psi_i|)
+\end{equation}
+
+The measurement probability of $m$ from the collection of state $\{|\psi_i\rangle\}$ is 
+\begin{equation}
+  \begin{split}
+    p(m) &= \sum_i p_i p(m|i) \\ 
+    &= \sum_i p_i \langle\psi_i|M^{\dagger}_m M_m|\psi_i\rangle \\
+    &= \sum_i p_i \tr(M^{\dagger}_m M_m|\psi_i\rangle\langle\psi_i|) \\
+    &= \tr(M^{\dagger}_m M_m \rho)
+  \end{split}
+\end{equation}
+
+The quantum state after the measuring $|\psi_i\rangle$ is 
+\begin{equation}
+  |\psi^m_i\rangle = \frac{M_m|\psi^m_i\rangle}{\sqrt{\langle \psi^m_i|M^{\dagger}_m M_m|\psi^m_i\rangle}}
+\end{equation}
+
+The corresponding density matrix is
+\begin{equation}
+  \begin{split}
+    \rho_m = \sum_i p(i|m)|\psi^m_i\rangle\langle\psi^m_i| = \sum_i p(i|m)\frac{M_m|\psi_i\rangle\langle\psi_i|M^{\dagger}_m}{\sqrt{\langle \psi^m_i|M^{\dagger}_m M_m|\psi^m_i\rangle}}
+  \end{split}
+\end{equation}
+
+\begin{equation}
+  \begin{split}
+    p(i|m) &= \frac{p(m, i)}{p(m)} = \frac{p(m|i)p_i}{p(m)} \\
+    &= \frac{\tr(M^{\dagger}_m M_m \rho) p_i}{\tr(M^{\dagger}_m M_m \rho)} \\
+    &= p_i
+  \end{split}
+\end{equation}
+
+Therefore, the state can also be described by the equation
+\begin{equation}
+  \begin{split}
+    \rho_m &= \sum_i p_i \frac{M_m|\psi_i\rangle\langle\psi_i|M^{\dagger}_m}{\tr(M^{\dagger}_m M_m \rho)} \\
+    &= \frac{M_m \rho M^{\dagger}_m}{\tr(M^{\dagger}_m M_m \rho)}
+  \end{split}
+\end{equation}
+
  \subsection{Fidelity}
  \subsection{Quantum State Tomography}
 
 \section{Quantum Operations}
 \subsection{I Gate}
 
-I gate is equal to the 2x2 identity matrix, which is 
+I gate is equal to the 2 $\times$ 2 identity matrix, which is 
 
 \begin{equation}
 I = \begin{bmatrix}
@@ -470,6 +538,8 @@ $$\sum_{m} M^{\dagger}_m M_m = I$$
 
 Also, the sum of the measurement probability of each possible measurement outcome is equal to one.
 $$\sum_{m} p(m) = \langle \psi|\sum_{m} M^{\dagger}_m M_m|\psi\rangle = 1$$
+
+% TODO: Add general properties of density operators
 
 \section{Quantum Circuit}
 Here is the example of a quantum circuit.
