@@ -126,6 +126,8 @@ Because the equation above has two parameters,  any pure single qubit state can 
  cannot be decomposed into quantum state of each qubit.  These special quantum states are called \textbf{entangled} states.
 
  \subsection{Mixed State}
+ %TODO: Add general principles of density metrics and their proofs
+%TODO: ADD proof that a density matrix is positive semidefinite
 
  Mixed state is another representation of quantum state in more general cases, such as the presense of physical error.
 Mixed state is described in the form of a matrix which is called density matrix.  Assume quantum system takes one of their collections $\{|\psi_i\rangle\}$ ($i$ is an index) with the probability of $p_i$.
@@ -192,7 +194,42 @@ Therefore, the state can also be described by the equation
   \end{split}
 \end{equation}
 
+
+
  \subsection{Fidelity}
+  %TODO: Add proof that the square root of density matrix exists in the appendix
+  %TODO: Mention the fact above in this subsection.
+
+ Fidelity is one of the distance between two quantum state. the fidelity of quantum state $\rho$ and $\sigma$ is
+ \begin{equation}
+  \begin{split}
+    F(\rho, \sigma) &= \tr{\sqrt{\rho^{\frac{1}{2}}\sigma\rho^{\frac{1}{2}}}} \\
+  \end{split}
+\end{equation}
+
+For instance, if they commute and diagonal in the same basis like the following,
+ \begin{equation}
+  \begin{split}
+    \rho &= \sum_i r_i |i\rangle\langle i|, \sigma= \sum_i s_i |i\rangle\langle i|\\
+  \end{split}
+\end{equation}
+
+The fidelity between these two states would be
+\begin{equation}
+  \begin{split}
+    F(\rho, \sigma) &= \tr{\sqrt{\sum_i r_i s_i |i\rangle\langle i|}} \\
+    &= \tr(\sum_i \sqrt{r_i s_i} |i\rangle\langle i|) \\
+    &= \sum_i \sqrt{r_i s_i}
+  \end{split}
+\end{equation}
+
+The fidelity between a pure state $|\psi\rangle$ and a mixed state $\rho$ is 
+\begin{equation}
+  \begin{split}
+    F(\psi, \rho) &= \tr{\sqrt{\langle\psi|\rho|\psi\rangle|\psi\rangle\langle\psi|}} \\
+    &= \sqrt{\langle\psi|\rho|\psi\rangle}
+  \end{split}
+\end{equation}
 
 \section{Quantum Operations}
 \subsection{I Gate}
