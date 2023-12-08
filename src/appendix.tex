@@ -2,6 +2,61 @@
 \chapter{Appendix}
 
 
-\section{hoge}
+\section{The Entire Calculation To Derive The Bell Pair After Purification}
+\label{appendix:purification}
+
+\begin{table}[ht]
+  \begin{center}
+    \begin{tabular}{|c|c|} \hline
+      Before applying a CNOT gate & After a applying CNOT gate \\ \hline \cline{1-2}
+      $|\Phi^+\rangle|\Phi^+\rangle$ &  $|\Phi^+\rangle|\Phi^+\rangle$ \\ \cline{1-2}
+      $|\Phi^+\rangle|\Phi^-\rangle$ &  $|\Phi^-\rangle|\Phi^-\rangle$ \\ \cline{1-2}
+      $|\Phi^+\rangle|\Psi^+\rangle$ &  $|\Phi^+\rangle|\Psi^+\rangle$ \\ \cline{1-2}
+      $|\Phi^+\rangle|\Psi^-\rangle$ &  $|\Phi^-\rangle|\Psi^-\rangle$ \\ \cline{1-2}
+      $|\Phi^-\rangle|\Phi^+\rangle$ &  $|\Phi^-\rangle|\Phi^+\rangle$ \\ \cline{1-2}
+      $|\Phi^-\rangle|\Psi^-\rangle$ &  $|\Phi^+\rangle|\Phi^-\rangle$ \\ \cline{1-2}
+      $|\Phi^-\rangle|\Psi^+\rangle$ &  $|\Phi^-\rangle|\Psi^+\rangle$ \\ \cline{1-2}
+      $|\Phi^-\rangle|\Psi^-\rangle$ &  $|\Phi^+\rangle|\Psi^-\rangle$ \\ \cline{1-2}
+      $|\Psi^+\rangle|\Phi^+\rangle$ &  $|\Psi^+\rangle|\Psi^+\rangle$ \\ \cline{1-2}
+      $|\Psi^+\rangle|\Phi^-\rangle$ &  $|\Psi^+\rangle|\Psi^-\rangle$ \\ \cline{1-2}
+      $|\Psi^+\rangle|\Psi^+\rangle$ &  $|\Psi^+\rangle|\Phi^+\rangle$ \\ \cline{1-2}
+      $|\Psi^+\rangle|\Psi^-\rangle$ &  $|\Psi^+\rangle|\Phi^-\rangle$ \\ \cline{1-2}
+      $|\Psi^-\rangle|\Phi^+\rangle$ &  $|\Psi^-\rangle|\Psi^+\rangle$ \\ \cline{1-2}
+      $|\Psi^-\rangle|\Phi^-\rangle$ &  $|\Psi^-\rangle|\Psi^-\rangle$ \\ \cline{1-2}
+      $|\Psi^-\rangle|\Psi^+\rangle$ &  $|\Psi^-\rangle|\Phi^+\rangle$ \\ \cline{1-2}
+      $|\Psi^-\rangle|\Psi^-\rangle$ &  $|\Psi^-\rangle|\Phi^-\rangle$ \\ \cline{1-2}
+    \end{tabular}
+    \caption{A table of correspondence between Bell pairs before and after applying a CNOT gate}
+  \end{center}
+\end{table}
+
+Two noisy bell pairs are required for entanglement purification, so assume the quantum state of the entire system can be described as follows.
+\begin{multline*}
+\rho^{'}_{a_1 b_1} \otimes \rho^{'}_{a_2 b_2} = F^2|\Phi^+\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Phi^+| \\ 
++ \frac{F(1-F)}{3}(|\Phi^+\rangle|\Phi^-\rangle\langle\Phi^-|\langle\Phi^+|+|\Phi^+\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Phi^+|+|\Phi^+\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Phi^+| \\
++|\Phi^-\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Phi^-|+|\Psi^+\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Psi^+|+|\Psi^-\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Psi^-|) \\ 
++ \frac{(1-F)^2}{9}(|\Phi^-\rangle|\Phi^-\rangle\langle\Phi^-|\langle\Phi^-|+|\Phi^-\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Phi^-|+|\Phi^-\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Phi^-| \\
++ |\Psi^+\rangle|\Phi^-\rangle\langle\Phi^-|\langle\Psi^+|+|\Psi^+\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Psi^+|+|\Psi^+\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Psi^+| \\
++|\Psi^-\rangle|\Phi^-\rangle\langle\Psi^-|\langle\Phi^-|+|\Psi^-\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Psi^-|+|\Psi^-\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Psi^-|)
+\end{multline*}
+
+One of the bell pair $\rho^{'}_{a_1 b_1}$ is called source bell pair, which may be purified, and the other one $\rho^{'}_{a_2 b_2}$  is called target bell pair, which is going to be measured. Then, Alice and Bob perform CNOT operations between $a_1$ and $a_2$, and $b_1$ and $b_2$, respectively.
+The entire quantum state on this point would be as follows.
+\begin{multline*}
+  \rho^{'}_{a_1 b_1} \otimes \rho^{'}_{a_2 b_2} = F^2|\Phi^+\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Phi^+| \\ 
+  + \frac{F(1-F)}{3}(|\Phi^-\rangle|\Phi^-\rangle\langle\Phi^-|\langle\Phi^-|+|\Phi^+\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Phi^+|+|\Phi^-\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Phi^-| \\
+  +|\Phi^-\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Phi^-|+|\Psi^+\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Psi^+|+|\Psi^-\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Psi^-|) \\ 
+  + \frac{(1-F)^2}{9}(|\Phi^+\rangle|\Phi^-\rangle\langle\Phi^-|\langle\Phi^+|+|\Phi^-\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Phi^-|+|\Phi^+\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Phi^+| \\
+  + |\Psi^+\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Psi^+|+|\Psi^-\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Psi^+|+|\Psi^+\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Psi^+| \\
+  +|\Psi^-\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Psi^-|+|\Psi^-\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Psi^-|+|\Psi^-\rangle|\Phi^-\rangle\langle\Phi^-|\langle\Psi^-|)
+  \end{multline*}
+
+Because getting the quantum state after measuring the last two qubits is equivalent to taking the partial trace of the target bell pair, here is the description of the source bell pair after measurement.
+\begin{multline*}
+  \rho^{'}_{ab} = \frac{1}{N} \big[ F^2 + \frac{1}{9}\big(1-F \big)^2\big]|\Phi^+\rangle\langle\Phi^+| + \frac{2F(1-F)}{3N}|\Phi^-\rangle\langle\Phi^-| + \frac{2(1-F)^2}{9N}(|\Psi^+\rangle\langle\Psi^+| + |\Psi^-\rangle\langle\Psi^-|) \\
+  (N = F^2 + \frac{2F(1-F)}{3} + \frac{2(1-F)^2}{9})
+\end{multline*}
+
+The purification becomes successful if F  $> \frac{1}{2}$
 
 
