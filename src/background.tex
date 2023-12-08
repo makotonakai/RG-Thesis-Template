@@ -751,7 +751,7 @@ $$ \rho^{'}_{AB} = F|\Phi^+\rangle\langle\Phi^+| + \frac{1-F}{3}(|\Phi^-\rangle\
 
 Two noisy bell pairs are required for entanglement purification. One of the bell pair $\rho^{'}_{a_1 b_1}$ is called source bell pair, which may be purified, and the other one $\rho^{'}_{a_2 b_2}$  is called target bell pair, which is going to be measured. 
 Then, Alice and Bob perform CNOT operations between $a_1$ and $a_2$, and $b_1$ and $b_2$, respectively.
-After that, they measure $a_2$ and $b_2$ respectively, which is the qubit on the target bell pair on their side and exchange the measurement results. If their measurement results match, the purification is successful, while they have to discard the source bell pair and try again if those results do not match. 
+After that, they measure $a_2$ and $b_2$ respectively, which is the qubit on the target bell pair on their side and exchange the measurement results. 
 If their measurement results match, the purification is successful, while they have to discard the source bell pair and try again if those results do not match.
 
 Here is the quantum state after measuring the target bell pair.
@@ -764,8 +764,17 @@ Here is the quantum state after measuring the target bell pair.
 The purification becomes successful if F  $> \frac{1}{2}$. The readers can refer to more detailed calculation in the Appendix\ref{appendix:purification}
 
 \section{Quantum Networking}
+
+This section explains the important concepts of quantum networking.
+
 \subsection{Quantum Node}
-\subsection{Quantum Repeater}
+
+Quantum nodes are the nodes on a quantum network, which can be one of the following two categories.
+\begin{enumerate}
+  \item End node \\ (A quantum node that utilizes end-to-end bell pairs to perform a specific task)
+  \item Quantum repeater \\ (An intermediate quantum node that performs entanglement swapping to extend physical bell pairs)
+\end{enumerate}
 \subsection{Quantum Link}
+\subsection{Quantum Repeater}
 \subsection{Major Applications of Quantum Networking}
 
