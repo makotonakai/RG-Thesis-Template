@@ -25,11 +25,27 @@ Multiple connections should be established simultaneously in order to enhance th
 However, the previous work only proposes the method to allocate required physical bell pairs and establish a single end-to-end bell pair, in other word, an single connection by consuming those physical resources.
 This thesis proposes a protocol to realize three important tasks, which are the negotiation about what set of connections are going to be established, the one about when to switch from those in the previous round, and coordinated resource management between two nodes connected by each link.
 It also discusses the updated procedure of establishing a new connection and tearing down one of the existing connections while several connections are being established by applying the proposed protocol.
-The proposed approach in this thesis is validated by the simulation of RuleSet-based quantum networks under several circumstances.
+The approach presented in this thesis is validated by the simulation of RuleSet-based quantum networks under several circumstances.
 
 \section{Thesis Structure}
 \label{introduction:thesis-structure} 
 % 本論文における以降の構成は次の通りである．
+
+The structure of this thesis is as follows. 
+
+Chapter \ref{background} provides the background knowledge to understand the key concepts readers would encounter throughout this thesis.
+
+Chapter \ref{related works} explains the detail of RuleSet-based quantum networking.
+
+Chapter \ref{problem-definition} presents the problem that this thesis addresses.
+
+Chapter \ref{proposal} offers the overview of the link management protocol and the messages required for its negotiation process.
+
+Chapter \ref{simulation} provides how link management protocol proposed in this thesis will be triggered after the process of connection setup and teardown. It also includes the pseudocode of methods that the node software need to execute and messages outside of the link management protocol.
+
+Chapter \ref{evaluation} presents several scenarios used to validate this protocol.
+
+Chapter \ref{conclusion} offers the conclusion of this thesis and discusses future works.
 
 % ~\ref{background}章では，背景を述べる．
 % ~\ref{issue}章では，本研究における問題の定義と，解決するための要件の整理を行う．
