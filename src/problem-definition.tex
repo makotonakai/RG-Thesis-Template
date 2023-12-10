@@ -3,6 +3,12 @@
 
 \section{Problem Definition}
 
+In order to maximize the overall performance and the aggregative use of resource in the entire network, several connections are desired to be established in the real-time fashion.
+However, there are two major obstacles to overcome in the case of quantum network. 
+One is the absence of link management protocol for quantum network. There is a previous work \cite{aparicio2011multiplexing} that proposes and compares the performance of various multiplexing strategies, but it does not mention any concrete methods to establish multiple connections and allocate the available physical links to each of these connections.
+The other one is the lack of interaction between connection management and the subsequent resource management. The current RuleSet-based communication protocol \cite{matsuo2019quantum} only proposes the scheme to establish a single connection and it does not explain the method to tear it down and free the allocated physical links after the end of RuleSet execution. 
+This thesis tackles the first problem by proposing the link management protocol the involves the negotiation about the set of connections to establish and the one about when to start the establishment. It also discuss the messages and their properties that are required to run this protocol.
+Additionally, this thesis explains how the link management scheme is going to be triggered when a new connection is established and the old one is torn down. This explanation includes the methods to implement in the relevant software components when RuleSet-based quantum network is simulated or deployed in the real world.
 %%% Local Variables:
 %%% mode: japanese-latex
 %%% TeX-master: "．/thesis"
