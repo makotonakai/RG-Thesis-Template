@@ -769,24 +769,55 @@ This section explains the important concepts of quantum networking.
 
 \subsection{Quantum Node}
 
-Quantum nodes are the nodes on a quantum network, which can be one of the following two categories.
-\begin{enumerate}
-  \item End node \\ (A quantum node that utilizes end-to-end bell pairs to perform a specific task)
-  \item Quantum repeater \\ (An intermediate quantum node that performs entanglement swapping to extend physical bell pairs)
-\end{enumerate}
+Quantum nodes are the nodes on a quantum network, which can be categorized into one of the following three categories, which was discussed in \cite{van2022quantum}
 
-The detail of quantum repeater is discussed in the section \ref{background:quantum-repeater}
+\subsubsection{End nodes}
+
+\textbf{MEAS} measures the photons it receives. Although its functionality seems to be pretty limited, a pair of this node can perform quantum key distribution. In addition to that, the single node can be used as a terminal for blind quantum computation.
+
+\textbf{COMP} represents quantum processor.  This node also has the functionality of measuring qubits and also storing them in quantum memories.
+
+\textbf{SNS} has sensing functionality by using quantum entanglement, which can be used for clock synchronization and a reference frame for interferometry. 
+
+\subsubsection{Quantum repeaters and routers}
+
+\textbf{REP1} plays a role of the 1st generation quantum repeater. It performs entanglement swapping and improves the fidelity of bell pair by purification.
+The detail of each generation of quantum repeater network will be discussed in the later section.
+
+\textbf{REP2} plays a role of the 2nd generation quantum repeater. It performs entanglement swapping and perform quantum error correction on a logical qubits, which is composed of several physical qubits.
+
+\textbf{RTR} behaves as the border between two different networks and also involves rewriting the given RuleSets into either 1st generation protocol and 2nd generation protocol based on what the network assumes.
+
+\subsubsection{Support nodes}
+
+\textbf{EPPS}, which stands for an entangled photon pair source, performs symmetric parametric down conversion.
+It creates pairs of entangled photons and send them to link end points. This node is used in terrestrial links or in satellite, which emits photons to telescopes on the ground.
+
+\textbf{BSA} or Bell State Analyzer, generates a entangled state between two quantum memories by swapping two different entanglements between a single quantum memory and a single photon.
+The success probability of entanglement swapping with linear optics scheme does not exceed 50\%.
+
+\textbf{RGSS} generates multipartite photonic entangled state for memoryless quantum network. It sends each half of the generated repeater graph state to the neighboring nodes.
+The photons are measured at link end nodes.
+
+\textbf{ABSA} performs both a single-photon measurement and two-photon measurements and their measurement basis changes based on previous measurement outcomes, logical encoding and the structure of repeater graph states.
+
+\textbf{OSW} plays a role of optical switches and can exist independently or as a part of the type of nodes that are mentioned above.
+It switches photons from incoming links to outgoing ones.
 
 \subsection{Quantum Link}
 %TODO: Add reference to quantum link
-Quantum link is a physical bell pair that is generated between two neighboring quantum nodes.  This subsection introduces three link architectures discussed in.
+Quantum link is a physical bell pair that is generated between two neighboring quantum nodes.  This subsection introduces three link architectures discussed in \cite{jones2016design}.
 
-\subsubsection*{SenderReceiver}
-\subsubsection*{MeetIntheMiddle}
-\subsubsection*{MidpointSource}
+\subsubsection{MeetIntheMiddle}
 
-\subsection{Quantum Repeater}
-\label{background:quantum-repeater}
+Meet-In-the-Middle, or MIM in short, collect photons from both end points of a physical link and create entanglements and send them back. Generation of these entanglements are performed in the Bell State Analyzer located in the middle.
 
-\subsection{Major Applications of Quantum Networking}
+\subsubsection{SenderReceiver}
+
+Unlike MIM, the Bell State Analyzer is located in one of the endpoints of a physical link.
+
+\subsubsection{MidpointSource}
+
+EPPS in the middle performs generate entanglements and send them to the both endpoints of a physical link.
+
 
