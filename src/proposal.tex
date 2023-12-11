@@ -25,12 +25,15 @@ This protocol has several requirements as follows.
 \subsubsection{Functional requirements}
 
 \begin{itemize}
-  \item Coordinate what set of RuleSets and their order to execute in the next round
-  \item Coordinate the timing of when to execute these RuleSets
-  \item Perform these negotiations between the two end nodes of each link.
+  \item The two end nodes of each link must coordinate what set of RuleSets and their order to execute in the next round
+  \item The two end nodes of each link must coordinate the timing of when to execute these RuleSets
 \end{itemize}
 
 \subsubsection{Non functional requirements}
+
+\begin{itemize}
+  \item This protocol must be adaptable to any link architecture assumed a quantum channel is based on.
+\end{itemize}
 
 \section{Link Allocation Policy}
 \section{The Negotiation About The Upcoming Link Allocation}
