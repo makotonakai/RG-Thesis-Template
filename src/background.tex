@@ -606,7 +606,7 @@ Each horizontal line represents each qubit and the square boxes that contain alp
 Quantum entanglement is a special type of quantum state that cannot be described in the form of tensor product of the state of each particle.
 
 \subsection{Bell Pair}
-The entangled states between two qubits are called bell pairs, and each of four states has a special notation.
+The entangled states between two qubits are called Bell pairs, and each of four states has a special notation.
 %% TODO: Add reference of EPR pair
 
 \begin{equation}
@@ -639,7 +639,7 @@ In the general case, the braket notation of the GHZ state of N qubits is the fol
 \end{equation}.
 
 \subsection{Bell State Measurement}
-Bell state measurement is a special type of quantum measurement that determines which bell pair the given two qubit entangled state is.
+Bell state measurement is a special type of quantum measurement that determines which Bell pair the given two qubit entangled state is.
 %% TODO: Add reference of BSM
 \begin{figure}[ht]
   \begin{center}
@@ -651,7 +651,7 @@ Bell state measurement is a special type of quantum measurement that determines 
       measure a[0-1];					 
      \end{yquant}
   \end{tikzpicture}
-\caption{Quantum circuit for bell state measurement}
+\caption{Quantum circuit for Bell state measurement}
 \end{center}
 \end{figure}
 
@@ -737,7 +737,7 @@ Here is the figure of quantum circuit to perform entanglement swapping.
 %% TODO: Add reference of experimental works
 
 Entanglement purification is a scheme to generate a set of quantum entanglements with higher fidelities from a larger set of imperfect quantum entanglements, local quantum operations, and classical communications.
-This procedure is also called entanglement distillation, or quantum concatenation. This section presents an example of entanglement purification that generates a single bell pair with higher fidelity from two of those with less fidelity.
+This procedure is also called entanglement distillation, or quantum concatenation. This section presents an example of entanglement purification that generates a single Bell pair with higher fidelity from two of those with less fidelity.
 
 Assume Alice and Bob are supposed to share $|\Phi^+\rangle$, which is one of the Bell pairs. However, the state would be converted to the following mixed state due to the noisy nature of a quantum channel.
 $$ \rho_{AB} = P_{\Phi^+}|\Phi^+\rangle\langle\Phi^+| + P_{\Phi^-}|\Phi^-\rangle\langle\Phi^-| + P_{\Psi^+}|\Psi^+\rangle\langle\Psi^+| + P_{\Psi^-}|\Psi^-\rangle\langle\Psi^-|$$
@@ -749,12 +749,12 @@ Any mixed state can be converted to Werner state by applying Pauli operations an
 $$ \rho^{'}_{AB} = F|\Phi^+\rangle\langle\Phi^+| + \frac{1-F}{3}(|\Phi^-\rangle\langle\Phi^-| + |\Psi^+\rangle\langle\Psi^+| + |\Psi^-\rangle\langle\Psi^-|)$$
 
 
-Two noisy bell pairs are required for entanglement purification. One of the bell pair $\rho^{'}_{a_1 b_1}$ is called source bell pair, which may be purified, and the other one $\rho^{'}_{a_2 b_2}$  is called target bell pair, which is going to be measured. 
+Two noisy Bell pairs are required for entanglement purification. One of the Bell pair $\rho^{'}_{a_1 b_1}$ is called source Bell pair, which may be purified, and the other one $\rho^{'}_{a_2 b_2}$  is called target Bell pair, which is going to be measured. 
 Then, Alice and Bob perform CNOT operations between $a_1$ and $a_2$, and $b_1$ and $b_2$, respectively.
-After that, they measure $a_2$ and $b_2$ respectively, which is the qubit on the target bell pair on their side and exchange the measurement results. 
-If their measurement results match, the purification is successful, while they have to discard the source bell pair and try again if those results do not match.
+After that, they measure $a_2$ and $b_2$ respectively, which is the qubit on the target Bell pair on their side and exchange the measurement results. 
+If their measurement results match, the purification is successful, while they have to discard the source Bell pair and try again if those results do not match.
 
-Here is the quantum state after measuring the target bell pair.
+Here is the quantum state after measuring the target Bell pair.
 
 \begin{multline*}
 \rho^{'}_{ab} = \frac{1}{N} \big[ F^2 + \frac{1}{9}\big(1-F \big)^2\big]|\Phi^+\rangle\langle\Phi^+| + \frac{2F(1-F)}{3N}|\Phi^-\rangle\langle\Phi^-| + \frac{2(1-F)^2}{9N}(|\Psi^+\rangle\langle\Psi^+| + |\Psi^-\rangle\langle\Psi^-|) \\
@@ -781,7 +781,7 @@ Quantum nodes are the nodes on a quantum network, which can be categorized into 
 
 \subsubsection{Quantum repeaters and routers}
 
-\textbf{REP1} plays a role of the 1st generation quantum repeater. It performs entanglement swapping and improves the fidelity of bell pair by purification.
+\textbf{REP1} plays a role of the 1st generation quantum repeater. It performs entanglement swapping and improves the fidelity of Bell pair by purification.
 The detail of each generation of quantum repeater network will be discussed in the later section.
 
 \textbf{REP2} plays a role of the 2nd generation quantum repeater. It performs entanglement swapping and perform quantum error correction on a logical qubits, which is composed of several physical qubits.
@@ -806,7 +806,7 @@ It switches photons from incoming links to outgoing ones.
 
 \subsection{Quantum Link}
 %TODO: Add reference to quantum link
-Quantum link is a physical bell pair that is generated between two neighboring quantum nodes.  This subsection introduces three link architectures discussed in \cite{jones2016design}.
+Quantum link is a physical Bell pair that is generated between two neighboring quantum nodes.  This subsection introduces three link architectures discussed in \cite{jones2016design}.
 
 \subsubsection{MeetIntheMiddle}
 

@@ -30,7 +30,7 @@
   \end{center}
 \end{table}
 
-Two noisy bell pairs are required for entanglement purification, so assume the quantum state of the entire system can be described as follows.
+Two noisy Bell pairs are required for entanglement purification, so assume the quantum state of the entire system can be described as follows.
 \begin{multline*}
 \rho^{'}_{a_1 b_1} \otimes \rho^{'}_{a_2 b_2} = F^2|\Phi^+\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Phi^+| \\ 
 + \frac{F(1-F)}{3}(|\Phi^+\rangle|\Phi^-\rangle\langle\Phi^-|\langle\Phi^+|+|\Phi^+\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Phi^+|+|\Phi^+\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Phi^+| \\
@@ -40,7 +40,7 @@ Two noisy bell pairs are required for entanglement purification, so assume the q
 +|\Psi^-\rangle|\Phi^-\rangle\langle\Psi^-|\langle\Phi^-|+|\Psi^-\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Psi^-|+|\Psi^-\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Psi^-|)
 \end{multline*}
 
-One of the bell pair $\rho^{'}_{a_1 b_1}$ is called source bell pair, which may be purified, and the other one $\rho^{'}_{a_2 b_2}$  is called target bell pair, which is going to be measured. Then, Alice and Bob perform CNOT operations between $a_1$ and $a_2$, and $b_1$ and $b_2$, respectively.
+One of the Bell pair $\rho^{'}_{a_1 b_1}$ is called source Bell pair, which may be purified, and the other one $\rho^{'}_{a_2 b_2}$  is called target Bell pair, which is going to be measured. Then, Alice and Bob perform CNOT operations between $a_1$ and $a_2$, and $b_1$ and $b_2$, respectively.
 The entire quantum state on this point would be as follows.
 \begin{multline*}
   \rho^{'}_{a_1 b_1} \otimes \rho^{'}_{a_2 b_2} = F^2|\Phi^+\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Phi^+| \\ 
@@ -51,7 +51,7 @@ The entire quantum state on this point would be as follows.
   +|\Psi^-\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Psi^-|+|\Psi^-\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Psi^-|+|\Psi^-\rangle|\Phi^-\rangle\langle\Phi^-|\langle\Psi^-|)
   \end{multline*}
 
-Because getting the quantum state after measuring the last two qubits is equivalent to taking the partial trace of the target bell pair, here is the description of the source bell pair after measurement.
+Because getting the quantum state after measuring the last two qubits is equivalent to taking the partial trace of the target Bell pair, here is the description of the source Bell pair after measurement.
 \begin{multline*}
   \rho^{'}_{ab} = \frac{1}{N} \big[ F^2 + \frac{1}{9}\big(1-F \big)^2\big]|\Phi^+\rangle\langle\Phi^+| + \frac{2F(1-F)}{3N}|\Phi^-\rangle\langle\Phi^-| + \frac{2(1-F)^2}{9N}(|\Psi^+\rangle\langle\Psi^+| + |\Psi^-\rangle\langle\Psi^-|) \\
   (N = F^2 + \frac{2F(1-F)}{3} + \frac{2(1-F)^2}{9})
