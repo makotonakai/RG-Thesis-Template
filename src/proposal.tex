@@ -216,7 +216,7 @@ This event indicates the generation of a Bell pair
 \subsubsection{Allocate}
 This event indicates the allocation of a given Bell pair to RuleSet.
 
-\subsubsection{Release}
+\subsubsection{Free}
 This event indicates the release of an available Bell pair from that RuleSet that it is used to be allocated to.
 
 \subsubsection{Measure}
@@ -227,11 +227,16 @@ This event indicates the measurement of two physical qubits of the given Bell pa
 \begin{figure}[ht] % ’ht’ tells LaTeX to place the figure ’here’ or at the top of the page
   \centering % centers the figure
   \begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto]
-    \node[state, initial] (Init) {Init};
-    \node[state, below left of=Init] (LAUSnd) {LAUSnd};
-    \node[state, right of=LAUSnd, xshift=1cm] (LAURecv) {LAURecv};
+    \node[state] (Up) {Up};
+    \node[state, initial, accepting, below = 2cm of Up] (Down) {Down};
+    \node[state, right = 3cm of Up] (Allocated) {Allocated};
+
+    \draw[->] (Down) edge [bend left] node {\tt BellPairGen} (Up);
+    \draw[->] (Up) edge [bend left] node {\tt Allocate} (Allocated);
+    \draw[->] (Allocated) edge [bend left] node {\tt Free} (Up);
+    \draw[->] (Allocated) edge [bend left] node {\tt Measure} (Down);
   \end{tikzpicture}
-  \caption{The FSM for the negotiation phase}
+  \caption{The FSM for the resource management phase}
   \label{fig:my_label}
 \end{figure}
 
