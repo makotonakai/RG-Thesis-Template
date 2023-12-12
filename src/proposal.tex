@@ -3,7 +3,7 @@
 
 \section{Overview}
 
-This chapter proposes the protocol for the management of the physical bell pairs that are available on each quantum link.
+This chapter proposes the protocol for the management of the physical Bell pairs that are available on each quantum link.
 
 This protocol has two separated phases. The first phase is the negotiation about the set of RuleSets that are going to be established in the next round. The second phase is the negotiation about when to apply the next set of RuleSets.
 These negotiations will take place between the two end point of each link.
@@ -16,7 +16,7 @@ This protocol is proposed based on the following assumptions.
   \item Existence of both a classical link and quantum link between two neighboring nodes.
   \item No delay in transmitting messages 
   \item No failures in nodes and links
-  \item Transmission of classical messages each of which includes a sequence number (an incremental identifier) from a support node every time a new bell pair is generated.
+  \item Transmission of classical messages each of which includes a sequence number (an incremental identifier) from a support node every time a new Bell pair is generated.
 \end{itemize}
 
 \section{Requirements}
@@ -47,10 +47,10 @@ After the node receives a message that notifies the establishment of a new conne
 Therefore, this protocol involves the transmission of messages that include the information of the next link allocation policy in each node.  It has to be mentioned that the order of arrival of RuleSets in the next policy might be different, so the protocol also requires the mechanism to determine which policy needs to be prioritized.
 This can be achieved by inserting a random integer to the message and adopt the order with the larger value.
 
-\section{The Timing Negotiation Policy}
+\section{The Timing Negotiation Phase}
 
-The end nodes of a physical link also need to align the timing of updating the link policy in order to assign the same bell pair to the connection.
-Otherwise,they might allocate the physical qubits of two different bell pairs, which might end up with the failure of the entire connection.
+The end nodes of a physical link also need to align the timing of updating the link policy in order to assign the same Bell pair to the connection.
+Otherwise,they might allocate the physical qubits of two different Bell pairs, which might end up with the failure of the entire connection.
 
 \section{Resource Management}
 
@@ -100,8 +100,9 @@ This message contains the following fields.
 
 \section{Finite State Machine For Link Allocation Policy}
 
-Finite state machine (FSM) is commonly provides a simple and clear description about the behavior of the communication protocol\cite{BOCHMANN1978361}.
+Finite state machine (FSM) is commonly provides a simple and clear description about the behavior of the communication protocol \cite{BOCHMANN1978361}.
 Each state in the finite state machine represents the condition of a communication node, its events represents the change such as transmission and reception of messages, and the action represents the reaction to the event based on the previous condition.
+This section explains the behavior of one of the end nodes of a link during the negotiation phase. 
 
 \subsection{States}
 
@@ -163,34 +164,76 @@ This event indicates the failure in the coordination of the next link allocation
 
 \begin{figure}[ht] % ’ht’ tells LaTeX to place the figure ’here’ or at the top of the page
   \centering % centers the figure
-  \begin{tikzpicture}
-    \node[state, initial] (q1) {$q_1$};
-    \node[state, below left of=q1] (q2) {$q_2$};
-    \node[state, right of=q2] (q3) {$q_3$};
+  \begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto]
+    \node[state, initial] (Init) {Init};
+    \node[state, below left of=Init] (LAUSnd) {LAUSnd};
+    \node[state, right of=LAUSnd, xshift=1cm] (LAURecv) {LAURecv};
+    \node[state, below right of=LAUSnd] (LAUSync) {LAUSync};
+    \node[state, below left of=LAUSync] (BrSnd) {BrSnd};
+    \node[state, right of=BrSnd, xshift=1cm] (BrRecv) {BrRecv};
+    \node[state, accepting, below right of=BrSnd] (BrSync) {BrSync};
 
-    \draw   (q1) edge[loop above] node{0} (q1)
-            (q1) edge[above] node{1} (q2)
-            (q2) edge[loop above] node{1} (q2)
-            (q2) edge[bend left, above] node{0} (q3)
-            (q3) edge[bend left, below] node{0, 1} (q2);
+   \draw[->] (Init) edge [bend right] node {\tt -LAU} (LAUSnd);
+   \draw[->] (Init) edge [bend left] node {\tt +LAU} (LAURecv);
+   \draw[->] (LAUSnd) edge [bend right] node {\tt +LAU} (LAUSync);
+   \draw[->] (LAURecv) edge [bend left] node {\tt -LAU} (LAUSync);
+   \draw[->] (LAUSync) edge [bend right] node {\tt -Br} (BrSnd);
+   \draw[->] (LAUSync) edge [bend left] node {\tt +Br} (BrRecv);
+   \draw[->] (LAUSync) edge [loop left] node {\tt LAUSuccess} ();
+   \draw[->] (LAUSync) edge [bend right] node {\tt LAUFail} (Init);
+   \draw[->] (BrSnd) edge [bend right] node {\tt +Br} (BrSync);
+   \draw[->] (BrRecv) edge [bend left] node {\tt -Br} (BrSync);
+
   \end{tikzpicture}
-  \caption{Caption of the FSM}
+  \caption{The FSM for the negotiation phase}
   \label{fig:my_label}
 \end{figure}
 
 \section{Finite State Machine For Link Management}
 
-Finite state machine is commonly provides a simple and clear description about the behavior of the communication protocol\cite{BOCHMANN1978361}.
-Each state in the finite state machine represents the condition of a communication node, its events represents the change such as transmission and reception of messages, and the action represents the reaction to the event based on the previous condition.
+This section provides the different finite state machine for the link management phase. It focuses on the behavior of a single quantum link for simplicity.
 
 \subsection{States}
 
-\subsubsection{Down}
 \subsubsection{Up}
+This is the state when a quantum link is established between its two end nodes. In this state, it is not allocated to any specific RuleSet.
+The FSM transits to Allocated if the link becomes allocated to one of the RuleSets in the active link allocation policy.
+
+\subsubsection{Down}
+This is the state when a quantum link is not established between its two end nodes. In this state, it can be no Bell pair between two existing quantum memories in the case of a quantum repeaters with those memories, or the situation when incoming photons have not arrived to memoryless quantum repeaters.
+The FSM transits to Up if a Bell pair is established.
+
 \subsubsection{Allocated}
+This is the state when a quantum link is allocated to one of the RuleSets in the active link allocation policy.
+The FSM transits to Up if the link becomes released after the connection that this link used to be allocated is terminated.
+It can also transits to Down if the physical qubits on the link are measured during execution of the RuleSet that this link is allocated to.
 
 \subsection{Events}
+
+\subsubsection{BellPairGen}
+This event indicates the generation of a Bell pair
+
+\subsubsection{Allocate}
+This event indicates the allocation of a given Bell pair to RuleSet.
+
+\subsubsection{Release}
+This event indicates the release of an available Bell pair from that RuleSet that it is used to be allocated to.
+
+\subsubsection{Measure}
+This event indicates the measurement of two physical qubits of the given Bell pair while the RuleSet is being executed.
+
 \subsection{Description of Finite State Machine}
+
+\begin{figure}[ht] % ’ht’ tells LaTeX to place the figure ’here’ or at the top of the page
+  \centering % centers the figure
+  \begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto]
+    \node[state, initial] (Init) {Init};
+    \node[state, below left of=Init] (LAUSnd) {LAUSnd};
+    \node[state, right of=LAUSnd, xshift=1cm] (LAURecv) {LAURecv};
+  \end{tikzpicture}
+  \caption{The FSM for the negotiation phase}
+  \label{fig:my_label}
+\end{figure}
 
 
 %%% Local Variables:
