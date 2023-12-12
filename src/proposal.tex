@@ -141,16 +141,16 @@ The FSM transits to the Init state until the next negotiation about the link all
 \subsection{Events}
 
 \subsubsection{+LAU}
-This event indicates the transmission of a LinkAllocationUpdateMessage.
-
-\subsubsection{-LAU}
 This event indicates the reception of a LinkAllocationUpdateMessage.
 
+\subsubsection{-LAU}
+This event indicates the transmission of a LinkAllocationUpdateMessage.
+
 \subsubsection{+Br}
-This event indicates the transmission of a BarrierMessage.
+This event indicates the reception of a BarrierMessage.
 
 \subsubsection{-Br}
-This event indicates the reception of a BarrierMessage.
+This event indicates the transmission of a BarrierMessage.
 
 \subsubsection{LAUSuccess}
 This event indicates the success in the coordination of the next link allocation policy.
