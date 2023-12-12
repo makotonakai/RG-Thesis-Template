@@ -23,28 +23,175 @@ This protocol is proposed based on the following assumptions.
 
 This protocol has several requirements as follows.
 
-\subsubsection{Functional requirements}
+\subsection{Functional requirements}
 
 \begin{itemize}
   \item The two end nodes of each link must coordinate what set of RuleSets and their order to execute in the next round
   \item The two end nodes of each link must coordinate the timing of when to execute these RuleSets
 \end{itemize}
 
-\subsubsection{Non functional requirements}
+\subsection{Non functional requirements}
 
 \begin{itemize}
-  \item This protocol must be adaptable to any link architecture assumed a quantum channel is based on.
+  \item This protocol must be independent from the underlying link architecture of a quantum link.
 \end{itemize}
 
 \section{Link Allocation Policy}
-\section{The Negotiation About The Upcoming Link Allocation}
-\section{The Negotiation About The Timing of Updating Link Allocation}
-\section{Resource Allocation }
-\section{Link Management Finite State Machines}
-\section{Link Management Finite State Events}
-\section{Type of Messages}
-\section{Relationship With Connection Setup}
-\section{Relationship With Connection Teardown}
+
+In order to establish multiple connections over a single link, the both end nodes of the link need to make the coordinated decisions about what connections need to be established.
+This set of connections, to be more specific, the set of RuleSets, would be called \textbf{Link Allocation Policy} in the rest of this thesis.
+
+\section{Link Allocation Policy Negotiation Phase}
+
+After the node receives a message that notifies the establishment of a new connection, or the termination of one of the existing connections, both nodes between a single link need to agree with the link allocation policy that are going to be executed in the next round.
+Therefore, this protocol involves the transmission of messages that include the information of the next link allocation policy in each node.  It has to be mentioned that the order of arrival of RuleSets in the next policy might be different, so the protocol also requires the mechanism to determine which policy needs to be prioritized.
+This can be achieved by inserting a random integer to the message and adopt the order with the larger value.
+
+\section{The Timing Negotiation Policy}
+
+The end nodes of a physical link also need to align the timing of updating the link policy in order to assign the same bell pair to the connection.
+Otherwise,they might allocate the physical qubits of two different bell pairs, which might end up with the failure of the entire connection.
+
+\section{Resource Management}
+
+The actual resource allocation process needs to take place before or during the execution of the RuleSets that were determined in the previous steps.
+On the contrary to that, the release of physical resources that were allocated to the terminated RuleSets need to be executed after the notification of connection teardown, which the node receives from the networking layer.
+
+\section{Messages}
+
+This protocol involves the exchange of two kinds of messages, which are \textbf{LinkAllocationUpdateMessage} and \textbf{BarrierMessage}.
+This section proposes the required fields and their types in each message.
+
+\subsection{LinkAllocationUpdateMessage}
+ 
+This message contains the following fields.
+
+\begin{table}[ht]
+  \begin{center}
+    \begin{tabular}{|c|c|c|} \hline
+      Field Name & Type & Explanation \\ \hline \cline{1-3}
+      srcAddress & integer & The source address \\ \cline{1-3}
+      destAddress & integer & The destination address \\ \cline{1-3}
+      activeLinkAllocations & RuleSet[] & The current link allocation policy \\ \cline{1-3}
+      nextLinkAllocations & RuleSet[] & The upcoming link allocation policy \\ \cline{1-3}
+      randomValue & integer & A random value \\ \cline{1-3}
+    \end{tabular}
+    \caption{The Message Fields in a LinkAllocationUpdateMessage}
+  \end{center}
+\end{table}
+
+\subsection{BarrierMessage}
+
+This message contains the following fields.
+
+\begin{table}[ht]
+  \begin{center}
+    \begin{tabular}{|c|c|c|} \hline
+      Field Name & Type & Explanation \\ \hline \cline{1-3}
+      srcAddress & integer & The source address \\ \cline{1-3}
+      destAddress & integer & The destination address \\ \cline{1-3}
+      sequenceNumber & integer & A sequence number of the first available physical Bell Pair \\ \cline{1-3}
+    \end{tabular}
+    \caption{The Message Fields in a BarrierMessage}
+  \end{center}
+\end{table}
+
+\newpage
+
+\section{Finite State Machine For Link Allocation Policy}
+
+Finite state machine (FSM) is commonly provides a simple and clear description about the behavior of the communication protocol\cite{BOCHMANN1978361}.
+Each state in the finite state machine represents the condition of a communication node, its events represents the change such as transmission and reception of messages, and the action represents the reaction to the event based on the previous condition.
+
+\subsection{States}
+
+\subsubsection{Init}
+This is the initial state that each node starts with.  
+In this state, neither the negotiation about the upcoming link allocation policy or the one about when to update the policy are happening.
+The FSM transits into either LAUSnd state or LAURecv state by sending an LinkAllocationUpdateMessage or receiving the one from its neighboring nodes.
+
+\subsubsection{LAUSnd}
+This is the state when a node sends a LinkAllocationUpdateMessage to its neighboring node. 
+In this state, a node is waiting for the incoming LinkAllocationUpdateMessage from those nodes in return, 
+so that the FSM can move to LAUSync state by coordinating the new link allocation policy.
+
+\subsubsection{LAURecv}
+This is the state when a node receives a LinkAllocationUpdateMessage from its neighboring node. 
+In this state, a node is about to send LinkAllocationUpdateMessages back to those nodes, so that the FSM can move to LAUSync state by coordinating the new link allocation policy.
+
+\subsubsection{LAUSync}
+This is the state when both end nodes coordinated the next link allocation policy.
+The FSM transits into either BarrierSnd state or BarrierRecv state if the negotiation goes successfully, otherwise it transits back to Init if they fail.
+
+\subsubsection{BrSnd}
+This is the state when a node sends a BarrierMessage to its neighboring node. 
+In this state, a node is waiting for the incoming BarrierMessage from that node in return, 
+so that the FSM can move to BarrierMessage state by coordinating from which Bell Pair the new link allocation policy should be applied.
+
+\subsubsection{BrRecv}
+This is the state when a node receives a BarrierMessage from its neighboring node. 
+In this state, a node is about to send BarrierMessage back to that node, 
+so that the FSM can move to BarrierSync state by coordinating from which Bell Pair the new link allocation policy should be applied.
+
+\subsubsection{BrSync}
+This is the state when both end nodes of a link successfully coordinated from which Bell Pair the new link allocation policy should be applied.
+The FSM transits to the Init state until the next negotiation about the link allocation policy becomes triggered from the networking layer.
+
+\subsection{Events}
+
+\subsubsection{+LAU}
+This event indicates the transmission of a LinkAllocationUpdateMessage.
+
+\subsubsection{-LAU}
+This event indicates the reception of a LinkAllocationUpdateMessage.
+
+\subsubsection{+Br}
+This event indicates the transmission of a BarrierMessage.
+
+\subsubsection{-Br}
+This event indicates the reception of a BarrierMessage.
+
+\subsubsection{LAUSuccess}
+This event indicates the success in the coordination of the next link allocation policy.
+
+\subsubsection{LAUFail}
+This event indicates the failure in the coordination of the next link allocation policy.
+
+\newpage
+
+\subsection{Description of Finite State Machine}
+
+\begin{figure}[ht] % ’ht’ tells LaTeX to place the figure ’here’ or at the top of the page
+  \centering % centers the figure
+  \begin{tikzpicture}
+    \node[state, initial] (q1) {$q_1$};
+    \node[state, below left of=q1] (q2) {$q_2$};
+    \node[state, right of=q2] (q3) {$q_3$};
+
+    \draw   (q1) edge[loop above] node{0} (q1)
+            (q1) edge[above] node{1} (q2)
+            (q2) edge[loop above] node{1} (q2)
+            (q2) edge[bend left, above] node{0} (q3)
+            (q3) edge[bend left, below] node{0, 1} (q2);
+  \end{tikzpicture}
+  \caption{Caption of the FSM}
+  \label{fig:my_label}
+\end{figure}
+
+\section{Finite State Machine For Link Management}
+
+Finite state machine is commonly provides a simple and clear description about the behavior of the communication protocol\cite{BOCHMANN1978361}.
+Each state in the finite state machine represents the condition of a communication node, its events represents the change such as transmission and reception of messages, and the action represents the reaction to the event based on the previous condition.
+
+\subsection{States}
+
+\subsubsection{Down}
+\subsubsection{Up}
+\subsubsection{Allocated}
+
+\subsection{Events}
+\subsection{Description of Finite State Machine}
+
 
 %%% Local Variables:
 %%% mode: japanese-latex
