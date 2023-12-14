@@ -79,4 +79,17 @@ Instead of performing additional state, it performs measurement on a specific ba
 
 \section{Link Layer Protocols For Quantum Network}
 
+Communication protocols for link layer have been proposed in several previous studies \cite{Van_Meter_2009,Dahlberg_2019,matsuo2019simulation}.
+The biggest difference between the communication protocol for the physical layer protocol and the one for the link layer is reliability.
+The former involves the process of actual entanglement generation and classical communication that triggers the process. On the other hand, the latter requires the additional classical communication that indicates the beginning and end of entanglement generation.
+
+The first protocol \cite{Van_Meter_2009} assumes that end nodes of a physical link are directly connected via an optical fiber. First of all, multiplexed optical pulses are sent to the receiver and they are demultiplexed and measured at the receiver.
+After several entanglements are generated, the ACK or NACK "keep" flags for each physical qubit are sent back to the sender.
+\begin{figure}[H]
+  \centerline{\includegraphics{images/link_protocol_rdv.jpg}}
+  \caption{Message sequences in the link layer protocol in  \cite{Van_Meter_2009}}
+\end{figure}
+
+The next protocol \cite{Dahlberg_2019}
+The last protocol \cite{matsuo2019simulation}
 \section{RuleSet-Based Quantum Network}
