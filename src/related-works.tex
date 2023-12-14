@@ -86,10 +86,40 @@ The former involves the process of actual entanglement generation and classical 
 The first protocol \cite{Van_Meter_2009} assumes that end nodes of a physical link are directly connected via an optical fiber. First of all, multiplexed optical pulses are sent to the receiver and they are demultiplexed and measured at the receiver.
 After several entanglements are generated, the ACK or NACK "keep" flags for each physical qubit are sent back to the sender.
 \begin{figure}[H]
-  \centerline{\includegraphics{images/link_protocol_rdv.jpg}}
+  \centerline{\includegraphics[width=.5\columnwidth]{images/link_protocol_rdv.jpg}}
   \caption{Message sequences in the link layer protocol in  \cite{Van_Meter_2009}}
 \end{figure}
 
-The next protocol \cite{Dahlberg_2019}
-The last protocol \cite{matsuo2019simulation}
+The next protocol \cite{Dahlberg_2019} assumes several components, which are Distributed Queue to store requests, Quantum Memory Management (QMM) to decide which physical qubits to use, Fidelity Estimation Unit (FEU) to estimate hardware capabilities, and Scheduler that schedules the timing of incoming requests.
+The link layer receives a CREATE operation from the upper networking layer with the number of entangled pairs it requires, the minimum required fidelity, and the amount of time it can wait.
+After that, the FEU estimates the hardware capabilities and the amount of time it would take to generate the entanglement pairs.  It the request will be rejected if the estimated time exceeds the given amount of time.
+If it is accepted, the link layer send the "yes" response with the unique ID and the number of requested entanglement pairs.
+
+\begin{figure}[H]
+  \centerline{\includegraphics[width=.5\columnwidth]{images/link_protocol_dahlberg.png}}
+  \caption{Message sequences in the link layer protocol in  \cite{Dahlberg_2019}}
+\end{figure}
+
+The last protocol \cite{matsuo2019simulation} assumes either SendReceiver or MeetInTheMiddle for its link architecture. First of all, each end node sends Boot Up Notification to its neighboring BSA nodes.
+After these notifications are received, the BSA node in the middle calculates the emission timing and send it back to its neighboring end nodes.
+Then end nodes emit a bulk of photons and send the message to notify the end of photon emission.
+Lastly, the BSA node transmits the measurement results either sequentially or in batch and the message that includes the next emission timing.
+\begin{figure}[H]
+  \centerline{\includegraphics[width=.5\columnwidth]{images/link_protocol_matsuo.png}}
+  \caption{Message sequences in the link layer protocol in \cite{matsuo2019simulation}}
+\end{figure}
+
 \section{RuleSet-Based Quantum Network}
+
+This section explains the essential features of RuleSet-based quantum networking. Before the connection is established, the initiator sends the ConnectionSetupRequest and the information about each link along the path to the responder.
+After the responder receives the request, it sends the ConnectionSetupResponse and an object called RuleSet.
+RuleSet is a collection of Rule, which contains both one or more Condition clauses and Action clause. Condition clause is the condition to meet in order to perform a specific operation, and an Action clause is the operation itself, such as entanglement swapping and purification.
+Connection establishment is performed by executing the RuleSet in each node instead of performing synchronization with neighboring nodes for each operation, so that it can reduce the number of message exchange and eventually build a more scalable quantum network.
+
+\begin{figure}[H]
+  \centerline{\includegraphics[width=.5\columnwidth]{images/ruleset_connection.png}}
+  \caption{Connection Setup in the RuleSet-based quantum network from \cite{matsuo2019simulation}}
+\end{figure}
+
+
+
