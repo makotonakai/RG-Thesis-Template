@@ -1,22 +1,69 @@
 \chapter{Simulation}
 \label{simulation}
 
-\section{Overview of QuISP (Quantum Internet Simulation Package)}
-\section{Major Components}
+\section{QuISP (Quantum Internet Simulation Package)}
 
-\section{BSA Controller}
-\section{EPPS Controller}
-\section{Bell Pair Store}
+\subsection{Overview}
 
-\section{RuleEngine}
+QuISP \cite{satoh2022quisp} is a quantum network simulator which aims to simulate the behavior of a large-scale quantum network. It is built on top of OMNeT++ \cite{10.5555/1416222.1416290}, which is an event-driven network simulator.
+The reason why QuISP is built on top of OMNet++ is that OMNet++ allows users to define their own networking layers.
+QuISP can simulate various types of errors, not only Pauli X error, Pauli Y error and Pauli Z error, but also relaxation error and excitation error.
+Physical noise on an actual quantum system with $n$ qubits are usually simulated in the form of a density matrix, which would includes $2^n \times 2^n$ elementss and soon becomes intractable as $n$ becomes larger.
+QuISP realizes the scalable simulation of quantum network by simulating the physical error using an error probability vector, which would take the following form.
+
+\begin{equation}
+  \overrightarrow{\pi}(t) = (\pi_I, \pi_X, \pi_Y, \pi_Z, \pi_R, \pi_E, \pi_L)
+\end{equation}
+It contains $m+1$ elements (m is the number of simulated error types)
+The time evolution of error probability vector is provided by a transition error matrix $Q$.
+\begin{equation}
+  \overrightarrow{\pi}(t) = \overrightarrow{\pi}(t-1)Q 
+\end{equation}
+
+The error probability vector above is the one for a single qubit, so the one for $N$ qubit system contains $N(m+1)$ elements.
+
+\subsection{Hardware Components}
+
+Communication between two quantum nodes is achieved by transmission of photons via an optical fiber, and the fiber is mocked by an object called quantum link.
+QuISP supports three main link architecture. 
+
+\subsubsection{Memory-Memory}
+The first one is Memory-Memory that two nodes are directly connected via a quantum link and the Bell State Analyzer is equipped in the receiver node.
+
+\subsubsection{Memory-Interface-Memory}
+The second one is Memory-Interface-Memory. Both end nodes of a quantum link emits photons to Bell State Analyzer located in the middle. After they become entangled, all the measurements results and required operations are sent back to both nodes.
+
+\subsubsection{Memory-Source-Memory}
+The last one Memory-Source-Memory. All the entanglement pairs are both generated and sent from the source of entangled photonic pair states in the middle.
+
+\subsection{Software Components}
+
+\subsubsection{Connection Manager}
+
+Connection establishment is done when connection manager at the Initiator nodes sends ConnectionSetupRequest to the Responder node and intermediate nodes sends additional information such as those about QNIC.
+After that, the connection manager at the responder node sends ConnectionSetupResponse to each node along the path of the connection.
+
+\subsubsection{Hardware Monitor}
+Hardware monitor is the module that collects the information of a quantum link such as fidelity and generation rate and pass those information to the routing daemon and the connection manager.
+
+\subsubsection{Bell Pair Store}
+Bell pair store is the module that stores the entanglement pairs generated from a support node such as a Bell State Analyzer.
+
+\subsubsection{Rule Engine}
+Rule engine is the component that is in charge for executing the given RuleSets and monitor the conditions of physical qubits.
+
+\subsubsection{Real-Time Controller}
+Real-time controller is the component that is responsible for the initialization of physical components and coordination of the timing for photon emission.
+
+\subsubsection{Routing Daemon}
+Routing daemon is the component that generates and exchanges the routing table for quantum network interface card, or QNIC in short.
+
+\section{Implementation}
+
+\subsection{RuleEngine}
 \subsection{Link Allocation Policy Negotiation}
-\subsection{Link Allocation Timing Negotiation}
-\subsection{Resource Allocation}
-\subsection{Connection Teardown}
-
-\section{Connection Manager}
-\subsection{LinkAllocationUpdateNotifier}
-\subsection{Connection Teardown}
+\subsubsection{Link Allocation Timing Negotiation}
+\subsubsection{Resource Allocation}
 
 
 %%% Local Variables:
