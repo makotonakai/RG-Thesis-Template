@@ -5,7 +5,7 @@ DVIPDF = dvipdfmx
 DVI_VIEW = xdvi
 PS_VIEW = gv
 PS2PDF = ps2pdf
-NAME = thesis
+NAME = dave_karitoji
 TEXHTML = latex2html
 CC = clang
 
