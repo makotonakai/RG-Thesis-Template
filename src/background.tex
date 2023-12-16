@@ -491,7 +491,40 @@ H|1\rangle = \begin{bmatrix}
 \end{equation}.
 
 \subsection{Rotation Gate}
+
+Rotation gates are quantum gates that represent rotation through an arbitrary angle $\theta$ with respect to one of x, y, z-axes of the Bloch sphere.
+
+\begin{equation}
+  R_x(\theta) = e^{-iX\theta/2} = \cos \frac{\theta}{2}I - i \sin\frac{\theta}{2}X = \begin{bmatrix}
+    \cos \frac{\theta}{2} & -i \sin \frac{\theta}{2} \\
+    -i \sin \frac{\theta}{2} & \cos \frac{\theta}{2} \\
+    \end{bmatrix} 
+\end{equation}
+
+\begin{equation}
+  R_y(\theta) = e^{-iY\theta/2} = \cos \frac{\theta}{2}I - i \sin\frac{\theta}{2}Y = \begin{bmatrix}
+    \cos \frac{\theta}{2} & -\sin \frac{\theta}{2} \\
+    \sin \frac{\theta}{2} & \cos \frac{\theta}{2} \\
+    \end{bmatrix} 
+\end{equation}
+
+\begin{equation}
+  R_z(\theta) = e^{-iZ\theta/2} = \cos \frac{\theta}{2}I - i \sin\frac{\theta}{2}Z = \begin{bmatrix}
+    e^{-i \frac{\theta}{2}} & 0 \\
+    0 & e^{i \frac{\theta}{2}} \\
+    \end{bmatrix} 
+\end{equation}
+
 \subsection{General One Qubit Gate}
+
+An arbitrary single qubit operation $U$ can be decomposed into three rotation gates with an additional phase $\alpha$.
+
+\begin{equation}
+ U = e^{i \alpha}R_z(\beta)R_y(\gamma)R_z(\delta) = \begin{bmatrix}
+    e^{i (\alpha-\beta/2-\gamma/2)\cos\frac{\delta}{2}} & e^{i (\alpha-\beta/2+\gamma/2)\sin\frac{\delta}{2}}  \\
+    e^{i (\alpha+\beta/2-\gamma/2)\sin\frac{\delta}{2}}  & e^{i (\alpha+\beta/2+\gamma/2)\cos\frac{\delta}{2}}  \\
+    \end{bmatrix} 
+\end{equation}
 
 \subsection{Controlled-NOT Gate}
 A CNOT gate involves two qubits, one is called \textbf{controlled qubit} and the other is called \textbf{target qubit}.  If the controlled qubit is 1, the bit value of the target qubit is flipped.
@@ -558,6 +591,73 @@ CNOT_{0,1}|11\rangle =
 \end{array}
 \right] 
 = |10\rangle 
+\end{equation}.
+
+\subsection{Controlled-Z Gate}
+A CZ gate involves two qubits, one is called \textbf{controlled qubit} and the other is called \textbf{target qubit}.  If the controlled qubit is 1, the Z gate is applied to the target qubit.
+
+\begin{equation}
+CZ = \begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & -1 \\
+\end{bmatrix}
+\end{equation}.
+
+For example,
+\begin{equation}
+CZ_{0,1}|10\rangle = 
+\begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & -1 \\
+\end{bmatrix}
+ \left[
+\begin{array}{c}
+0 \\
+0 \\
+1 \\
+0 \\
+\end{array}
+\right]
+=  \left[
+\begin{array}{c}
+0 \\
+0 \\
+1 \\
+0 \\
+\end{array}
+\right] 
+= |10\rangle 
+\end{equation}
+
+\begin{equation}
+CZ_{0,1}|11\rangle = 
+\begin{bmatrix}
+  1 & 0 & 0 & 0 \\
+  0 & 1 & 0 & 0 \\
+  0 & 0 & 1 & 0 \\
+  0 & 0 & 0 & -1 \\
+  \end{bmatrix}
+ \left[
+\begin{array}{c}
+0 \\
+0 \\
+0 \\
+1 \\
+\end{array}
+\right]
+=  \left[
+\begin{array}{c}
+0 \\
+0 \\
+0 \\
+-1 \\
+\end{array}
+\right] 
+= -|11\rangle 
 \end{equation}.
 
 \subsection{Measurement}
@@ -637,6 +737,18 @@ In the general case, the braket notation of the GHZ state of N qubits is the fol
 \begin{equation}
   |GHZ\rangle = \frac{|0\rangle^{\otimes N} + |1\rangle^{\otimes N}}{\sqrt{2}}
 \end{equation}.
+
+\subsection{Graph State}
+
+Graph state is one of the particular multipartite entangled state. Suppose given a particular grap $G(V, E)$.
+V indicates the collection of vertices and $E$ indicates the collection of edges.
+The associated graph state $|G\rangle$ would be represented as 
+\begin{equation}
+  |G\rangle = \prod_{(a,b) \in E} CZ_{a,b} |+\rangle
+\end{equation}.
+
+First, all the qubits are initialized as $|+ \rangle$ states and then Controlled-Z gates are applied to each pair of qubits that is represented in each edge.
+Graph state is also known as the initial state for measurement-based quantum computation (MBQC) \cite{PhysRevLett.86.5188}. 
 
 \subsection{Bell State Measurement}
 Bell state measurement is a special type of quantum measurement that determines which Bell pair the given two qubit entangled state is.
