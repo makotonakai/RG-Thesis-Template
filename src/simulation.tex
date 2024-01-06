@@ -238,6 +238,7 @@ Allocation of link Bell pairs starts after two neighboring nodes coordinates the
 \begin{algorithm}[H]  
   \caption{Algorithm For Allocating Link Bell pairs}                 
   \begin{algorithmic}[1]
+    \Require The first sequence number $first\_sequence\_number$
     \State Initialize a map of node addresses of neighboring nodes and the indices of Runtimes $partner\_addr\_runtime\_indices\_map$
     \State $index \gets$ 0
     \ForAll {$runtime \gets runtimes$}
@@ -257,11 +258,26 @@ Allocation of link Bell pairs starts after two neighboring nodes coordinates the
       \EndFor
 
       \State  Initialize a map of Runtime indices and the number of Bell pairs $runtime\_index\_bell\_pair\_number\_map$
-      \State 
-
+      \State $number \gets$ 0
+      \ForAll {$bell\_pair \gets bell\_pair\_range$}
+        \State $sequence\_number \gets$ sequence\_number of $bell\_pair$
+        \If {$first\_sequence\_number <= sequence\_number$}
+          \State $qubit\_record \gets$ The object of the physical qubit in $bell\_pair$
+          \If {$qubit\_record$ is not allocated}
+            \State $qubit\_record.is\_allocated \gets$ True
+            \State $index \gets \lfloor number \times $ the size of $runtime\_indices / bell\_pair\_num \rfloor$
+            \State $i \gets runtime\_indices[index]$
+            \State Allocate $qubit\_record$ to the $i$th Runtime
+            \If {$i$ is a part of the key list of $runtime\_index\_bell\_pair\_number\_map$}
+              \State $runtime\_index\_bell\_pair\_number\_map[runtime\_index] \gets runtime\_index\_bell\_pair\_number\_map[runtime\_index] + 1$
+            \Else
+              \State $runtime\_index\_bell\_pair\_number\_map[runtime\_index] \gets$ 0
+            \EndIf
+          \EndIf
+        \EndIf
+        \State $number \gets number + 1$
+      \EndFor
     \EndFor
-    \State $number \gets$ 0
-
   \end{algorithmic}
 \end{algorithm}
 
