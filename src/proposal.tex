@@ -140,16 +140,16 @@ The FSM transits to the Init state until the next negotiation about the link all
 
 \subsection{Events}
 
-\subsubsection{+LAU}
+\subsubsection{TxLAU}
 This event indicates the reception of a LinkAllocationUpdateMessage.
 
-\subsubsection{-LAU}
+\subsubsection{RxLAU}
 This event indicates the transmission of a LinkAllocationUpdateMessage.
 
-\subsubsection{+Br}
+\subsubsection{TxBr}
 This event indicates the reception of a BarrierMessage.
 
-\subsubsection{-Br}
+\subsubsection{RxBr}
 This event indicates the transmission of a BarrierMessage.
 
 \subsubsection{LAUSuccess}
@@ -173,16 +173,16 @@ This event indicates the failure in the coordination of the next link allocation
     \node[state, right of=BrSnd, xshift=1cm] (BrRecv) {BrRecv};
     \node[state, accepting, below right of=BrSnd] (BrSync) {BrSync};
 
-   \draw[->] (Init) edge [bend right] node {\tt -LAU} (LAUSnd);
-   \draw[->] (Init) edge [bend left] node {\tt +LAU} (LAURecv);
-   \draw[->] (LAUSnd) edge [bend right] node {\tt +LAU} (LAUSync);
-   \draw[->] (LAURecv) edge [bend left] node {\tt -LAU} (LAUSync);
-   \draw[->] (LAUSync) edge [bend right] node {\tt -Br} (BrSnd);
-   \draw[->] (LAUSync) edge [bend left] node {\tt +Br} (BrRecv);
+   \draw[->] (Init) edge [bend right] node {\tt RxLAU} (LAUSnd);
+   \draw[->] (Init) edge [bend left] node {\tt TxLAU} (LAURecv);
+   \draw[->] (LAUSnd) edge [bend right] node {\tt TxLAU} (LAUSync);
+   \draw[->] (LAURecv) edge [bend left] node {\tt RxLAU} (LAUSync);
+   \draw[->] (LAUSync) edge [bend right] node {\tt RxBr} (BrSnd);
+   \draw[->] (LAUSync) edge [bend left] node {\tt TxBr} (BrRecv);
    \draw[->] (LAUSync) edge [loop left] node {\tt LAUSuccess} ();
    \draw[->] (LAUSync) edge [bend right] node {\tt LAUFail} (Init);
-   \draw[->] (BrSnd) edge [bend right] node {\tt +Br} (BrSync);
-   \draw[->] (BrRecv) edge [bend left] node {\tt -Br} (BrSync);
+   \draw[->] (BrSnd) edge [bend right] node {\tt TxBr} (BrSync);
+   \draw[->] (BrRecv) edge [bend left] node {\tt RxBr} (BrSync);
 
   \end{tikzpicture}
   \caption{The FSM for the negotiation phase}
