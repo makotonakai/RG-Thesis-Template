@@ -27,6 +27,10 @@
 \usepackage{tikz}
 \usetikzlibrary{automata, positioning, arrows}
 \usepackage[T1]{fontenc}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
 
 \AtBeginDvi{\special{pdf:tounicode EUC-UCS2}}
 
@@ -118,10 +122,10 @@
 \pagenumbering{arabic}
 \input{src/introduction}
 \input{src/background}
-\input{src/related-works}
 \input{src/problem-definition}
 \input{src/proposal}
-% \input{src/simulation}
+\input{src/simulation}
+\input{src/related-works}
 \input{src/evaluation}
 \input{src/conclusion}
 \input{src/appendix}
