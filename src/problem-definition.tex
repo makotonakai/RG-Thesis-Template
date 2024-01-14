@@ -13,6 +13,52 @@ The other one is the lack of interaction between connection management and the s
 This thesis tackles the first problem by proposing the link management protocol the involves the negotiation about the set of connections to establish and the one about when to start the establishment. It also discuss the messages and their properties that are required to run this protocol.
 
 Additionally, this thesis explains how the link management scheme is going to be triggered when a new connection is established and the old one is torn down. This explanation includes the methods to implement in the relevant software components when RuleSet-based quantum network is simulated or deployed in the real world.
+
+\section{Assumptions}
+
+This protocol is proposed based on the following assumptions.
+
+\begin{itemize}
+  \item The decision for the entire network is made by each node.
+  \item Each node allows the increase or decrease of the number of ongoing connections and does not refuse the setup of the new connection.
+  \item The Bell pairs that are allocated but not used will be reallocated to one of the new connections.
+  \item The link management protocol is triggered by the notification of either the setup of a new connection, or the teardown of an existing connection.
+  \item Same amount of Bell pairs will be allocated to each RuleSet.
+\end{itemize}
+
+\section{Requirements}
+
+This protocol has several requirements as follows.
+
+\subsection{Functional requirements}
+
+\subsubsection{Common}
+
+\begin{itemize}
+  \item Two neighboring nodes MUST agree with the next set of RuleSets (which is called the link allocation policy) and its order.
+\end{itemize}
+
+\subsubsection{Connection Setup}
+
+\begin{itemize}
+  \item Two neighboring nodes MUST also agree with when the new policy will be applied.
+  \item If these negotiations go successful, available Bell pairs on link level MUST be allocated to one of the RuleSets in the next link allocation policy.
+\end{itemize}
+
+\subsubsection{Connection Teardown}
+\begin{itemize}
+\item The execution of the old RuleSet MUST be terminated.
+\item Link Bell pairs that are allocated but not consumed MUST be released from the RuleSet after its connection is terminated.
+\end{itemize}
+
+
+\subsection{Non functional requirements}
+
+\begin{itemize}
+  \item This protocol must be independent from the underlying link architecture of a quantum link.
+\end{itemize}
+
+
 %%% Local Variables:
 %%% mode: japanese-latex
 %%% TeX-master: "．/thesis"

@@ -8,34 +8,6 @@ This chapter proposes the protocol for the management of the physical Bell pairs
 This protocol has two separated phases. The first phase is the negotiation about the set of RuleSets that are going to be established in the next round. The second phase is the negotiation about when to apply the next set of RuleSets.
 These negotiations will take place between the two end point of each link.
 
-\section{Assumptions}
-
-This protocol is proposed based on the following assumptions.
-
-\begin{itemize}
-  \item Existence of both a classical link and quantum link between two neighboring nodes.
-  \item No delay in transmitting messages 
-  \item No failures in nodes and links
-  \item Transmission of classical messages each of which includes a sequence number (an incremental identifier) from a support node every time a new Bell pair is generated.
-\end{itemize}
-
-\section{Requirements}
-
-This protocol has several requirements as follows.
-
-\subsection{Functional requirements}
-
-\begin{itemize}
-  \item The two end nodes of each link must coordinate what set of RuleSets and their order to execute in the next round
-  \item The two end nodes of each link must coordinate the timing of when to execute these RuleSets
-\end{itemize}
-
-\subsection{Non functional requirements}
-
-\begin{itemize}
-  \item This protocol must be independent from the underlying link architecture of a quantum link.
-\end{itemize}
-
 \section{Link Allocation Policy}
 
 In order to establish multiple connections over a single link, the both end nodes of the link need to make the coordinated decisions about what connections need to be established.
