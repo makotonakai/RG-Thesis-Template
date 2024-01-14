@@ -44,8 +44,8 @@ This message contains the following fields.
       Field Name & Type & Explanation \\ \hline \cline{1-3}
       srcAddress & integer & The source address \\ \cline{1-3}
       destAddress & integer & The destination address \\ \cline{1-3}
-      activeLinkAllocations & RuleSet[] & The current link allocation policy \\ \cline{1-3}
-      nextLinkAllocations & RuleSet[] & The upcoming link allocation policy \\ \cline{1-3}
+      activeLinkAllocations & unsigned long [] & The array of IDs of the RuleSets in the active link allocation policy \\ \cline{1-3}
+      nextLinkAllocations & unsigned long [] & The array of IDs of the RuleSets in the upcoming link allocation policy \\ \cline{1-3}
       randomValue & integer & A random value \\ \cline{1-3}
     \end{tabular}
     \caption{The Message Fields in a LinkAllocationUpdateMessage}
