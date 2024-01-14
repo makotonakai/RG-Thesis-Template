@@ -281,10 +281,81 @@ Allocation of link Bell pairs starts after two neighboring nodes coordinates the
   \end{algorithmic}
 \end{algorithm}
 
-
 \subsection{Relationship with Connection Management}
 \subsubsection{Connection Setup}
+
+There are three steps for connection setup in RuleSet-based quantum networking. 
+The first one is the transmission of a ConnectionSetupRequest from the Initiator to the Responder.
+\begin{figure}[H]
+  \centerline{\includegraphics[width=\columnwidth]{images/connection_setup_request.png}}
+  \caption{Transmission of a ConnectionSetupRequest}
+\end{figure}
+
+After the responder receives ConnectionSetupRequest, it sends Ack and RuleSet to each node along the path of the connection.
+\begin{figure}[H]
+  \centerline{\includegraphics[width=\columnwidth]{images/ack_and_ruleset.png}}
+  \caption{Transmission of RuleSets}
+\end{figure}
+
+The RuleSet received by the ConnectionManager will be stored in RuleEngine in each node.
+\begin{figure}[H]
+  \centerline{\includegraphics[width=\columnwidth]{images/ruleset_in_rule_engine.png}}
+  \caption{Storing RuleSet in the RuleEngine}
+\end{figure}
+
+The reception of RuleSet triggers the transmission of LinkAllocationUpdateMessage to each of the neighboring nodes.
+After each node both sent and received LinkAllocationUpdateMessages, it determines the next link allocation policy with each of the neighboring nodes.
+\begin{figure}[H]
+  \centerline{\includegraphics[width=\columnwidth]{images/lau_negotiation.png}}
+  \caption{Exchange of LinkAllocationUpdateMessages}
+\end{figure}
+
+Generation of link Bell pairs are performed independently from exchange of messages.
+\begin{figure}[H]
+  \centerline{\includegraphics[width=\columnwidth]{images/bell_pair_generation.png}}
+  \caption{Exchange of LinkAllocationUpdateMessages}
+\end{figure}
+
+BarrierMessages will be exchanged only if the next link allocation policy is determined and available link Bell pairs exist with each of the neighboring nodes.
+After each node sent and receives BarrierMessages, the first sequence number for the next link allocation is determined.
+\begin{figure}[H]
+  \centerline{\includegraphics[width=\columnwidth]{images/barrier_negotiation.png}}
+  \caption{Exchange of BarrierMessages}
+\end{figure}
+
+the first sequence number for the next link allocation is negotiated, each link Bell pairs will be allocated to one of the runtimes for the RuleSets in the next link allocation policy.
+\begin{figure}[H]
+  \centerline{\includegraphics[width=\columnwidth]{images/link_allocation.png}}
+  \caption{Allocation of Link Bell pairs}
+\end{figure}
+
 \subsubsection{Connection Teardown}
+
+
+\begin{figure}[H]
+  \centerline{\includegraphics[width=\columnwidth]{images/connection_teardown_notifier.png}}
+  \caption{Transmission of ConnectionTeardownNotifier}
+\end{figure}
+
+\begin{figure}[H]
+  \centerline{\includegraphics[width=\columnwidth]{images/connection_teardown_message.png}}
+  \caption{Transmission of ConnectionTeardownMessages}
+\end{figure}
+
+\begin{figure}[H]
+  \centerline{\includegraphics[width=\columnwidth]{images/internal_connection_teardown_message.png}}
+  \caption{Storing a ConnectionTeardownMessage}
+\end{figure}
+
+\begin{figure}[H]
+  \centerline{\includegraphics[width=\columnwidth]{images/ruleset_execution_terminated.png}}
+  \caption{Termination of the execution of RuleSets}
+\end{figure}
+
+\begin{figure}[H]
+  \centerline{\includegraphics[width=\columnwidth]{images/link_release.png}}
+  \caption{Release of allocated Link Bell pairs}
+\end{figure}
 
 
 %%% Local Variables:
