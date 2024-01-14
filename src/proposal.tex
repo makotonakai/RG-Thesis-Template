@@ -172,20 +172,20 @@ This event indicates the failure in the coordination of the first sequence numbe
 
 \section{Finite State Machine For Link Management}
 
-This section provides the different finite state machine for the link management phase. It focuses on the behavior of a single quantum link for simplicity.
+This section provides the different finite state machine for the link management phase. It focuses on the behavior of a single Bell pair that exists on the quantum link for simplicity.
 
 \subsection{States}
 
 \subsubsection{Up}
-This is the state when a quantum link is established between its two end nodes. In this state, it is not allocated to any specific RuleSet.
+This is the state when a physical Bell pair is established on a quantum link between its two end nodes. In this state, it is not allocated to any specific RuleSet.
 The FSM transits to Allocated if the link becomes allocated to one of the RuleSets in the active link allocation policy.
 
 \subsubsection{Down}
-This is the state when a quantum link is not established between its two end nodes. In this state, it can be no Bell pair between two existing quantum memories in the case of a quantum repeaters with those memories, or the situation when incoming photons have not arrived to memoryless quantum repeaters.
+This is the state when a physical Bell pair on a quantum link is not established between its two end nodes. In this state, it can be no Bell pair between two existing quantum memories in the case of a quantum repeaters with those memories, or the situation when incoming photons have not arrived to memoryless quantum repeaters.
 The FSM transits to Up if a Bell pair is established.
 
 \subsubsection{Allocated}
-This is the state when a quantum link is allocated to one of the RuleSets in the active link allocation policy.
+This is the state when a physical Bell pair is allocated to one of the RuleSets in the active link allocation policy.
 The FSM transits to Up if the link becomes released after the connection that this link used to be allocated is terminated.
 It can also transits to Down if the physical qubits on the link are measured during execution of the RuleSet that this link is allocated to.
 
