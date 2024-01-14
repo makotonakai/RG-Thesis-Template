@@ -81,48 +81,48 @@ This section explains the behavior of one of the end nodes of a link during the 
 \subsubsection{Init}
 This is the initial state that each node starts with.  
 In this state, neither the negotiation about the upcoming link allocation policy or the one about when to update the policy are happening.
-The FSM transits into either LAUSnd state or LAURecv state by sending an LinkAllocationUpdateMessage or receiving the one from its neighboring nodes.
+The FSM transits into either IncomingLAUWait state or LAUNotSent state by sending an LinkAllocationUpdateMessage or receiving the one from its neighboring nodes.
 
-\subsubsection{LAUSnd}
+\subsubsection{IncomingLAUWait}
 This is the state when a node sends a LinkAllocationUpdateMessage to its neighboring node. 
 In this state, a node is waiting for the incoming LinkAllocationUpdateMessage from those nodes in return, 
-so that the FSM can move to LAUSync state by coordinating the new link allocation policy.
+so that the FSM can move to SyncNextPolicy state by coordinating the new link allocation policy.
 
-\subsubsection{LAURecv}
+\subsubsection{LAUNotSent}
 This is the state when a node receives a LinkAllocationUpdateMessage from its neighboring node. 
-In this state, a node is about to send LinkAllocationUpdateMessages back to those nodes, so that the FSM can move to LAUSync state by coordinating the new link allocation policy.
+In this state, a node is about to send LinkAllocationUpdateMessages back to those nodes, so that the FSM can move to SyncNextPolicy state by coordinating the new link allocation policy.
 
-\subsubsection{LAUSync}
+\subsubsection{SyncNextPolicy}
 This is the state when both end nodes coordinated the next link allocation policy.
-The FSM transits into either BarrierSnd state or BarrierRecv state if the negotiation goes successfully, otherwise it transits back to Init if they fail.
+The FSM transits into either BarrierNotSent state or IncomingBarrierWait state if the negotiation goes successfully, otherwise it transits back to Init if they fail.
 
-\subsubsection{BrSnd}
+\subsubsection{IncomingBarrierWait}
 This is the state when a node sends a BarrierMessage to its neighboring node. 
 In this state, a node is waiting for the incoming BarrierMessage from that node in return, 
 so that the FSM can move to BarrierMessage state by coordinating from which Bell Pair the new link allocation policy should be applied.
 
-\subsubsection{BrRecv}
+\subsubsection{BarrierNotSent}
 This is the state when a node receives a BarrierMessage from its neighboring node. 
 In this state, a node is about to send BarrierMessage back to that node, 
-so that the FSM can move to BarrierSync state by coordinating from which Bell Pair the new link allocation policy should be applied.
+so that the FSM can move to SyncNextSeqNum state by coordinating from which Bell Pair the new link allocation policy should be applied.
 
-\subsubsection{BrSync}
-This is the state when both end nodes of a link successfully coordinated from which Bell Pair the new link allocation policy should be applied.
+\subsubsection{SyncNextSeqNum}
+This is the state when both end nodes of a link successfully coordinated from which Bell Pair the new link allocation policy will be updated.
 The FSM transits to the Init state until the next negotiation about the link allocation policy becomes triggered from the networking layer.
 
 \subsection{Events}
 
 \subsubsection{TxLAU}
-This event indicates the reception of a LinkAllocationUpdateMessage.
-
-\subsubsection{RxLAU}
 This event indicates the transmission of a LinkAllocationUpdateMessage.
 
+\subsubsection{RxLAU}
+This event indicates the reception of a LinkAllocationUpdateMessage.
+
 \subsubsection{TxBr}
-This event indicates the reception of a BarrierMessage.
+This event indicates the transmission of a BarrierMessage.
 
 \subsubsection{RxBr}
-This event indicates the transmission of a BarrierMessage.
+This event indicates the reception of a BarrierMessage.
 
 \subsubsection{LAUSuccess}
 This event indicates the success in the coordination of the next link allocation policy.
@@ -130,31 +130,40 @@ This event indicates the success in the coordination of the next link allocation
 \subsubsection{LAUFail}
 This event indicates the failure in the coordination of the next link allocation policy.
 
+
+\subsubsection{BarrierSuccess}
+This event indicates the success in the coordination of the first sequence number that the new link allocation policy is applied.
+
+\subsubsection{BarrierFail}
+This event indicates the failure in the coordination of the first sequence number that the new link allocation policy is applied.
+
 \newpage
 
 \subsection{Description of Finite State Machine}
 
 \begin{figure}[ht] % ’ht’ tells LaTeX to place the figure ’here’ or at the top of the page
   \centering % centers the figure
-  \begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto]
+  \begin{tikzpicture}[shorten >=1pt,node distance=6cm,on grid,auto]
     \node[state, initial] (Init) {Init};
-    \node[state, below left of=Init] (LAUSnd) {LAUSnd};
-    \node[state, right of=LAUSnd, xshift=1cm] (LAURecv) {LAURecv};
-    \node[state, below right of=LAUSnd] (LAUSync) {LAUSync};
-    \node[state, below left of=LAUSync] (BrSnd) {BrSnd};
-    \node[state, right of=BrSnd, xshift=1cm] (BrRecv) {BrRecv};
-    \node[state, accepting, below right of=BrSnd] (BrSync) {BrSync};
+    \node[state, below left of=Init] (IncomingLAUWait) {IncomingLAUWait};
+    \node[state, right of=IncomingLAUWait, xshift=1cm] (LAUNotSent) {LAUNotSent};
+    \node[state, below right of=IncomingLAUWait] (SyncNextPolicy) {SyncNextPolicy};
+    \node[state, below left of=SyncNextPolicy] (IncomingBarrierWait) {IncomingBarrierWait};
+    \node[state, right of=IncomingBarrierWait, xshift=1cm] (BarrierNotSent) {BarrierNotSent};
+    \node[state, accepting, below right of=IncomingBarrierWait] (SyncNextSeqNum) {SyncNextSeqNum};
 
-   \draw[->] (Init) edge [bend right] node {\tt RxLAU} (LAUSnd);
-   \draw[->] (Init) edge [bend left] node {\tt TxLAU} (LAURecv);
-   \draw[->] (LAUSnd) edge [bend right] node {\tt TxLAU} (LAUSync);
-   \draw[->] (LAURecv) edge [bend left] node {\tt RxLAU} (LAUSync);
-   \draw[->] (LAUSync) edge [bend right] node {\tt RxBr} (BrSnd);
-   \draw[->] (LAUSync) edge [bend left] node {\tt TxBr} (BrRecv);
-   \draw[->] (LAUSync) edge [loop left] node {\tt LAUSuccess} ();
-   \draw[->] (LAUSync) edge [bend right] node {\tt LAUFail} (Init);
-   \draw[->] (BrSnd) edge [bend right] node {\tt TxBr} (BrSync);
-   \draw[->] (BrRecv) edge [bend left] node {\tt RxBr} (BrSync);
+   \draw[->] (Init) edge [bend right] node {\tt TxLAU} (IncomingLAUWait);
+   \draw[->] (Init) edge [bend left] node {\tt RxLAU} (LAUNotSent);
+   \draw[->] (IncomingLAUWait) edge [bend right] node {\tt RxLAU} (SyncNextPolicy);
+   \draw[->] (LAUNotSent) edge [bend left] node {\tt TxLAU} (SyncNextPolicy);
+   \draw[->] (SyncNextPolicy) edge [bend right] node {\tt TxBr} (IncomingBarrierWait);
+   \draw[->] (SyncNextPolicy) edge [bend left] node {\tt RxBr} (BarrierNotSent);
+   \draw[->] (SyncNextPolicy) edge [loop left] node {\tt LAUSuccess} ();
+   \draw[->] (SyncNextPolicy) edge [bend right] node {\tt LAUFail} (Init);
+   \draw[->] (IncomingBarrierWait) edge [bend right] node {\tt RxBr} (SyncNextSeqNum);
+   \draw[->] (BarrierNotSent) edge [bend left] node {\tt TxBr} (SyncNextSeqNum);
+   \draw[->] (SyncNextSeqNum) edge [loop left] node {\tt BarrierSuccess} ();
+   \draw[->] (SyncNextSeqNum) edge [bend right] node {\tt BarrierFail} (Init);
 
   \end{tikzpicture}
   \caption{The FSM for the negotiation phase}
