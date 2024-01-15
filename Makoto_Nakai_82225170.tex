@@ -1,0 +1,147 @@
+\documentclass[12pt,dvipdfmx]{report}
+\usepackage{comment}
+\usepackage{./sty/eclepsf}
+\usepackage{tascmac}
+\usepackage{tabularx}
+\usepackage{listliketab}
+\usepackage[longnamesfirst,numbers]{natbib}
+\usepackage[dvipdfmx]{graphics}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage{subfigure}
+\usepackage{alltt}
+\usepackage{here}
+\usepackage{afterpage}
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{amsmath, amssymb}
+\usepackage{type1cm}
+\usepackage{yquant}
+\usepackage{tikz}
+\usetikzlibrary{quantikz}
+\usepackage{./sty/ncodeline}
+%\usepackage[dvipdfmx, colorlinks, breaklinks,%
+\usepackage[dvipdfmx, breaklinks,bookmarks=true, bookmarksnumbered=true,bookmarkstype=toc, bookmarksopen=true,bookmarksopenlevel=3,pdftitle={RG}]{hyperref}
+\usepackage{bookmark}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows}
+\usepackage[T1]{fontenc}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{array}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+\AtBeginDvi{\special{pdf:tounicode EUC-UCS2}}
+
+\usepackage{fancyhdr}
+
+\usepackage{./sty/doxygenorig}
+
+\usepackage{indentfirst}
+\usepackage{url}
+\usepackage{listings,./sty/jlisting}
+\usepackage{float}
+\graphicspath{ {./images/} }
+
+\def\lstlistingname{プログラム}
+
+\lstset{%
+ language={C++},
+ %backgroundcolor={\color[gray]{.85}},%
+ basicstyle={\small\ttfamily},%
+ identifierstyle={\small},%
+ commentstyle={\small\itshape},%
+ keywordstyle={\small\bfseries},%
+ ndkeywordstyle={\small\ttfamily},%
+ stringstyle={\small\ttfamily},
+ frame={tb},
+ framesep=1zw,
+ breaklines=true,
+ numbers=left,%
+ xrightmargin=0zw,%
+ xleftmargin=1.5zw,%
+ numberstyle={\scriptsize},%
+ stepnumber=1,
+ numbersep=1zw,%
+ lineskip=-0.5ex%
+}
+
+\usepackage{amssymb}
+%\usepackage{supertabular,multirow}
+
+\usepackage{array}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+
+% A4  size: 297mm*210mm %1pt = 0.35mm
+\setlength{\topmargin}{-3.4mm} % 10pt 25.4mm - 3.4mm = 22mm
+\setlength{\oddsidemargin}{-0.4mm} % 25.4mm - 0.4mm = 25mm
+\setlength{\evensidemargin}{-0.4mm} % 25.4mm - 0.4mm = 25mm
+\setlength{\textheight}{231mm} % 660pt % original is 225.75mm 645pt
+\setlength{\textwidth}{160mm} % 457pt
+
+\renewcommand{\topfraction}{.99}
+\renewcommand{\textfraction}{.0}
+\renewcommand{\floatpagefraction}{.99}
+\renewcommand{\bibname}{Reference}
+\DeclareMathOperator{\tr}{tr}
+
+\pagestyle{fancy}
+\lhead[]{}
+
+% タイトル
+\def\title{Link Management in a Quantum Network}
+% 英語タイトル
+\def\etitle{Link Management in a Quantum Network}
+% 著者(日本語)
+\def\author{Makoto Nakai}
+% 著者(英語)
+\def\eauthor{Makoto Nakai}
+% 学部・研究科
+\def\dept{Keio University Graduate School of Media and Governance}
+% 学部・研究科(英語)
+\def\edept{Keio University Graduate School of Media and Governance}
+
+\begin{document}
+
+\pagenumbering{roman}
+\input{src/titlepage}
+\thispagestyle{empty}
+
+\input{src/abstract}
+\thispagestyle{plain}
+\clearpage
+
+\tableofcontents\thispagestyle{plain} %目次
+\clearpage
+\listoffigures\thispagestyle{plain} %図目次
+\clearpage
+\listoftables\thispagestyle{plain} %表目次
+\clearpage
+
+\pagenumbering{arabic}
+\input{src/introduction}
+\input{src/background}
+\input{src/problem-definition}
+\input{src/proposal}
+\input{src/simulation}
+\input{src/related-works}
+\input{src/evaluation}
+\input{src/conclusion}
+\input{src/appendix}
+% \input{src/acknowledgement}
+
+% \renewcommand{\thechapter}{\Alph{chapter}}
+% \setcounter{chapter}{0}
+% \vspace{-5mm}
+
+
+\input{bib/biblio}\thispagestyle{plain}%bibtex
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: japanese-latex
+%%% TeX-master: t
+%%% End:
