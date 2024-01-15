@@ -69,11 +69,11 @@ This section discusses the mechanism and required methods that the author implem
 The first phase of link management in RuleSet-based quantum networking is the negotiation of the next set of RuleSets to execute.
 This is triggered by each update in the set of available runtimes, or RuleSets in the Rule Engine, such as the reception of a new RuleSet or the notification of connection teardown, which will be explained in detail in the later section.
 \begin{figure}[H]
-  \centerline{\includegraphics[width=.5\columnwidth]{images/link_allocation_update_message.png}}
+  \centerline{\includegraphics[width=.8\columnwidth]{images/link_allocation_update_message.png}}
   \caption{Transmission of a LinkAllocationUpdateMessage}
 \end{figure}
 
-First of all, LinkAllocationUpdateMessages are sent to all the neighboring nodes. Here is the pseudocode of the transmission of those messages.
+First of all, LinkAllocationUpdateMessages are sent to all the neighboring nodes. \ref{algo:sendlau} is the pseudocode of the transmission of those messages.
 
 \begin{algorithm}[H]
   \caption{Algorithm For Sending LinkAllocationUpdateMessages}
@@ -138,6 +138,7 @@ First of all, LinkAllocationUpdateMessages are sent to all the neighboring nodes
     \EndFor
   \EndFunction
   \end{algorithmic}
+  \label{algo:sendlau}
 \end{algorithm}
 
 If the RuleEngine receives an incoming LinkAllocationUpdateMessage, it has to store the information for the further negotiation.

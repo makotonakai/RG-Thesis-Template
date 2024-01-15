@@ -51,10 +51,11 @@ The entire quantum state on this point would be as follows.
   +|\Psi^-\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Psi^-|+|\Psi^-\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Psi^-|+|\Psi^-\rangle|\Phi^-\rangle\langle\Phi^-|\langle\Psi^-|)
   \end{multline*}
 
-Because getting the quantum state after measuring the last two qubits is equivalent to taking the partial trace of the target Bell pair, here is the description of the source Bell pair after measurement.
+Because getting the quantum state after measuring the last two qubits is equivalent to taking the partial trace of the target Bell pair, \ref{appendix:partial_trace} is the description of the source Bell pair after measurement.
 \begin{multline*}
   \rho^{'}_{ab} = \frac{1}{N} \big[ F^2 + \frac{1}{9}\big(1-F \big)^2\big]|\Phi^+\rangle\langle\Phi^+| + \frac{2F(1-F)}{3N}|\Phi^-\rangle\langle\Phi^-| + \frac{2(1-F)^2}{9N}(|\Psi^+\rangle\langle\Psi^+| + |\Psi^-\rangle\langle\Psi^-|) \\
   (N = F^2 + \frac{2F(1-F)}{3} + \frac{2(1-F)^2}{9})
+  \label{appendix:partial_trace}
 \end{multline*}
 
 The purification becomes successful if F  $> \frac{1}{2}$

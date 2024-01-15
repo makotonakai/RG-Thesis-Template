@@ -678,7 +678,7 @@ $$\sum_{m} p(m) = \langle \psi|\sum_{m} M^{\dagger}_m M_m|\psi\rangle = 1$$
 % TODO: Add general properties of density operators
 
 \section{Quantum Circuit}
-Here is the example of a quantum circuit.
+\ref{background:example-circuit} is the example of a quantum circuit.
 
 \begin{figure}[ht]
   \begin{center}
@@ -697,6 +697,7 @@ Here is the example of a quantum circuit.
   \end{tikzpicture}
 \caption{A example of quantum circuit}
 \end{center}
+\label{background:example-circuit}
 \end{figure}
 
 Each horizontal line represents each qubit and the square boxes that contain alphabets mean single quantum gates.  The sign which involves a vertical line means a CNOT gate, and the box on the most right side indicates measurement. 
@@ -728,9 +729,10 @@ The entangled states between two qubits are called Bell pairs, and each of four 
 \subsection{Multipartite Entanglement}
 There are cases that more than two qubits are entangled and that state is called Greenberger–Horne–Zeilinger state or GHZ state.
 
-Here is the braket notation of the GHZ state that involves three qubits.
+\ref{background:three-qubits} is the braket notation of the GHZ state that involves three qubits.
 \begin{equation}
   |GHZ\rangle = \frac{|000\rangle + |111\rangle}{\sqrt{2}}
+  \label{background:three-qubits}
 \end{equation}.
 
 In the general case, the braket notation of the GHZ state of N qubits is the following.
@@ -816,7 +818,7 @@ Entanglement swapping is the method to extend quantum entanglement by performing
 For example, assume Alice has a single qubit, Bob has two qubits, and Charlie has one qubit. Then, there are Bell pairs between Alice's qubit and Bob's first qubit, and Bob's second qubit and Charlie's qubit, respectively.
 If Bob performs Bell state measurement on both of his qubits, Alice's qubit and Charlie's qubit are eventually entangled, even though they have not interacted with each other.
 This can be also seen as the teleporatation of a Bell pair by sending one of its particles.
-Here is the figure of quantum circuit to perform entanglement swapping.
+\ref{background:entanglement-swapping} is the figure of quantum circuit to perform entanglement swapping.
 %% TODO: Add reference of entanglement swapping (both idea and circuit)
 %% TODO: Show that it works in the form of equations
 %% TODO: Add reference of experimental works
@@ -841,6 +843,7 @@ Here is the figure of quantum circuit to perform entanglement swapping.
   \end{tikzpicture}
 \caption{Quantum circuit for entanglement swapping}
 \end{center}
+\label{background:entanglement-swapping}
 \end{figure}
 
 \subsection{Entanglement Purification}
@@ -866,11 +869,12 @@ Then, Alice and Bob perform CNOT operations between $a_1$ and $a_2$, and $b_1$ a
 After that, they measure $a_2$ and $b_2$ respectively, which is the qubit on the target Bell pair on their side and exchange the measurement results. 
 If their measurement results match, the purification is successful, while they have to discard the source Bell pair and try again if those results do not match.
 
-Here is the quantum state after measuring the target Bell pair.
+\ref{background:after-measurement} is the quantum state after measuring the target Bell pair.
 
 \begin{multline*}
 \rho^{'}_{ab} = \frac{1}{N} \big[ F^2 + \frac{1}{9}\big(1-F \big)^2\big]|\Phi^+\rangle\langle\Phi^+| + \frac{2F(1-F)}{3N}|\Phi^-\rangle\langle\Phi^-| + \frac{2(1-F)^2}{9N}(|\Psi^+\rangle\langle\Psi^+| + |\Psi^-\rangle\langle\Psi^-|) \\
 (N = F^2 + \frac{2F(1-F)}{3} + \frac{2(1-F)^2}{9})
+\label{background:after-measurement}
 \end{multline*}
 
 The purification becomes successful if F  $> \frac{1}{2}$. The readers can refer to more detailed calculation in the Appendix\ref{appendix:purification}
