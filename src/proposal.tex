@@ -205,6 +205,8 @@ This event indicates the measurement of two physical qubits of the given Bell pa
 
 \subsection{Description of Finite State Machine}
 
+\ref{fig:link_state_machine} is the state machine that describes the transition for the state of a single link-level Bell pair.
+
 \begin{figure}[ht] % ’ht’ tells LaTeX to place the figure ’here’ or at the top of the page
   \centering % centers the figure
   \begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto]
@@ -218,7 +220,7 @@ This event indicates the measurement of two physical qubits of the given Bell pa
     \draw[->] (Allocated) edge [bend left] node {\tt Measure} (Down);
   \end{tikzpicture}
   \caption{The FSM for the resource management phase}
-  \label{fig:my_label}
+  \label{fig:link_state_machine}
 \end{figure}
 
 

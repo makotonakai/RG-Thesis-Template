@@ -76,6 +76,7 @@ This is triggered by each update in the set of available runtimes, or RuleSets i
 First of all, LinkAllocationUpdateMessages are sent to all the neighboring nodes. \ref{algo:sendlau} is the pseudocode of the transmission of those messages.
 
 \begin{algorithm}[H]
+  \begin{minipage}{0.8\linewidth}
   \caption{Algorithm For Sending LinkAllocationUpdateMessages}
   \begin{algorithmic}[1]
 \Require The address of this node $\text{parent\_address}$
@@ -114,9 +115,11 @@ First of all, LinkAllocationUpdateMessages are sent to all the neighboring nodes
       \EndFor
       \algstore{hoge}
     \end{algorithmic}
+  \end{minipage}
   \end{algorithm}
 
-  \begin{algorithm}[H]                   
+  \begin{algorithm}[H]    
+    \begin{minipage}{0.8\linewidth}               
     \begin{algorithmic}[1]
       \algrestore{hoge}
       \ForAll {$\text{partner\_address} \gets \text{partner\_addresses}$}
@@ -139,10 +142,12 @@ First of all, LinkAllocationUpdateMessages are sent to all the neighboring nodes
   \EndFunction
   \end{algorithmic}
   \label{algo:sendlau}
+\end{minipage}
 \end{algorithm}
 
 If the RuleEngine receives an incoming LinkAllocationUpdateMessage, it has to store the information for the further negotiation.
 \begin{algorithm}[H]  
+  \begin{minipage}{0.8\linewidth}
   \caption{Algorithm For Storing the Information of an Incoming LinkAllocationUpdateMessage}                 
   \begin{algorithmic}[1]
     \Require An incoming LinkAllocationUpdateMessage $\text{pkt}$
@@ -165,12 +170,14 @@ If the RuleEngine receives an incoming LinkAllocationUpdateMessage, it has to st
     \EndFor
     \State $\text{node\_address\_lau\_received\_map[src\_addr]} \gets$ True
   \end{algorithmic}
+\end{minipage}
 \end{algorithm}
 
 After exchanging LinkAllocationUpdateMessages, each pair of nodes need to synchronize the contents and their order of the next link allocation policy.
 The policy from the LinkAllocationUpdateMessage with the bigger random value will be prioritized.
 
 \begin{algorithm}[H]  
+  \begin{minipage}{0.8\linewidth}
   \caption{Algorithm For Synchronizing the Link Allocation Policy}                 
   \begin{algorithmic}[1]
     \Require The address of the destination node $\text{dest\_address}$
@@ -188,12 +195,14 @@ The policy from the LinkAllocationUpdateMessage with the bigger random value wil
     \State $\text{node\_address\_barrier\_sent\_map[src\_addr]} \gets$ True
     \State $\text{node\_address\_barrier\_received\_map[src\_addr]} \gets$ True
   \end{algorithmic}
+\end{minipage}
 \end{algorithm}
 
 \subsubsection{Link Allocation Timing Negotiation}
 
 After the next link allocation policy is synchronized between two neighboring nodes, it is time to determine when to update the link allocation policy.
 \begin{algorithm}[H]  
+  \begin{minipage}{0.8\linewidth}
   \caption{Algorithm For Sending a BarrierMessage}             
   \begin{algorithmic}[1]
     \Require The address of the this node $\text{this\_address}$      
@@ -205,9 +214,11 @@ After the next link allocation policy is synchronized between two neighboring no
     \State The sequence number of $\text{pkt} \gets \text{sequence\_number}$
     \State Send $\text{pkt}$
   \end{algorithmic}
+\end{minipage}
 \end{algorithm}
 
 \begin{algorithm}[H]  
+  \begin{minipage}{0.8\linewidth}
   \caption{Algorithm For Storing Information About the Incoming BarrierMessage}                 
   \begin{algorithmic}[1]
   \Require The incoming BarrierMessage $\text{pkt}$
@@ -216,9 +227,11 @@ After the next link allocation policy is synchronized between two neighboring no
     \State $\text{sequence\_number} \gets$ the smallest value among sequence numbers of the available link Bell pairs
     \State $\text{node\_address\_incoming\_sequence\_number\_map[src\_addr]} \gets \text{sequence\_number}$
   \end{algorithmic}
+\end{minipage}
 \end{algorithm}
 
 \begin{algorithm}[H]  
+  \begin{minipage}{0.8\linewidth}
   \caption{Algorithm For Synchronizing the Next Sequence Number}                 
   \begin{algorithmic}[1]
     \Require The node address of one of the neighboring nodes $\text{src\_address}$
@@ -230,6 +243,7 @@ After the next link allocation policy is synchronized between two neighboring no
       \State $\text{node\_address\_sequence\_number\_map[src\_addr]} \gets \text{incoming\_sequence\_number}$
     \EndIf
   \end{algorithmic}
+\end{minipage}
 \end{algorithm}
 
 \subsubsection{Link Management in QuISP}
@@ -238,6 +252,7 @@ Allocation of link Bell pairs starts after two neighboring nodes coordinates the
 Release of link Bell pairs that were allocated to the terminated connection will be performed after the termination of execution of the associated RuleSet.
 
 \begin{algorithm}[H]  
+  \begin{minipage}{0.8\linewidth}
   \caption{Algorithm For Allocating Link Bell pairs}                 
   \begin{algorithmic}[1]
     \Require The QNIC type $\text{qnic\_type}$
@@ -283,9 +298,11 @@ Release of link Bell pairs that were allocated to the terminated connection will
       \EndFor
     \EndFor
   \end{algorithmic}
+\end{minipage}
 \end{algorithm}
 
 \begin{algorithm}[H]  
+  \begin{minipage}{0.8\linewidth}
   \caption{Algorithm For Releasing Link Bell pairs}                 
   \begin{algorithmic}[1]
     \Require The QNIC type $\text{qnic\_type}$
@@ -329,6 +346,7 @@ Release of link Bell pairs that were allocated to the terminated connection will
       \EndFor
     \EndFor
   \end{algorithmic}
+\end{minipage}
 \end{algorithm}
 
 
