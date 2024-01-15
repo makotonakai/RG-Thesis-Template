@@ -5,7 +5,7 @@ DVIPDF = dvipdfmx
 DVI_VIEW = xdvi
 PS_VIEW = gv
 PS2PDF = ps2pdf
-NAME = dave_karitoji
+NAME = Makoto_Nakai_82225170
 TEXHTML = latex2html
 CC = clang
 
