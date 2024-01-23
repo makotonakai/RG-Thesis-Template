@@ -790,7 +790,7 @@ Graph state is also known as the initial state for measurement-based quantum com
 
 \subsection{Bell State Measurement}
 Bell state measurement is a special type of quantum measurement that determines which Bell pair the given two qubit entangled state is \cite{PhysRevA.59.3295}.
-%% TODO: Add reference of BSM
+
 \begin{figure}[ht]
   \begin{center}
     \begin{tikzpicture}
@@ -820,12 +820,17 @@ Bell state measurement is a special type of quantum measurement that determines 
 
 \subsection{Quantum Teleportation}
 
-Unlike classical communication, quantum states cannot be just copied and transmit to other nodes due to the no-cloning theorem, which forbids duplication of any quantum state.  However, a method called quantum teleportation was proposed, which overcomes the restriction and allows sender to transmit single qubit state to a distant location. 
+Unlike classical communication, quantum states cannot be just copied and transmit to other nodes due to the no-cloning theorem, which forbids duplication of any quantum state.  
+
+However, a method called quantum teleportation was proposed \cite{PhysRevLett.70.1895}, which overcomes the restriction and allows sender to transmit single qubit state to a distant location. 
  		
-This method requires both the single qubit state and a new Bell pair, and also the sender have to prepare two qubits and the receiver have to prepare one qubit.  After applying a CNOT gate and an H gate in the figure above, the sender have to measure both qubits and send those measurement results over the classical network.  After the receiver get those measurement results and apply some quantum gates if the measurement results of corresponding qubits on the sender's side are 1, in order to correct on the quantum state on the receiver's side.
-%% TODO: Add reference of quantum teleportation (both idea and circuit)
-%% TODO: Show that it works in the form of equations
-%% TODO: Add reference of experimental works
+This method requires both the single qubit state and a new Bell pair, and also the sender have to prepare two qubits and the receiver have to prepare one qubit. 
+After applying a CNOT gate and an H gate in the figure above, the sender have to measure both qubits and send those measurement results over the classical network.  
+Then, the receiver get those measurement results and apply some quantum gates if the measurement results of corresponding qubits on the sender's side are 1, in order to correct on the quantum state on the receiver's side.
+
+This protocol experimentally demonstrated over up to 1,400 km \cite{ren2017ground}.
+
+This is the figure of the quantum circuit that performs quantum teleportation for a single qubit information \cite{9023997}.
 
 \begin{figure}[ht]
   	\begin{center}
@@ -850,14 +855,15 @@ This method requires both the single qubit state and a new Bell pair, and also t
 
 \subsection{Entanglement Swapping}
 
-Entanglement swapping is the method to extend quantum entanglement by performing joint measurement on several quantum entanglement.
+Entanglement swapping is the method to extend quantum entanglement by performing joint measurement on several quantum entanglement \cite{zukowski1993event}.
+
 For example, assume Alice has a single qubit, Bob has two qubits, and Charlie has one qubit. Then, there are Bell pairs between Alice's qubit and Bob's first qubit, and Bob's second qubit and Charlie's qubit, respectively.
 If Bob performs Bell state measurement on both of his qubits, Alice's qubit and Charlie's qubit are eventually entangled, even though they have not interacted with each other.
-This can be also seen as the teleporatation of a Bell pair by sending one of its particles.
-\ref{background:entanglement-swapping} is the figure of quantum circuit to perform entanglement swapping.
-%% TODO: Add reference of entanglement swapping (both idea and circuit)
-%% TODO: Show that it works in the form of equations
-%% TODO: Add reference of experimental works
+This can be also seen as the teleportation of a Bell pair by sending one of its particles. 
+
+This method has been experimentally demonstrated by using polarization photon qubits in a free space \cite{PhysRevLett.80.3891},  those in an optical fiber \cite{PhysRevA.71.050302}, and even continuous variables \cite{jia2004experimental}.
+
+\ref{background:entanglement-swapping} is the figure of quantum circuit to perform entanglement swapping \cite{9803043}.
 
 \begin{figure}[ht]
   \begin{center}
@@ -883,12 +889,12 @@ This can be also seen as the teleporatation of a Bell pair by sending one of its
 \end{figure}
 
 \subsection{Entanglement Purification}
-%% TODO: Add reference of entanglement purification (both idea and circuit)
-%% TODO: Show that it works in the form of equations
-%% TODO: Add reference of experimental works
 
-Entanglement purification is a scheme to generate a set of quantum entanglements with higher fidelities from a larger set of imperfect quantum entanglements, local quantum operations, and classical communications.
+Entanglement purification \cite{PhysRevA.53.2046} is a scheme to generate a set of quantum entanglements with higher fidelities from a larger set of imperfect quantum entanglements, local quantum operations, and classical communications.
 This procedure is also called entanglement distillation, or quantum concatenation. This section presents an example of entanglement purification that generates a single Bell pair with higher fidelity from two of those with less fidelity.
+
+This protocol is experimentally demonstrated by photons \cite{Yan:21}, atoms \cite{179436} and electron-spin qubits \cite{kalb2017entanglement}.
+
 
 Assume Alice and Bob are supposed to share $|\Phi^+\rangle$, which is one of the Bell pairs. However, the state would be converted to the following mixed state due to the noisy nature of a quantum channel.
 $$ \rho_{AB} = P_{\Phi^+}|\Phi^+\rangle\langle\Phi^+| + P_{\Phi^-}|\Phi^-\rangle\langle\Phi^-| + P_{\Psi^+}|\Psi^+\rangle\langle\Psi^+| + P_{\Psi^-}|\Psi^-\rangle\langle\Psi^-|$$
@@ -957,7 +963,6 @@ The photons are measured at link end nodes.
 It switches photons from incoming links to outgoing ones.
 
 \subsection{Quantum Link}
-%TODO: Add reference to quantum link
 Quantum link is a physical Bell pair that is generated between two neighboring quantum nodes.  This subsection introduces three link architectures discussed in \cite{jones2016design}.
 
 \subsubsection{MeetIntheMiddle}
