@@ -3,7 +3,7 @@
 
 \section{Overview}
 
-This chapter proposes the protocol for the management of the physical Bell pairs that are available on each quantum link.
+This chapter proposes the protocol for the management of the link-level Bell pairs.
 
 This protocol has two separated phases. The first phase is the negotiation about the set of RuleSets that are going to be established in the next round. The second phase is the negotiation about when to apply the next set of RuleSets.
 These negotiations will take place between the two end point of each link.
@@ -172,12 +172,12 @@ This event indicates the failure in the coordination of the first sequence numbe
 
 \section{Finite State Machine For Link Management}
 
-This section provides the different finite state machine for the link management phase. It focuses on the behavior of a single Bell pair that exists on the quantum link for simplicity.
+This section provides the different finite state machine for the link management phase. It focuses on the behavior of a link-level Bell pair for simplicity.
 
 \subsection{States}
 
 \subsubsection{Up}
-This is the state when a physical Bell pair is established on a quantum link between its two end nodes. In this state, it is not allocated to any specific RuleSet.
+This is the state when a link-level Bell pair between its two end nodes. In this state, it is not allocated to any specific RuleSet.
 The FSM transits to Allocated if the link becomes allocated to one of the RuleSets in the active link allocation policy.
 
 \subsubsection{Down}
