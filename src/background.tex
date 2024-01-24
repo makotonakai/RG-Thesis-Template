@@ -203,7 +203,7 @@ Because the equation above has two parameters,  any pure single qubit state can 
 
  \subsubsection{Measurement}
 Quantum measurement can be described by using a group of measurement operators $\{M_m\}$
-($m$ is the measurement result that is expected to get).
+($m$ is the measurement result that is expected to get). It is worth noting the fact that a measurement operator is not unitary.
  If the quantum state before measurement is $|\psi\rangle$, the measurement probability of value $m$ is 
  \begin{equation}
   p(m) = \langle \psi|M^{\dagger}_m M_m|\psi\rangle
@@ -295,7 +295,6 @@ Therefore, the state can also be described by the equation
     &= \frac{M_m \rho M^{\dagger}_m}{\tr(M^{\dagger}_m M_m \rho)}
   \end{split}
 \end{equation}
-
 
 
  \subsection{Fidelity}
