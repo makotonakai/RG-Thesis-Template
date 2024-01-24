@@ -79,7 +79,7 @@ Moreover, if we have systems numbered 1 through $n$, and system number $i$ is pr
 
 Pure state is the representation of quantum state of the whole system without the assumption of external noise.
 
-\subsubsection{Quantum Bit}
+\subsubsection{Definition}
 
 A conventional computer uses a bit to represent a basic unit of information, which are 0 and 1. A basic unit of quantum information, on the other hand is called a quantum bit (or \textbf{qubit} in short) are $|0\rangle$ and $|1\rangle$, each of which can be described in the form of a vector. 
 
@@ -201,6 +201,32 @@ Because the equation above has two parameters,  any pure single qubit state can 
  
  cannot be decomposed into quantum state of each qubit.  These special quantum states are called \textbf{entangled} states.
 
+ \subsubsection{Measurement}
+Quantum measurement can be described by using a group of measurement operators $\{M_m\}$
+($m$ is the measurement result that is expected to get).
+ If the quantum state before measurement is $|\psi\rangle$, the measurement probability of value $m$ is 
+ \begin{equation}
+  p(m) = \langle \psi|M^{\dagger}_m M_m|\psi\rangle
+ \end{equation}
+
+
+ The quantum state after the measurement is 
+ \begin{equation}
+  \frac{M_m|\psi\rangle}{\sqrt{\langle \psi|M^{\dagger}_m M_m|\psi\rangle}}
+ \end{equation}
+
+
+The measurement operators satisfy the completeness equation
+\begin{equation}
+  \sum_{m} M^{\dagger}_m M_m = I
+\end{equation}
+
+
+Also, the sum of the measurement probability of each possible measurement outcome is equal to one.
+\begin{equation}
+  \sum_{m} p(m) = \langle \psi|\sum_{m} M^{\dagger}_m M_m|\psi\rangle = 1
+\end{equation}
+
  \subsection{Mixed State}
  %TODO: Add general principles of density metrics and their proofs
 %TODO: ADD proof that a density matrix is positive semidefinite
@@ -208,7 +234,7 @@ Because the equation above has two parameters,  any pure single qubit state can 
  Mixed state is another representation of quantum state in more general cases, such as the presense of physical error.
 Mixed state is described in the form of a matrix which is called density matrix.  Assume quantum system takes one of their ensembles of states $\{|\psi_i\rangle\}$ ($i$ is an index) with the measurement probability of $p_i$ for each state.
 
-\subsubsection{Mixed State}
+\subsubsection{Definition}
 
 The density matrix of this system $\rho$ is described by 
 
@@ -735,32 +761,6 @@ CZ_{0,1}|11\rangle =
 \right] 
 = -|11\rangle 
 \end{equation}.
-
-\subsection{Measurement}
-Quantum measurement can be described by using a group of measurement operators $\{M_m\}$
-($m$ is the measurement result that is expected to get).
- If the quantum state before measurement is $|\psi\rangle$, the measurement probability of value $m$ is 
- \begin{equation}
-  p(m) = \langle \psi|M^{\dagger}_m M_m|\psi\rangle
- \end{equation}
-
-
- The quantum state after the measurement is 
- \begin{equation}
-  \frac{M_m|\psi\rangle}{\sqrt{\langle \psi|M^{\dagger}_m M_m|\psi\rangle}}
- \end{equation}
-
-
-The measurement operators satisfy the completeness equation
-\begin{equation}
-  \sum_{m} M^{\dagger}_m M_m = I
-\end{equation}
-
-
-Also, the sum of the measurement probability of each possible measurement outcome is equal to one.
-\begin{equation}
-  \sum_{m} p(m) = \langle \psi|\sum_{m} M^{\dagger}_m M_m|\psi\rangle = 1
-\end{equation}
 
 
 % TODO: Add general properties of density operators
