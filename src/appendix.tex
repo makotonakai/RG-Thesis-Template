@@ -31,32 +31,32 @@
 \end{table}
 
 Two noisy Bell pairs are required for entanglement purification, so assume the quantum state of the entire system can be described as follows.
-\begin{multline*}
-\rho^{'}_{a_1 b_1} \otimes \rho^{'}_{a_2 b_2} = F^2|\Phi^+\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Phi^+| \\ 
-+ \frac{F(1-F)}{3}(|\Phi^+\rangle|\Phi^-\rangle\langle\Phi^-|\langle\Phi^+|+|\Phi^+\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Phi^+|+|\Phi^+\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Phi^+| \\
-+|\Phi^-\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Phi^-|+|\Psi^+\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Psi^+|+|\Psi^-\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Psi^-|) \\ 
-+ \frac{(1-F)^2}{9}(|\Phi^-\rangle|\Phi^-\rangle\langle\Phi^-|\langle\Phi^-|+|\Phi^-\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Phi^-|+|\Phi^-\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Phi^-| \\
-+ |\Psi^+\rangle|\Phi^-\rangle\langle\Phi^-|\langle\Psi^+|+|\Psi^+\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Psi^+|+|\Psi^+\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Psi^+| \\
+\begin{align}
+\rho^{'}_{a_1 b_1} \otimes \rho^{'}_{a_2 b_2} = F^2|\Phi^+\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Phi^+| \nonumber\\ 
++ \frac{F(1-F)}{3}(|\Phi^+\rangle|\Phi^-\rangle\langle\Phi^-|\langle\Phi^+|+|\Phi^+\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Phi^+|+|\Phi^+\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Phi^+| \nonumber\\
++|\Phi^-\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Phi^-|+|\Psi^+\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Psi^+|+|\Psi^-\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Psi^-|) \nonumber\\ 
++ \frac{(1-F)^2}{9}(|\Phi^-\rangle|\Phi^-\rangle\langle\Phi^-|\langle\Phi^-|+|\Phi^-\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Phi^-|+|\Phi^-\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Phi^-| \nonumber\\
++ |\Psi^+\rangle|\Phi^-\rangle\langle\Phi^-|\langle\Psi^+|+|\Psi^+\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Psi^+|+|\Psi^+\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Psi^+| \nonumber\\
 +|\Psi^-\rangle|\Phi^-\rangle\langle\Psi^-|\langle\Phi^-|+|\Psi^-\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Psi^-|+|\Psi^-\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Psi^-|)
-\end{multline*}
+\end{align}
 
 One of the Bell pair $\rho^{'}_{a_1 b_1}$ is called source Bell pair, which may be purified, and the other one $\rho^{'}_{a_2 b_2}$  is called target Bell pair, which is going to be measured. Then, Alice and Bob perform CNOT operations between $a_1$ and $a_2$, and $b_1$ and $b_2$, respectively.
 The entire quantum state on this point would be as follows.
-\begin{multline*}
-  \rho^{'}_{a_1 b_1} \otimes \rho^{'}_{a_2 b_2} = F^2|\Phi^+\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Phi^+| \\ 
-  + \frac{F(1-F)}{3}(|\Phi^-\rangle|\Phi^-\rangle\langle\Phi^-|\langle\Phi^-|+|\Phi^+\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Phi^+|+|\Phi^-\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Phi^-| \\
-  +|\Phi^-\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Phi^-|+|\Psi^+\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Psi^+|+|\Psi^-\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Psi^-|) \\ 
-  + \frac{(1-F)^2}{9}(|\Phi^+\rangle|\Phi^-\rangle\langle\Phi^-|\langle\Phi^+|+|\Phi^-\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Phi^-|+|\Phi^+\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Phi^+| \\
-  + |\Psi^+\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Psi^+|+|\Psi^-\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Psi^+|+|\Psi^+\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Psi^+| \\
+\begin{align}
+  \rho^{'}_{a_1 b_1} \otimes \rho^{'}_{a_2 b_2} = F^2|\Phi^+\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Phi^+| \nonumber\\ 
+  + \frac{F(1-F)}{3}(|\Phi^-\rangle|\Phi^-\rangle\langle\Phi^-|\langle\Phi^-|+|\Phi^+\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Phi^+|+|\Phi^-\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Phi^-| \nonumber\\
+  +|\Phi^-\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Phi^-|+|\Psi^+\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Psi^+|+|\Psi^-\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Psi^-|) \nonumber\\ 
+  + \frac{(1-F)^2}{9}(|\Phi^+\rangle|\Phi^-\rangle\langle\Phi^-|\langle\Phi^+|+|\Phi^-\rangle|\Psi^+\rangle\langle\Psi^+|\langle\Phi^-|+|\Phi^+\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Phi^+| \nonumber\\
+  + |\Psi^+\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Psi^+|+|\Psi^-\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Psi^+|+|\Psi^+\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Psi^+| \nonumber\\
   +|\Psi^-\rangle|\Psi^-\rangle\langle\Psi^-|\langle\Psi^-|+|\Psi^-\rangle|\Phi^+\rangle\langle\Phi^+|\langle\Psi^-|+|\Psi^-\rangle|\Phi^-\rangle\langle\Phi^-|\langle\Psi^-|)
-  \end{multline*}
+  \end{align}
 
 Because getting the quantum state after measuring the last two qubits is equivalent to taking the partial trace of the target Bell pair, \ref{appendix:partial_trace} is the description of the source Bell pair after measurement.
-\begin{multline*}
-  \rho^{'}_{ab} = \frac{1}{N} \big[ F^2 + \frac{1}{9}\big(1-F \big)^2\big]|\Phi^+\rangle\langle\Phi^+| + \frac{2F(1-F)}{3N}|\Phi^-\rangle\langle\Phi^-| + \frac{2(1-F)^2}{9N}(|\Psi^+\rangle\langle\Psi^+| + |\Psi^-\rangle\langle\Psi^-|) \\
+\begin{align}
+  \rho^{'}_{ab} = \frac{1}{N} \big[ F^2 + \frac{1}{9}\big(1-F \big)^2\big]|\Phi^+\rangle\langle\Phi^+| + \frac{2F(1-F)}{3N}|\Phi^-\rangle\langle\Phi^-| + \frac{2(1-F)^2}{9N}(|\Psi^+\rangle\langle\Psi^+| + |\Psi^-\rangle\langle\Psi^-|) \nonumber\\
   (N = F^2 + \frac{2F(1-F)}{3} + \frac{2(1-F)^2}{9})
   \label{appendix:partial_trace}
-\end{multline*}
+\end{align}
 
 The purification becomes successful if F  $> \frac{1}{2}$
 

@@ -19,24 +19,39 @@ The system is completely described by \textit{state vector}, which is a unit vec
 The evaluation of a \textit{closed} quantum system is described by a \textit{unitary transformation}.
 That is, the state $|\psi\rangle$ of the system at time $t_1$ is related to the state $|\psi'\rangle$ of the system $t_2$ by a unitary operator $U$ which depends only on the times $t_1$ and $t_2$.
 
-$$ |\psi'\rangle = U|\psi\rangle$$
+\begin{equation}
+  |\psi'\rangle = U|\psi\rangle
+\end{equation}
+
 
 \subsubsection{Postulate 3}
 
 Quantum measurements are described by a collection $\{M_m\}$ of \textit{measurement operators}.
 These are operators acting on the space of the system being measured. The index $m$ refers to the measurement outcomes that may occur in the experiment.
 If the state of the quantum system is $|\psi\rangle$ immediately before the measurement then the probability that result $m$ occurs is given by 
-$$ p(m) = \langle \psi |M^{\dagger}_m M_m | \psi \rangle $$
+\begin{equation}
+  p(m) = \langle \psi |M^{\dagger}_m M_m | \psi \rangle
+\end{equation}
+
 
 and the state of the system after the measurement is 
 
-$$ \frac{M_m|\psi\rangle}{\langle \psi |M^{\dagger}_m M_m | \psi \rangle}$$
+\begin{equation}
+  \frac{M_m|\psi\rangle}{\langle \psi |M^{\dagger}_m M_m | \psi \rangle}
+\end{equation}
+
 
 The measurement operators satisfy the \textit{completeness equation}.
-$$ \sum_m M^{\dagger}_m M_m = I $$
+\begin{equation}
+  \sum_m M^{\dagger}_m M_m = I
+\end{equation}
+
 
 The completeness equation expresses the fact that probability sum to one.
-$$ 1 = \sum_m p(m) = \sum_m \langle \psi |M^{\dagger}_m M_m | \psi \rangle $$
+\begin{equation}
+  1 = \sum_m p(m) = \sum_m \langle \psi |M^{\dagger}_m M_m | \psi \rangle
+\end{equation}
+
 
 \subsubsection{Postulate 4}
 
@@ -53,28 +68,36 @@ Pure state is the representation of quantum state of the whole system without th
 A conventional computer uses a bit to represent a basic unit of information, which are 0 and 1. A basic unit of quantum information, on the other hand is called a quantum bit (or \textbf{qubit} in short) are $|0\rangle$ and $|1\rangle$, each of which can be described in the form of a vector. 
 
 For example  
- $$|0\rangle = \Big[
+
+\begin{equation}
+  |0\rangle = \Big[
+    \begin{array}{c}
+    1 \\
+    0 \\
+    \end{array}
+    \Big]
+\end{equation}
+
+\begin{equation}
+  |1\rangle = \Big[
 \begin{array}{c}
-1 \\
 0 \\
+1 \\
 \end{array}
 \Big]
-$$
+\end{equation}
 
-$$|1\rangle = \Big[
-\begin{array}{c}
-0 \\
-1 \\
-\end{array}
-\Big]$$
 
 The state of a single qubit $|\psi\rangle$ can be described as follows.
-$$ |\psi\rangle = \alpha |0\rangle + \beta |1\rangle \,(\alpha, \beta \in \mathbb{C}, |\alpha|^2+|\beta|^2=1)$$.
+\begin{equation}
+  |\psi\rangle = \alpha |0\rangle + \beta |1\rangle \,(\alpha, \beta \in \mathbb{C}, |\alpha|^2+|\beta|^2=1)
+\end{equation}
+
  After the operation called measurement, the quantum state would be collapsed into either 0 or 1.  The measurement probability of 0 is $|\alpha|^2$ and that of 1 is $|\beta|^2$. In other words, a single qubit can take both states probabilistically at the same time.  
  
  For instance, a qubit can be 
  
- \begin{equation}
+\begin{equation}
 	|\psi\rangle = \frac{1}{\sqrt{2}}|0\rangle + \frac{1}{\sqrt{2}}|1\rangle \tag{1}
 \end{equation}
 
@@ -122,11 +145,11 @@ Because the equation above has two parameters,  any pure single qubit state can 
 \subsubsection{Multi-Qubit State}
   The quantum state for multi-qubits is a \textbf{tensor product} of a state vector of each qubit.  The general notation of two qubit state is
   
-\begin{flalign}
-    |\psi\rangle & = (\alpha |0\rangle + \beta |1\rangle) \otimes  (\gamma |0\rangle + \delta |1\rangle) \\
-    & = \alpha \gamma |00\rangle + \alpha \delta |01\rangle + \beta \gamma |10\rangle + \beta \delta |11\rangle \\ 
+\begin{align}
+    |\psi\rangle & = (\alpha |0\rangle + \beta |1\rangle) \otimes  (\gamma |0\rangle + \delta |1\rangle) \nonumber\\
+    & = \alpha \gamma |00\rangle + \alpha \delta |01\rangle + \beta \gamma |10\rangle + \beta \delta |11\rangle \nonumber\\ 
    & (\alpha, \beta, \gamma, \delta \in \mathbb{C}, |\alpha|^2+|\beta|^2+|\gamma|^2+|\delta|^2=1)
- \end{flalign}.
+\end{align}
   
   For example, the state $|00\rangle$ is equal to 
   
@@ -701,16 +724,28 @@ CZ_{0,1}|11\rangle =
 Quantum measurement can be described by using a group of measurement operators $\{M_m\}$
 ($m$ is the measurement result that is expected to get).
  If the quantum state before measurement is $|\psi\rangle$, the measurement probability of value $m$ is 
- $$p(m) = \langle \psi|M^{\dagger}_m M_m|\psi\rangle$$
+ \begin{equation}
+  p(m) = \langle \psi|M^{\dagger}_m M_m|\psi\rangle
+ \end{equation}
+
 
  The quantum state after the measurement is 
- $$\frac{M_m|\psi\rangle}{\sqrt{\langle \psi|M^{\dagger}_m M_m|\psi\rangle}}$$
+ \begin{equation}
+  \frac{M_m|\psi\rangle}{\sqrt{\langle \psi|M^{\dagger}_m M_m|\psi\rangle}}
+ \end{equation}
+
 
 The measurement operators satisfy the completeness equation
-$$\sum_{m} M^{\dagger}_m M_m = I$$
+\begin{equation}
+  \sum_{m} M^{\dagger}_m M_m = I
+\end{equation}
+
 
 Also, the sum of the measurement probability of each possible measurement outcome is equal to one.
-$$\sum_{m} p(m) = \langle \psi|\sum_{m} M^{\dagger}_m M_m|\psi\rangle = 1$$
+\begin{equation}
+  \sum_{m} p(m) = \langle \psi|\sum_{m} M^{\dagger}_m M_m|\psi\rangle = 1
+\end{equation}
+
 
 % TODO: Add general properties of density operators
 
@@ -897,13 +932,19 @@ This protocol is experimentally demonstrated by photons \cite{Yan:21}, atoms \ci
 
 
 Assume Alice and Bob are supposed to share $|\Phi^+\rangle$, which is one of the Bell pairs. However, the state would be converted to the following mixed state due to the noisy nature of a quantum channel.
-$$ \rho_{AB} = P_{\Phi^+}|\Phi^+\rangle\langle\Phi^+| + P_{\Phi^-}|\Phi^-\rangle\langle\Phi^-| + P_{\Psi^+}|\Psi^+\rangle\langle\Psi^+| + P_{\Psi^-}|\Psi^-\rangle\langle\Psi^-|$$
+\begin{equation}
+  \rho_{AB} = P_{\Phi^+}|\Phi^+\rangle\langle\Phi^+| + P_{\Phi^-}|\Phi^-\rangle\langle\Phi^-| + P_{\Psi^+}|\Psi^+\rangle\langle\Psi^+| + P_{\Psi^-}|\Psi^-\rangle\langle\Psi^-|
+\end{equation}
 
-$$\sum_{s \in \{\Phi^+, \Phi^-, \Psi^+, \Psi^- \}} P_{s} = 1$$
+\begin{equation}
+  \sum_{s \in \{\Phi^+, \Phi^-, \Psi^+, \Psi^- \}} P_{s} = 1
+\end{equation}
+
 
 Any mixed state can be converted to Werner state by applying Pauli operations and $\frac{\pi}{2}$ operations, so Alice and Bob can obtain the following state.
-
-$$ \rho^{'}_{AB} = F|\Phi^+\rangle\langle\Phi^+| + \frac{1-F}{3}(|\Phi^-\rangle\langle\Phi^-| + |\Psi^+\rangle\langle\Psi^+| + |\Psi^-\rangle\langle\Psi^-|)$$
+\begin{equation}
+  \rho^{'}_{AB} = F|\Phi^+\rangle\langle\Phi^+| + \frac{1-F}{3}(|\Phi^-\rangle\langle\Phi^-| + |\Psi^+\rangle\langle\Psi^+| + |\Psi^-\rangle\langle\Psi^-|)
+\end{equation}
 
 
 Two noisy Bell pairs are required for entanglement purification. One of the Bell pair $\rho^{'}_{a_1 b_1}$ is called source Bell pair, which may be purified, and the other one $\rho^{'}_{a_2 b_2}$  is called target Bell pair, which is going to be measured. 
@@ -913,11 +954,11 @@ If their measurement results match, the purification is successful, while they h
 
 \ref{background:after-measurement} is the quantum state after measuring the target Bell pair.
 
-\begin{multline*}
-\rho^{'}_{ab} = \frac{1}{N} \big[ F^2 + \frac{1}{9}\big(1-F \big)^2\big]|\Phi^+\rangle\langle\Phi^+| + \frac{2F(1-F)}{3N}|\Phi^-\rangle\langle\Phi^-| + \frac{2(1-F)^2}{9N}(|\Psi^+\rangle\langle\Psi^+| + |\Psi^-\rangle\langle\Psi^-|) \\
+\begin{align}
+\rho^{'}_{ab} = \frac{1}{N} \big[ F^2 + \frac{1}{9}\big(1-F \big)^2\big]|\Phi^+\rangle\langle\Phi^+| + \frac{2F(1-F)}{3N}|\Phi^-\rangle\langle\Phi^-| + \frac{2(1-F)^2}{9N}(|\Psi^+\rangle\langle\Psi^+| + |\Psi^-\rangle\langle\Psi^-|) \nonumber\\
 (N = F^2 + \frac{2F(1-F)}{3} + \frac{2(1-F)^2}{9})
 \label{background:after-measurement}
-\end{multline*}
+\end{align}
 
 The purification becomes successful if F  $> \frac{1}{2}$. The readers can refer to more detailed calculation in the Appendix\ref{appendix:purification}
 
