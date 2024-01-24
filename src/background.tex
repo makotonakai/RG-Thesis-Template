@@ -1,9 +1,25 @@
 \chapter{Background}
 \label{background}
 
+\section{Linear Algebra}
+
+This section provides the minimum background knowledge of advanced concepts in the field of linear algebra.
+
+\subsection{Unitary Operator}
+
+If an operator is unitary if it satisfies the following conditions.
+
+\begin{equation}
+  U^{-1} = U^{\dagger}
+\end{equation}
+
+\begin{equation}
+  UU^{\dagger} = U^{\dagger}U = I
+\end{equation}
+
 \section{Quantum Physics}
 
-This subsection provide the fundamental knowledge of quantum physics, which will make readers feel familiar with the concept and notations that they will encounter throughout this thesis.
+This section provide the fundamental knowledge of quantum physics, which will make readers feel familiar with the concept and notations that they will encounter throughout this thesis.
 
 \subsection{Four Postulates}
 
@@ -206,7 +222,7 @@ The quantum system after applying a unitary operator $U$ is the following.
 \begin{equation}
   \rho = \sum_i p_i |\psi_i\rangle\langle\psi_i| \xrightarrow{U} \sum_i p_i U|\psi_i\rangle\langle\psi_i|U^{\dagger}
 \end{equation}
-
+It is worth noting that a unitary operation on a single qubit is equivalent to the rotation of a vector on the surface of the Bloch sphere.
 \subsubsection{Measurement}
 
 Suppose one performs measurement on a quantum state $|\psi_i\rangle$ using a measurement operator $M_m$. 
