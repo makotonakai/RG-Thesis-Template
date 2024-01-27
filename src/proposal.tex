@@ -8,26 +8,26 @@ This chapter proposes the protocol for the management of the link-level Bell pai
 This protocol has two separated phases. The first phase is the negotiation about the set of RuleSets that are going to be established in the next round. The second phase is the negotiation about when to apply the next set of RuleSets.
 These negotiations will take place between the two end point of each link.
 
-\section{Link Allocation Policy}
+\subsection{Link Allocation Policy}
 
-In order to establish multiple connections over a single link, the both end nodes of the link need to make the coordinated decisions about what connections need to be established.
-This set of connections, to be more specific, the set of RuleSets, would be called \textbf{Link Allocation Policy} in the rest of this thesis.
+In order to establish multiple connections over a single link, both end nodes of the link need to make the coordinated decisions about what connections need to be established.
+This set of connections, to be more specific, the set of RuleSets, is called \textbf{Link Allocation Policy} in the rest of this thesis.
 
-\section{Link Allocation Policy Negotiation Phase}
+\subsection{Link Allocation Policy Negotiation Phase}
 
-After the node receives a message that notifies the establishment of a new connection, or the termination of one of the existing connections, both nodes between a single link need to agree with the link allocation policy that are going to be executed in the next round.
-Therefore, this protocol involves the transmission of messages that include the information of the next link allocation policy in each node.  It has to be mentioned that the order of arrival of RuleSets in the next policy might be different, so the protocol also requires the mechanism to determine which policy needs to be prioritized.
-This can be achieved by inserting a random integer to the message and adopt the order with the larger value.
+After the node receives a message that notifies the establishment of a new connection, or the termination of one of the existing connections, both nodes on a single link need to agree on the link allocation policy that is going to be executed in the next round.
+Therefore, this protocol involves the transmission of messages that include the information of the next link allocation policy in each node.  It has to be mentioned that the order of arrival of RuleSets in the next policy might be different, so the protocol also requires a mechanism to determine which policy needs to be prioritized.
+This can be achieved by inserting a random integer to the message and adopting the order with the larger value.
 
-\section{The Timing Negotiation Phase}
+\subsection{The Timing Negotiation Phase}
 
 The end nodes of a physical link also need to align the timing of updating the link policy in order to assign the same Bell pair to the connection.
-Otherwise,they might allocate the physical qubits of two different Bell pairs, which might end up with the failure of the entire connection.
+Otherwise,they might allocate the physical qubits of a different Bell pair to two different connections, which might end up with the failure of the entire connection.
 
-\section{Resource Management}
+\subsection{Resource Management}
 
 The actual resource allocation process needs to take place before or during the execution of the RuleSets that were determined in the previous steps.
-On the contrary to that, the release of physical resources that were allocated to the terminated RuleSets need to be executed after the notification of connection teardown, which the node receives from the networking layer.
+In contrary, the release of physical resources that were allocated to the terminated RuleSets need to be executed after the notification of connection teardown, which the node receives from the networking layer.
 
 \section{Messages}
 
@@ -36,7 +36,7 @@ This section proposes the required fields and their types in each message.
 
 \subsection{LinkAllocationUpdateMessage}
  
-This message contains the following fields.
+This message contains the fields shown in table \ref{fig:lau-message}.
 
 \begin{table}[ht]
   \begin{center}
@@ -49,12 +49,13 @@ This message contains the following fields.
       randomValue & integer & A random value \\ \cline{1-3}
     \end{tabular}
     \caption{The Message Fields in a LinkAllocationUpdateMessage}
+    \label{fig:lau-message}
   \end{center}
 \end{table}
 
 \subsection{RejectLinkAllocationUpdateMessage}
  
-This message contains the following fields.
+This message contains the fields shown in table \ref{fig:reject-lau-message}.
 
 \begin{table}[ht]
   \begin{center}
@@ -64,12 +65,13 @@ This message contains the following fields.
       destAddress & integer & The destination address \\ \cline{1-3}
     \end{tabular}
     \caption{The Message Fields in a RejectLinkAllocationUpdateMessage}
+    \label{fig:reject-lau-message}
   \end{center}
 \end{table}
 
 \subsection{BarrierMessage}
 
-This message contains the following fields.
+This message contains the fields shown in table \ref{fig:barrier-message}.
 
 \begin{table}[ht]
   \begin{center}
@@ -80,6 +82,7 @@ This message contains the following fields.
       sequenceNumber & integer & A sequence number of the first available physical Bell Pair \\ \cline{1-3}
     \end{tabular}
     \caption{The Message Fields in a BarrierMessage}
+    \label{fig:barrier-message}
   \end{center}
 \end{table}
 
@@ -87,19 +90,21 @@ This message contains the following fields.
 
 \section{Finite State Machine For Link Allocation Policy}
 
-Finite state machine (FSM) is commonly provides a simple and clear description about the behavior of the communication protocol \cite{BOCHMANN1978361}.
+A finite state machine (FSM) is commonly provides a simple and clear description about the behavior of the communication protocol \cite{BOCHMANN1978361}.
 Each state in the finite state machine represents the condition of a communication node, its events represents the change such as transmission and reception of messages, and the action represents the reaction to the event based on the previous condition.
+Each event triggers a state transition.
 This section explains the behavior of one of the end nodes of a link during the negotiation phase. 
 
 \subsection{States}
 
+This subsection introduces all the states that a node can be during the negotiations related to the next link allocation policy.
 \subsubsection{Init}
 This is the initial state that each node starts with.  
 In this state, neither the negotiation about the upcoming link allocation policy or the one about when to update the policy are happening.
 The FSM transits into either IncomingLAUWait state or LAUNotSent state by sending an LinkAllocationUpdateMessage or receiving the one from its neighboring nodes.
 
 \subsubsection{IncomingLAUWait}
-This is the state when a node sends a LinkAllocationUpdateMessage to its neighboring node. 
+This is the state after a node sends a LinkAllocationUpdateMessage to its neighboring node. 
 In this state, a node is waiting for the incoming LinkAllocationUpdateMessage from those nodes in return, 
 so that the FSM can move to SyncNextPolicy state by coordinating the new link allocation policy.
 
@@ -112,7 +117,7 @@ This is the state when both end nodes coordinated the next link allocation polic
 The FSM transits into either BarrierNotSent state or IncomingBarrierWait state if the negotiation goes successfully, otherwise it transits back to Init if they fail.
 
 \subsubsection{IncomingBarrierWait}
-This is the state when a node sends a BarrierMessage to its neighboring node. 
+This is the state after a node sends a BarrierMessage to its neighboring node. 
 In this state, a node is waiting for the incoming BarrierMessage from that node in return, 
 so that the FSM can move to BarrierMessage state by coordinating from which Bell Pair the new link allocation policy should be applied.
 
@@ -126,6 +131,8 @@ This is the state when both end nodes of a link successfully coordinated from wh
 The FSM transits to the Init state until the next negotiation about the link allocation policy becomes triggered from the networking layer.
 
 \subsection{Events}
+
+This subsection introduces all the events that occur during the negotiation of the upcoming link allocation policy.
 
 \subsubsection{TxLAU}
 This event indicates the transmission of a LinkAllocationUpdateMessage.
@@ -156,6 +163,8 @@ This event indicates the failure in the coordination of the first sequence numbe
 
 \subsection{Description of Finite State Machine}
 
+Fig \ref{fig:state-machine-lau} shows the finite state machine that describes the change of states during the negotiations related to the next link allocation policy.
+
 \begin{figure}[ht] % ’ht’ tells LaTeX to place the figure ’here’ or at the top of the page
   \centering % centers the figure
   \begin{tikzpicture}[shorten >=1pt,node distance=6cm,on grid,auto]
@@ -182,7 +191,7 @@ This event indicates the failure in the coordination of the first sequence numbe
 
   \end{tikzpicture}
   \caption{The FSM for the negotiation phase}
-  \label{fig:my_label}
+  \label{fig:state-machine-lau}
 \end{figure}
 
 \section{Finite State Machine For Link Management}
@@ -190,6 +199,8 @@ This event indicates the failure in the coordination of the first sequence numbe
 This section provides the different finite state machine for the link management phase. It focuses on the behavior of a link-level Bell pair for simplicity.
 
 \subsection{States}
+
+This subsection introduces all the states that a link-level Bell pair can be during the resource management.
 
 \subsubsection{Up}
 This is the state when a link-level Bell pair between its two end nodes. In this state, it is not allocated to any specific RuleSet.
@@ -206,6 +217,8 @@ It can also transits to Down if the physical qubits on the link are measured dur
 
 \subsection{Events}
 
+This subsection introduces all the events that cause transition of states.
+
 \subsubsection{BellPairGen}
 This event indicates the generation of a Bell pair
 
@@ -220,7 +233,7 @@ This event indicates the measurement of two physical qubits of the given Bell pa
 
 \subsection{Description of Finite State Machine}
 
-\ref{fig:link_state_machine} is the state machine that describes the transition for the state of a single link-level Bell pair.
+Fig \ref{fig:link-state-machine} is the state machine that describes the transition for the state of a single link-level Bell pair.
 
 \begin{figure}[ht] % ’ht’ tells LaTeX to place the figure ’here’ or at the top of the page
   \centering % centers the figure
@@ -235,7 +248,7 @@ This event indicates the measurement of two physical qubits of the given Bell pa
     \draw[->] (Allocated) edge [bend left] node {\tt Measure} (Down);
   \end{tikzpicture}
   \caption{The FSM for the resource management phase}
-  \label{fig:link_state_machine}
+  \label{fig:link-state-machine}
 \end{figure}
 
 

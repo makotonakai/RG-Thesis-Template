@@ -6,6 +6,7 @@
 This section provides the minimum background knowledge of advanced concepts in the field of linear algebra.
 
 \subsection{Unitary Operator}
+\label{background:linear-algebra:unitary-operator}
 
 If an operator is unitary if it satisfies the following conditions.
 
@@ -27,16 +28,16 @@ This subsection introduces the basic principles, in other words, the postulates 
 
 \subsubsection{Postulate 1}
 
-Associated to any isolated physical system is a complex vector space with inner product know as the \textit{state space} of the system.
-The system is completely described by \textit{state vector}, which is a unit vector in the system's state space.
+Associated with any isolated physical system is a complex vector space with inner product know as the \textit{state space} of the system.
+The system is completely described by a \textit{state vector}, which is a unit vector in the system's state space.
 
 \subsubsection{Postulate 2}
 
-The evaluation of a \textit{closed} quantum system is described by a \textit{unitary transformation}.
+The evolution of a \textit{closed} quantum system is described by a \textit{unitary transformation}.
 That is, the state $|\psi\rangle$ of the system at time $t_1$ is related to the state $|\psi'\rangle$ of the system $t_2$ by a unitary operator $U$ which depends only on the times $t_1$ and $t_2$.
 
 \begin{equation}
-  |\psi'\rangle = U|\psi\rangle
+  |\psi(t_2) \rangle = U|\psi(t_1)\rangle
 \end{equation}
 
 
@@ -77,11 +78,11 @@ Moreover, if we have systems numbered 1 through $n$, and system number $i$ is pr
 
 \subsection{Pure State}
 
-Pure state is the representation of quantum state of the whole system without the assumption of external noise.
+A pure state is the representation of quantum state of the whole system without the assumption of external noise.
 
 \subsubsection{Definition}
 
-A conventional computer uses a bit to represent a basic unit of information, which are 0 and 1. A basic unit of quantum information, on the other hand is called a quantum bit (or \textbf{qubit} in short) are $|0\rangle$ and $|1\rangle$, each of which can be described in the form of a vector. 
+A conventional computer uses a bit to represent a basic unit of information, which has the possible values 0 and 1. A basic unit of quantum information, on the other hand, is called a quantum bit (or \textbf{qubit} in short) wit possible values $|0\rangle$ and $|1\rangle$, each of which can be described in the form of a vector. 
 
 For example  
 
@@ -106,7 +107,7 @@ For example
 
 The state of a single qubit $|\psi\rangle$ can be described as follows.
 \begin{equation}
-  |\psi\rangle = \alpha |0\rangle + \beta |1\rangle \,(\alpha, \beta \in \mathbb{C}, |\alpha|^2+|\beta|^2=1)
+  |\psi\rangle = \alpha |0\rangle + \beta |1\rangle \,(\alpha, \beta \in \mathbb{C}, |\alpha|^2+|\beta|^2=1).
 \end{equation}
 
  After the operation called measurement, the quantum state would be collapsed into either 0 or 1.  The measurement probability of 0 is $|\alpha|^2$ and that of 1 is $|\beta|^2$. In other words, a single qubit can take both states probabilistically at the same time.  
@@ -132,7 +133,7 @@ Because $e^{i\gamma}$ is just a global phase, it can be ignored because it does 
  |\psi\rangle =  \cos{\frac{\theta}{2}} + e^{i\phi} \sin{\frac{\theta}{2}} (\phi, \theta \in \mathbb{C})
 \end{equation}
 
-Because the equation above has two parameters,  any pure single qubit state can be considered as a point on the surface and its geometric representation is called \textbf{Bloch sphere}.
+Because the equation above has two parameters, any pure single qubit state can be considered as a point on the surface of a sphere and its geometric representation is called the \textbf{Bloch sphere}.
 
 \begin{figure}[ht]
   \centering
@@ -159,7 +160,7 @@ Because the equation above has two parameters,  any pure single qubit state can 
 \end{figure}
 
 \subsubsection{Multi-Qubit State}
-  The quantum state for multi-qubits is a \textbf{tensor product} of a state vector of each qubit.  The general notation of two qubit state is
+  The quantum state for multi-qubits is a \textbf{tensor product} of a state vector of each qubit.  The general notation of a two qubit state is
   
 \begin{align}
     |\psi\rangle & = (\alpha |0\rangle + \beta |1\rangle) \otimes  (\gamma |0\rangle + \delta |1\rangle) \nonumber\\
@@ -170,27 +171,27 @@ Because the equation above has two parameters,  any pure single qubit state can 
   For example, the state $|00\rangle$ is equal to 
   
 \begin{equation}
-  \Big[
+  \left[
 \begin{array}{c}
 1 \\
 0 \\
 \end{array}
-\Big]
+\right]
 \otimes
- \Big[
+ \left[
 \begin{array}{c}
 1 \\
 0 \\
 \end{array}
-\Big]
-= \Bigg[
+\right]
+= \left[
 \begin{array}{c}
 1 \\
 0 \\
 0 \\
 0 \\
 \end{array}
-\Bigg]
+\right]
 \end{equation}.
 
  However, some quantum states such as
@@ -199,7 +200,7 @@ Because the equation above has two parameters,  any pure single qubit state can 
  	|\psi\rangle = \frac{1}{\sqrt{2}}|00\rangle + \frac{1}{\sqrt{2}}|11\rangle
  \end{equation}
  
- cannot be decomposed into quantum state of each qubit.  These special quantum states are called \textbf{entangled} states.
+ cannot be decomposed into independent quantum state of each qubit.  These special quantum states are called \textbf{entangled} states.
 
  \subsubsection{Measurement}
 Quantum measurement can be described by using a group of measurement operators $\{M_m\}$
@@ -231,20 +232,20 @@ Also, the sum of the measurement probability of each possible measurement outcom
  %TODO: Add general principles of density metrics and their proofs
 %TODO: ADD proof that a density matrix is positive semidefinite
 
- Mixed state is another representation of quantum state in more general cases, such as the presense of physical error.
-Mixed state is described in the form of a matrix which is called density matrix.  Assume quantum system takes one of their ensembles of states $\{|\psi_i\rangle\}$ ($i$ is an index) with the measurement probability of $p_i$ for each state.
+ A mixed state is another representation of quantum state in more general cases, such as the presense of physical error.
+A mixed state is described in the form of a matrix which is called a density matrix. 
 
 \subsubsection{Definition}
 
 The density matrix of this system $\rho$ is described by 
 
 \begin{equation}
-  \rho = \sum_i p_i |\psi_i\rangle\langle\psi_i|
+  \rho = \sum_i p_i |\psi_i\rangle\langle\psi_i|.
 \end{equation}
 
 \subsubsection{Evolution}
 
-The quantum system after applying a unitary operator $U$ is the following.
+The quantum system after applying a unitary operator $U$ is
 \begin{equation}
   \rho = \sum_i p_i |\psi_i\rangle\langle\psi_i| \xrightarrow{U} \sum_i p_i U|\psi_i\rangle\langle\psi_i|U^{\dagger}
 \end{equation}
@@ -258,19 +259,19 @@ Then, the measurement probability of $m$ is
   p(m|i) = \langle\psi_i|M^{\dagger}_m M_m|\psi_i\rangle = tr(M^{\dagger}_m M_m|\psi_i\rangle\langle\psi_i|)
 \end{equation}
 
-The measurement probability of $m$ from the collection of state $\{|\psi_i\rangle\}$ is 
+The measurement probability of $m$ from the collection of states $\{|\psi_i\rangle\}$ is 
 \begin{equation}
   \begin{split}
     p(m) &= \sum_i p_i p(m|i) \\ 
     &= \sum_i p_i \langle\psi_i|M^{\dagger}_m M_m|\psi_i\rangle \\
     &= \sum_i p_i \tr(M^{\dagger}_m M_m|\psi_i\rangle\langle\psi_i|) \\
-    &= \tr(M^{\dagger}_m M_m \rho)
+    &= \tr(M^{\dagger}_m M_m \rho).
   \end{split}
 \end{equation}
 
 The quantum state after the measuring $|\psi_i\rangle$ is 
 \begin{equation}
-  |\psi^m_i\rangle = \frac{M_m|\psi^m_i\rangle}{\sqrt{\langle \psi^m_i|M^{\dagger}_m M_m|\psi^m_i\rangle}}
+  |\psi^m_i\rangle = \frac{M_m|\psi^m_i\rangle}{\sqrt{\langle \psi^m_i|M^{\dagger}_m M_m|\psi^m_i\rangle}}.
 \end{equation}
 
 The corresponding density matrix is
@@ -284,7 +285,7 @@ The corresponding density matrix is
   \begin{split}
     p(i|m) &= \frac{p(m, i)}{p(m)} = \frac{p(m|i)p_i}{p(m)} \\
     &= \frac{\tr(M^{\dagger}_m M_m \rho) p_i}{\tr(M^{\dagger}_m M_m \rho)} \\
-    &= p_i
+    &= p_i.
   \end{split}
 \end{equation}
 
@@ -292,7 +293,7 @@ Therefore, the state can also be described by the equation
 \begin{equation}
   \begin{split}
     \rho_m &= \sum_i p_i \frac{M_m|\psi_i\rangle\langle\psi_i|M^{\dagger}_m}{\tr(M^{\dagger}_m M_m \rho)} \\
-    &= \frac{M_m \rho M^{\dagger}_m}{\tr(M^{\dagger}_m M_m \rho)}
+    &= \frac{M_m \rho M^{\dagger}_m}{\tr(M^{\dagger}_m M_m \rho)}.
   \end{split}
 \end{equation}
 
@@ -301,17 +302,10 @@ Therefore, the state can also be described by the equation
   %TODO: Add proof that the square root of density matrix exists in the appendix
   %TODO: Mention the fact above in this subsection.
 
- Fidelity is one of the distance between two quantum state. the fidelity of quantum state $\rho$ and $\sigma$ is
+ Fidelity is one of a distance measure between two quantum state. the fidelity of quantum state $\rho$ and $\sigma$ is
  \begin{equation}
   \begin{split}
     F(\rho, \sigma) &= \tr{\sqrt{\rho^{\frac{1}{2}}\sigma\rho^{\frac{1}{2}}}} \\
-  \end{split}
-\end{equation}
-
-For instance, if they commute and diagonal in the same basis like the following,
- \begin{equation}
-  \begin{split}
-    \rho &= \sum_i r_i |i\rangle\langle i|, \sigma= \sum_i s_i |i\rangle\langle i|\\
   \end{split}
 \end{equation}
 
@@ -333,9 +327,12 @@ The fidelity between a pure state $|\psi\rangle$ and a mixed state $\rho$ is
 \end{equation}
 
 \section{Quantum Operations}
+
+Operators of quantum gates are unitary, while the one of the measurement operation is non-unitary.
+The definition of a unitary operator is described in \ref{background:linear-algebra:unitary-operator}
 \subsection{I Gate}
 
-I gate is equal to the 2 $\times$ 2 identity matrix, which is 
+The I gate is equal to the 2 $\times$ 2 identity matrix, which is 
 
 \begin{equation}
 I = \begin{bmatrix}
@@ -389,7 +386,7 @@ I|1\rangle = \begin{bmatrix}
 \subsection{X Gate}
 \subsubsection{X gate}
 
-X gate flips the logical value of a qubit.
+The X gate flips the logical value of a qubit.
 
 \begin{equation}
 X = \begin{bmatrix}
@@ -441,7 +438,7 @@ X|0\rangle = \begin{bmatrix}
 
 \subsection{Y Gate}
 
-Y gate flips the logical value of a qubit and add an imaginary number.
+The Y gate flips the logical value of a qubit and adds an imaginary phase.
 
 \begin{equation}
  Y = \begin{bmatrix}
@@ -492,7 +489,7 @@ i & 0 \\
 \end{equation}.
 
 \subsection{Z Gate}
-Z gate flips the phase of $ |1\rangle$
+The Z gate flips the phase of $ |1\rangle$
 
 \begin{equation}
  Z = \begin{bmatrix}
@@ -543,7 +540,7 @@ Z|1\rangle = \begin{bmatrix}
 \end{equation}.
 
 \subsection{H Gate}
-H gate creates superposition.
+The Hadamard or, the H gate creates superposition.
 \begin{equation}
  H = \frac{1}{\sqrt{2}}\begin{bmatrix}
 1 & 1\\
@@ -593,7 +590,7 @@ H|1\rangle = \begin{bmatrix}
 
 \subsection{Rotation Gate}
 
-Rotation gates are quantum gates that represent rotation through an arbitrary angle $\theta$ with respect to one of x, y, z-axes of the Bloch sphere.
+Rotation gates are quantum gates that represent rotation through an arbitrary angle $\theta$ with respect to one of the x, y, z-axes of the Bloch sphere.
 
 \begin{equation}
   R_x(\theta) = e^{-iX\theta/2} = \cos \frac{\theta}{2}I - i \sin\frac{\theta}{2}X = \begin{bmatrix}
@@ -628,7 +625,7 @@ An arbitrary single qubit operation $U$ can be decomposed into three rotation ga
 \end{equation}
 
 \subsection{Controlled-NOT Gate}
-A CNOT gate involves two qubits, one is called \textbf{controlled qubit} and the other is called \textbf{target qubit}.  If the controlled qubit is 1, the bit value of the target qubit is flipped.
+A CNOT gate involves two qubits, one is called \textbf{the controll qubit} and the other is called \textbf{target qubit}.  If the control qubit is 1, the bit value of the target qubit is flipped.
 
 \begin{equation}
 CNOT = \begin{bmatrix}
@@ -695,7 +692,7 @@ CNOT_{0,1}|11\rangle =
 \end{equation}.
 
 \subsection{Controlled-Z Gate}
-A CZ gate involves two qubits, one is called \textbf{controlled qubit} and the other is called \textbf{target qubit}.  If the controlled qubit is 1, the Z gate is applied to the target qubit.
+A CZ gate involves two qubits, one is called \textbf{the control qubit} and the other is called \textbf{target qubit}.  If the control qubit is 1, the Z gate is applied to the target qubit.
 
 \begin{equation}
 CZ = \begin{bmatrix}
@@ -765,7 +762,7 @@ CZ_{0,1}|11\rangle =
 % TODO: Add general properties of density operators
 
 \section{Quantum Circuit}
-\ref{background:example-circuit} is the example of a quantum circuit.
+Fig \ref{background:example-circuit} is an example of a quantum circuit.
 
 \begin{figure}[ht]
   \begin{center}
@@ -782,12 +779,12 @@ CZ_{0,1}|11\rangle =
       measure a[0-2];					 
      \end{yquant}
   \end{tikzpicture}
-\caption{A example of quantum circuit}
+\caption{A example of a quantum circuit}
 \end{center}
 \label{background:example-circuit}
 \end{figure}
 
-Each horizontal line represents each qubit and the square boxes that contain alphabets mean single quantum gates.  The sign which involves a vertical line means a CNOT gate, and the box on the most right side indicates measurement. 
+Each horizontal line represents each qubit and the square boxes that contain letters mean single quantum gates.  The sign which involves a vertical line means a CNOT gate, and the box on the most right side indicates measurement. 
 
 \section{Quantum Entanglement}
 
@@ -813,7 +810,8 @@ The entangled states between two qubits are called Bell pairs or EPR pairs \cite
   \end{equation}.
 
 \subsection{Multipartite Entanglement}
-There are cases that more than two qubits are entangled and that state is called Greenberger–Horne–Zeilinger state or GHZ state.
+There are cases that more than two qubits are entangled. One such state is called the Greenberger-Horne-Zeilinger state or GHZ state.
+The GHZ state is the only one of the infinite number of possible entangled states.
 
 \ref{background:three-qubits} is the braket notation of the GHZ state that involves three qubits.
 \begin{equation}
@@ -828,18 +826,19 @@ In the general case, the braket notation of the GHZ state of N qubits is the fol
 
 \subsection{Graph State}
 
-Graph state is one of the particular multipartite entangled state. Suppose given a particular grap $G(V, E)$.
-V indicates the collection of vertices and $E$ indicates the collection of edges.
+A graph state is a particular multipartite entangled state. 
+Given a particular graph $G(V, E)$, V indicates the collection of vertices and $E$ indicates the collection of edges.
 The associated graph state $|G\rangle$ would be represented as 
 \begin{equation}
   |G\rangle = \prod_{(a,b) \in E} CZ_{a,b} |+\rangle
 \end{equation}.
 
-First, all the qubits are initialized as $|+ \rangle$ states and then Controlled-Z gates are applied to each pair of qubits that is represented in each edge.
-Graph state is also known as the initial state for measurement-based quantum computation (MBQC) \cite{PhysRevLett.86.5188}. 
+First, all the qubits are initialized as $|+ \rangle$ states and then Controlled-Z gates are applied to each pair of qubits that is represented by an edge.
+A graph state is also known as the initial state for measurement-based quantum computation (MBQC) \cite{PhysRevLett.86.5188}. 
 
 \subsection{Bell State Measurement}
 Bell state measurement is a special type of quantum measurement that determines which Bell pair the given two qubit entangled state is \cite{PhysRevA.59.3295}.
+If the state is a superposition of Bell states, the system is projected into one of them probabilistically.
 
 \begin{figure}[ht]
   \begin{center}
@@ -874,13 +873,13 @@ Unlike classical communication, quantum states cannot be just copied and transmi
 
 However, a method called quantum teleportation was proposed \cite{PhysRevLett.70.1895}, which overcomes the restriction and allows sender to transmit single qubit state to a distant location. 
  		
-This method requires both the single qubit state and a new Bell pair, and also the sender have to prepare two qubits and the receiver have to prepare one qubit. 
-After applying a CNOT gate and an H gate in the figure above, the sender have to measure both qubits and send those measurement results over the classical network.  
-Then, the receiver get those measurement results and apply some quantum gates if the measurement results of corresponding qubits on the sender's side are 1, in order to correct on the quantum state on the receiver's side.
+This method requires both the single qubit state and a new Bell pair. 
+After applying a CNOT gate and an H gate between the single qubit and the first qubit of the Bell pair, the sender has to measure both qubits and send those measurement results over the classical network.  
+Then, the receiver gets those measurement results and apply some quantum gates if the measurement results of corresponding qubits on the sender's side are 1, in order to correct on the quantum state on the receiver's side.
 
-This protocol experimentally demonstrated over up to 1,400 km \cite{ren2017ground}.
+This protocol has been experimentally demonstrated over up to 1,400 km \cite{ren2017ground}.
 
-This is the figure of the quantum circuit that performs quantum teleportation for a single qubit information \cite{9023997}.
+Fig \ref{fig:quantum-teleporatation} is the figure of the quantum circuit that performs quantum teleportation for a single qubit information \cite{9023997}.
 
 \begin{figure}[ht]
   	\begin{center}
@@ -898,6 +897,7 @@ This is the figure of the quantum circuit that performs quantum teleportation fo
  			\end{yquant}
 		\end{tikzpicture}
 	\caption{Quantum circuit for quantum teleportation}
+  \label{fig:quantum-teleporatation}
 	\end{center}
 \end{figure}
 
@@ -911,7 +911,7 @@ For example, assume Alice has a single qubit, Bob has two qubits, and Charlie ha
 If Bob performs Bell state measurement on both of his qubits, Alice's qubit and Charlie's qubit are eventually entangled, even though they have not interacted with each other.
 This can be also seen as the teleportation of a Bell pair by sending one of its particles. 
 
-This method has been experimentally demonstrated by using polarization photon qubits in a free space \cite{PhysRevLett.80.3891},  those in an optical fiber \cite{PhysRevA.71.050302}, and even continuous variables \cite{jia2004experimental}.
+This method has been experimentally demonstrated by using polarization photon qubits in free space \cite{PhysRevLett.80.3891}, in optical fiber \cite{PhysRevA.71.050302}, and even using continuous variables \cite{jia2004experimental}.
 
 \ref{background:entanglement-swapping} is the figure of quantum circuit to perform entanglement swapping \cite{9803043}.
 
@@ -943,7 +943,7 @@ This method has been experimentally demonstrated by using polarization photon qu
 Entanglement purification \cite{PhysRevA.53.2046} is a scheme to generate a set of quantum entanglements with higher fidelities from a larger set of imperfect quantum entanglements, local quantum operations, and classical communications.
 This procedure is also called entanglement distillation, or quantum concatenation. This section presents an example of entanglement purification that generates a single Bell pair with higher fidelity from two of those with less fidelity.
 
-This protocol is experimentally demonstrated by photons \cite{Yan:21}, atoms \cite{179436} and electron-spin qubits \cite{kalb2017entanglement}.
+This protocol has been experimentally demonstrated using photons \cite{Yan:21}, atoms \cite{179436} and electron-spin qubits \cite{kalb2017entanglement}.
 
 
 Assume Alice and Bob are supposed to share $|\Phi^+\rangle$, which is one of the Bell pairs. However, the state would be converted to the following mixed state due to the noisy nature of a quantum channel.
@@ -956,23 +956,30 @@ Assume Alice and Bob are supposed to share $|\Phi^+\rangle$, which is one of the
 \end{equation}
 
 
-Any mixed state can be converted to Werner state by applying Pauli operations and $\frac{\pi}{2}$ operations, so Alice and Bob can obtain the following state.
+Any mixed state might be converted to a Werner state by applying Pauli operations and $\frac{\pi}{2}$ operations, so Alice and Bob can obtain the following state.
 \begin{equation}
   \rho^{'}_{AB} = F|\Phi^+\rangle\langle\Phi^+| + \frac{1-F}{3}(|\Phi^-\rangle\langle\Phi^-| + |\Psi^+\rangle\langle\Psi^+| + |\Psi^-\rangle\langle\Psi^-|)
 \end{equation}
 
+Fig \ref{background:werner-state} is the quantum circuit to prepare a Werner state.
 
-Two noisy Bell pairs are required for entanglement purification. One of the Bell pair $\rho^{'}_{a_1 b_1}$ is called source Bell pair, which may be purified, and the other one $\rho^{'}_{a_2 b_2}$  is called target Bell pair, which is going to be measured. 
+\begin{figure}[H]
+  \centerline{\includegraphics[width=0.8\columnwidth]{images/circuit_werner_state.png}}
+  \caption{The figure of the circuit for entanglement purification \cite{riedel2021bell}}
+  \label{background:werner-state}
+\end{figure}
+
+
+Two noisy Bell pairs are required for entanglement purification. One of the Bell pair $\rho^{'}_{a_1 b_1}$ is called the source Bell pair, which may be purified, and the other one $\rho^{'}_{a_2 b_2}$  is the called target Bell pair, which is going to be measured. 
 Then, Alice and Bob perform CNOT operations between $a_1$ and $a_2$, and $b_1$ and $b_2$, respectively.
 After that, they measure $a_2$ and $b_2$ respectively, which is the qubit on the target Bell pair on their side and exchange the measurement results. 
 If their measurement results match, the purification is successful, while they have to discard the source Bell pair and try again if those results do not match.
 
-\ref{background:after-measurement} is the quantum state after measuring the target Bell pair.
+The quantum state after measuring the target Bell pair, is
 
 \begin{align}
 \rho^{'}_{ab} = \frac{1}{N} \big[ F^2 + \frac{1}{9}\big(1-F \big)^2\big]|\Phi^+\rangle\langle\Phi^+| + \frac{2F(1-F)}{3N}|\Phi^-\rangle\langle\Phi^-| + \frac{2(1-F)^2}{9N}(|\Psi^+\rangle\langle\Psi^+| + |\Psi^-\rangle\langle\Psi^-|) \nonumber\\
 (N = F^2 + \frac{2F(1-F)}{3} + \frac{2(1-F)^2}{9})
-\label{background:after-measurement}
 \end{align}
 
 The purification becomes successful if F  $> \frac{1}{2}$. The readers can refer to more detailed calculation in the Appendix\ref{appendix:purification}
@@ -987,24 +994,24 @@ Quantum nodes are the nodes on a quantum network, which can be categorized into 
 
 \subsubsection{End nodes}
 
-\textbf{MEAS} measures the photons it receives. Although its functionality seems to be pretty limited, a pair of this node can perform quantum key distribution. In addition to that, the single node can be used as a terminal for blind quantum computation.
+\textbf{MEAS} measures the photons it receives. Although its functionality seems to be pretty limited, a pair of this type of node can perform quantum key distribution. In addition, a single node can be used as a terminal for blind quantum computation.
 
 \textbf{COMP} represents quantum processor.  This node also has the functionality of measuring qubits and also storing them in quantum memories.
 
-\textbf{SNS} has sensing functionality by using quantum entanglement, which can be used for clock synchronization and a reference frame for interferometry. 
+\textbf{SENS} has sensing functionality by using quantum entanglement, which can be used for clock synchronization and a reference frame for interferometry. 
 
 \subsubsection{Quantum repeaters and routers}
 
-\textbf{REP1} plays a role of the 1st generation quantum repeater. It performs entanglement swapping and improves the fidelity of Bell pair by purification.
+\textbf{REP1} plays the role of the 1st generation quantum repeater. It performs entanglement swapping and improves the fidelity of Bell pair by purification.
 The detail of each generation of quantum repeater network will be discussed in the later section.
 
-\textbf{REP2} plays a role of the 2nd generation quantum repeater. It performs entanglement swapping and perform quantum error correction on a logical qubits, which is composed of several physical qubits.
+\textbf{REP2} plays the role of the 2nd generation quantum repeater. It performs entanglement swapping and perform quantum error correction on logical qubits composed of several physical qubits.
 
 \textbf{RTR} behaves as the border between two different networks and also involves rewriting the given RuleSets into either 1st generation protocol and 2nd generation protocol based on what the network assumes.
 
 \subsubsection{Support nodes}
 
-\textbf{EPPS}, which stands for an entangled photon pair source, performs symmetric parametric down conversion.
+\textbf{EPPS}, which stands for an entangled photon pair source, performs spontaneous parametric down conversion (SPDC).
 It creates pairs of entangled photons and send them to link end points. This node is used in terrestrial links or in satellite, which emits photons to telescopes on the ground.
 
 \textbf{BSA} or Bell State Analyzer, generates a entangled state between two quantum memories by swapping two different entanglements between a single quantum memory and a single photon.
@@ -1017,22 +1024,3 @@ The photons are measured at link end nodes.
 
 \textbf{OSW} plays a role of optical switches and can exist independently or as a part of the type of nodes that are mentioned above.
 It switches photons from incoming links to outgoing ones.
-
-\subsection{Quantum Link}
-
-Quantum link is a one of the protocol stacks for quantum network, which is responsible for robust entanglement generation between two neighboring nodes.
-This subsection introduces three different architectures for a physical Bell pair that are discussed in \cite{jones2016design}.
-
-\subsubsection{MeetIntheMiddle}
-
-Meet-In-the-Middle, or MIM in short, collect photons from both end points of a physical link and create entanglements and send them back. Generation of these entanglements are performed in the Bell State Analyzer located in the middle.
-
-\subsubsection{SenderReceiver}
-
-Unlike MIM, the Bell State Analyzer is located in one of the endpoints of a physical link.
-
-\subsubsection{MidpointSource}
-
-EPPS in the middle performs generate entanglements and send them to the both endpoints of a physical link.
-
-

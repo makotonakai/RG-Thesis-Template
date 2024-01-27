@@ -6,9 +6,9 @@
 \subsection{Overview}
 
 QuISP \cite{satoh2022quisp} is a quantum network simulator which aims to simulate the behavior of a large-scale quantum network. It is built on top of OMNeT++ \cite{10.5555/1416222.1416290}, which is an event-driven network simulator.
-The reason why QuISP is built on top of OMNet++ is that OMNet++ allows users to define their own networking layers.
+QuISP is built on top of OMNet++ because OMNet++ allows users to define their own networking layers.
 QuISP can simulate various types of errors, not only Pauli X error, Pauli Y error and Pauli Z error, but also relaxation error and excitation error.
-Physical noise on an actual quantum system with $n$ qubits are usually simulated in the form of a density matrix, which would includes $2^n \times 2^n$ elementss and soon becomes intractable as $n$ becomes larger.
+Physical noise on an actual quantum system with $n$ qubits are usually simulated in the form of a density matrix, which would includes $2^n \times 2^n$ elements and soon becomes intractable as $n$ becomes larger.
 QuISP realizes the scalable simulation of quantum network by simulating the physical error using an error probability vector, which would take the following form.
 
 \begin{equation}
@@ -30,7 +30,7 @@ QuISP supports three main link architecture.
 \subsubsection{Memory-Memory}
 The first one is Memory-Memory that two nodes are directly connected via a quantum link and the Bell State Analyzer is equipped in the receiver node.
 
-\subsubsection{Memory-Interface-Memory}
+\subsubsection{Memory-Interference-Memory}
 The second one is Memory-Interface-Memory. Both end nodes of a quantum link emits photons to Bell State Analyzer located in the middle. After they become entangled, all the measurements results and required operations are sent back to both nodes.
 
 \subsubsection{Memory-Source-Memory}
@@ -68,10 +68,6 @@ This section discusses the mechanism and required methods that the author implem
 \subsubsection{Link Allocation Policy Negotiation}
 The first phase of link management in RuleSet-based quantum networking is the negotiation of the next set of RuleSets to execute.
 This is triggered by each update in the set of available runtimes, or RuleSets in the Rule Engine, such as the reception of a new RuleSet or the notification of connection teardown, which will be explained in detail in the later section.
-\begin{figure}[H]
-  \centerline{\includegraphics[width=.8\columnwidth]{images/link_allocation_update_message.png}}
-  \caption{Transmission of a LinkAllocationUpdateMessage}
-\end{figure}
 
 First of all, LinkAllocationUpdateMessages are sent to all the neighboring nodes. \ref{algo:sendlau} is the pseudocode of the transmission of those messages.
 
@@ -100,6 +96,15 @@ First of all, LinkAllocationUpdateMessages are sent to all the neighboring nodes
             \State Append $\text{active\_link\_allocation}$ to $\text{active\_link\_allocations}$
           \EndFor
         \EndIf
+        \algstore{hoge}
+      \end{algorithmic}
+    \end{minipage}
+    \end{algorithm}
+
+    \begin{algorithm}[H]    
+      \begin{minipage}{0.8\linewidth}               
+      \begin{algorithmic}[1]
+        \algrestore{hoge}
       \State Initialize an array for RuleSet IDs in the next link policy $\text{next\_link\_allocations}$
         \If {$\text{partner}$ is a part of the key of $\text{node\_address\_next\_link\_allocations\_map}$}
           \ForAll {$\text{next\_link\_allocation} \gets \text{node\_address\_next\_link\_allocations\_map[partner]}$}
@@ -113,15 +118,6 @@ First of all, LinkAllocationUpdateMessages are sent to all the neighboring nodes
           \State{Append $\text{next\_link\_allocation}$ to $\text{node\_address\_next\_link\_allocations\_map[partner]}$}
         \EndFor
       \EndFor
-      \algstore{hoge}
-    \end{algorithmic}
-  \end{minipage}
-  \end{algorithm}
-
-  \begin{algorithm}[H]    
-    \begin{minipage}{0.8\linewidth}               
-    \begin{algorithmic}[1]
-      \algrestore{hoge}
       \ForAll {$\text{partner\_address} \gets \text{partner\_addresses}$}
         \State Initialize an new LinkAllocationUpdateMessage $\text{pkt}$
         \State The source address of $\text{pkt} \gets \text{parent\_address}$ 
@@ -173,6 +169,21 @@ If the RuleEngine receives an incoming LinkAllocationUpdateMessage, it has to st
 \end{minipage}
 \end{algorithm}
 
+If both the incoming and outgoing LinkAllocationUpdateMessages have the same random numbers, the negotiation will be rejected by sending a RejectLinkAllocationUpdateMessage to each other.
+\begin{algorithm}[H]  
+  \begin{minipage}{0.8\linewidth}
+  \caption{Algorithm For Sending a RejectLinkAllocationUpdateMessage}             
+  \begin{algorithmic}[1]
+    \Require The address of the this node $\text{this\_address}$      
+    \Require The address of the destination node $\text{dest\_address}$    
+    \State Initialize a new RejectLinkAllocationUpdateMessage $\text{pkt}$
+    \State The source address of $\text{pkt} \gets \text{this\_address}$
+    \State The destination address of $\text{pkt} \gets \text{dest\_address}$
+    \State Send $\text{pkt}$
+  \end{algorithmic}
+\end{minipage}
+\end{algorithm}
+
 After exchanging LinkAllocationUpdateMessages, each pair of nodes need to synchronize the contents and their order of the next link allocation policy.
 The policy from the LinkAllocationUpdateMessage with the bigger random value will be prioritized.
 
@@ -183,17 +194,17 @@ The policy from the LinkAllocationUpdateMessage with the bigger random value wil
     \Require The address of the destination node $\text{dest\_address}$
     \Require A map of node address of each neighboring nodes and the incoming random number $\text{node\_address\_incoming\_random\_number\_map}$
     \Require A map of node address of each neighboring nodes and the random number in this node $\text{node\_address\_random\_number\_map}$
-    \Require  A map of node address of each neighboring nodes and the incoming next link allocation policy $\text{node\_address\_incoming\_next\_link\_allocations\_map}$
-    \Require  A map of node address of each neighboring nodes and the next link allocation policy in this node $\text{node\_address\_next\_link\_allocations\_map}$
     \Require  A map of node address of each neighboring nodes and whether the RuleSet sent BarrierMessage $\text{node\_address\_barrier\_sent\_map}$
     \Require  A map of node address of each neighboring nodes and whether the RuleSet received BarrierMessage $\text{node\_address\_barrier\_received\_map}$
     \State $\text{incoming\_random\_number} \gets \text{node\_address\_incoming\_random\_number\_map[dest\_address]}$
     \State $\text{random\_number} \gets \text{node\_address\_random\_number\_map[dest\_address]}$
-    \If{$\text{incoming\_random\_number} > \text{random\_number}$}
+    \If{$\text{incoming\_random\_number} == \text{random\_number}$}
+      \State $\text{Send a RejectLinkAllocationUpdateMessage}$
+    \ElsIf{$\text{incoming\_random\_number} > \text{random\_number}$}
       \State $\text{node\_address\_incoming\_random\_number\_map[dest\_address]} \gets \text{node\_address\_random\_number\_map[dest\_address]}$
+      \State $\text{node\_address\_barrier\_sent\_map[dest\_address]} \gets \text{False}$
+      \State $\text{node\_address\_barrier\_received\_map[dest\_address]} \gets \text{False}$
     \EndIf
-    \State $\text{node\_address\_barrier\_sent\_map[src\_addr]} \gets$ True
-    \State $\text{node\_address\_barrier\_received\_map[src\_addr]} \gets$ True
   \end{algorithmic}
 \end{minipage}
 \end{algorithm}
@@ -275,7 +286,6 @@ Release of link Bell pairs that were allocated to the terminated connection will
       \ForAll {$\text{bell\_pair} \gets \text{bell\_pair\_range}$}
         \State $\text{bell\_pair\_num} \gets \text{bell\_pair\_num + 1}$
       \EndFor
-
       \State  Initialize a map of Runtime indices and the number of Bell pairs $\text{runtime\_index\_bell\_pair\_number\_map}$
       \State $\text{number} \gets$ 0
       \ForAll {$\text{bell\_pair} \gets \text{bell\_pair\_range}$}
@@ -292,6 +302,15 @@ Release of link Bell pairs that were allocated to the terminated connection will
             \Else
               \State $\text{runtime\_index\_bell\_pair\_number\_map[runtime\_index]} \gets$ 0
             \EndIf
+            \algstore{hoge}
+          \end{algorithmic}
+        \end{minipage}
+        \end{algorithm}
+    
+        \begin{algorithm}[H]    
+          \begin{minipage}{0.8\linewidth}               
+          \begin{algorithmic}[1]
+            \algrestore{hoge}
           \EndIf
         \EndIf
         \State $\text{number} \gets \text{number + 1}$
@@ -334,6 +353,15 @@ Release of link Bell pairs that were allocated to the terminated connection will
               \If {$\text{qubit\_record}$ is busy}
                 \State $\text{qubit\_record.is\_busy} \gets$ False
               \EndIf
+              \algstore{hoge}
+            \end{algorithmic}
+          \end{minipage}
+          \end{algorithm}
+
+          \begin{algorithm}[H]    
+            \begin{minipage}{0.8\linewidth}               
+            \begin{algorithmic}[1]
+              \algrestore{hoge}
               \ForAll {$\text{terminated\_runtime} \gets \text{terminated\_runtimes}$}
                 \If {ID of $\text{terminated\_runtime}$ is $\text{ruleset\_id}$}
                   \State Release $\text{qubit\_record}$ 
@@ -368,7 +396,7 @@ After the responder receives ConnectionSetupRequest, it sends Ack and RuleSet to
 
 The RuleSet received by the ConnectionManager will be stored in RuleEngine in each node.
 \begin{figure}[H]
-  \centerline{\includegraphics[width=\columnwidth]{images/ruleset_in_rule_engine.png}}
+  \centerline{\includegraphics[width=0.7\columnwidth]{images/ruleset_in_rule_engine.png}}
   \caption{Storing RuleSet in the RuleEngine}
 \end{figure}
 
@@ -382,7 +410,7 @@ After each node both sent and received LinkAllocationUpdateMessages, it determin
 Generation of link Bell pairs are performed independently from exchange of messages.
 \begin{figure}[H]
   \centerline{\includegraphics[width=\columnwidth]{images/bell_pair_generation.png}}
-  \caption{Exchange of LinkAllocationUpdateMessages}
+  \caption{Generation of Link-level Bell pairs}
 \end{figure}
 
 BarrierMessages will be exchanged only if the next link allocation policy is determined and available link Bell pairs exist with each of the neighboring nodes.
@@ -400,26 +428,35 @@ the first sequence number for the next link allocation is negotiated, each link 
 
 \subsubsection{Connection Teardown}
 
-
+After the RuleEngine detects the termination of execution of the RuleSet, the responder sends a ConnectionTeardownNotifier to its ConnectionManager.
 \begin{figure}[H]
   \centerline{\includegraphics[width=\columnwidth]{images/connection_teardown_notifier.png}}
   \caption{Transmission of ConnectionTeardownNotifier}
 \end{figure}
+
+After the ConnectionManager receives a ConnectionTeardownNotifier, it sends a ConnectionTeardownMessage to each node along the path of the connection.
 
 \begin{figure}[H]
   \centerline{\includegraphics[width=\columnwidth]{images/connection_teardown_message.png}}
   \caption{Transmission of ConnectionTeardownMessages}
 \end{figure}
 
+After each node receives a ConnectionTeardownMessage, it stores the message to the RuleEngine in the same node.
+The name of the message is changed to an InternalConnectionTeardownMessage for a better readability.
+
 \begin{figure}[H]
-  \centerline{\includegraphics[width=\columnwidth]{images/internal_connection_teardown_message.png}}
+  \centerline{\includegraphics[width=0.7\columnwidth]{images/internal_connection_teardown_message.png}}
   \caption{Storing a ConnectionTeardownMessage}
 \end{figure}
+
+After the RuleEngine receives an InternalConnectionTeardownMessage, it terminated the execution of the RuleSet for the connection that was torn down.
 
 \begin{figure}[H]
   \centerline{\includegraphics[width=\columnwidth]{images/ruleset_execution_terminated.png}}
   \caption{Termination of the execution of RuleSets}
 \end{figure}
+
+Lastly, all the link-level Bell pairs that are allocated but not consumed are released so that they can be reused for new RuleSets.
 
 \begin{figure}[H]
   \centerline{\includegraphics[width=\columnwidth]{images/link_release.png}}

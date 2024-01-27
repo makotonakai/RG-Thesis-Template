@@ -4,19 +4,39 @@
 \section{Protocol Stack For Quantum Network}
 
 This section discusses the protocol stack for quantum network. The protocol stack is a collection protocols that supports various levels of communication.
-\ref{related-works:rdv} is the comparison of the protocol stack for quantum network that are presented in the previous works.
+Table \ref{related-works:rdv} is the comparison of the protocol stack for quantum network that are presented in the previous works.
 
 \begin{table}[ht]
   \begin{center}
-    \begin{tabular}{|c|c|} \hline
-       Name & Functionality \\ \hline \cline{1-2}
-       Application & Run an application on an E2E connection \\ \hline \cline{1-2}
-       Purification Control & Perform purification to E2E connection \\ \hline \cline{1-2}
-       Entanglement Swapping Control & Perform entanglement swapping to establish an E2E connection \\
-       Purification Control & Perform purification to a physical bell pair \\ \hline \cline{1-2} \hline \cline{1-2}
-       Entanglement Control & Provide robustness to the bell pair establishment \\ \hline \cline{1-2} \hline \cline{1-2}
-       Physical Entanglement & Establish a physical bell pair \\ \hline \cline{1-2} \hline \cline{1-2}
-    \end{tabular}
+    \begin{tabularx}{\textwidth}{
+  | >{\centering\arraybackslash}X 
+  | >{\centering\arraybackslash}X |
+  }
+      \hline
+       Name & Functionality \\ 
+       \hline 
+       Application & Run an application on an E2E connection \\ 
+       \hline
+       Purification Control & Perform purification to E2E connection \\ 
+       \hline 
+       Entanglement Swapping Control & 
+        \begin{tabular}{c}
+          Perform entanglement swapping \\ to establish an E2E connection \\
+        \end{tabular}\\ 
+        \hline 
+       Purification Control & 
+       \begin{tabular}{c}
+        Perform purification to \\ a physical bell pair \\ 
+      \end{tabular}\\ 
+       \hline
+       Entanglement Control & 
+       \begin{tabular}{c}
+        Provide robustness to \\ the bell pair establishment \\ 
+      \end{tabular}\\ 
+       \hline
+       Physical Entanglement & Establish a physical bell pair \\ 
+       \hline
+    \end{tabularx}
     \caption{Protocol Stack for Quantum Network in \cite{Van_Meter_2009}}
   \end{center}
   \label{related-works:rdv}
