@@ -3,70 +3,121 @@
 
 \section{Experiment}
 
-The author performed several experiments using QuISP (Quantum Internet Simulation Package) and demonstration of the proposed protocol in several circumstances.
+The author performed several experiments using QuISP (Quantum Internet Simulation Package) and validated the behavior of the proposed protocol.
 
-\subsection{Validation of the protocol}
-The author ran the simulations whose topology has two nodes with a single link for two different link architectures, which are SenderReceiver and MeetInTheMiddle.
+\subsection{Validation of the Protocol}
 
-\begin{figure}[H]
-  \centerline{\includegraphics[width=.8\columnwidth]{images/topology_MM.png}}
-  \caption{Network topology for SenderReceiver}
-\end{figure}
-
-\begin{figure}[H]
-  \centerline{\includegraphics[width=.8\columnwidth]{images/topology_MIM.png}}
-  \caption{Network topology for MeetInTheMiddle}
-\end{figure}
-
-The active link allocation policy, the next link allocation policy, and the first sequence number for the new allocation policy became coordinated in these two nodes, both before the connection setup and before the connection teardown in both cases,
-which means that the proposed link management protocol is independent from the underlying physical link architecture.
+\subsubsection{Setting}
+Table \ref{table:parameter-for-experiment1} is the table of parameters that are used in this experiment.
 
 \begin{table}[ht]
   \begin{center}
-    \begin{tabular}{|m{5em}|m{5em}|m{10em}|m{10em}|m{5em}|} \hline
-      Case & Node name  & Active link allocation policy & Next link allocation policy & The sequence number of the first Bell pair \\ \hline \cline{1-5}
-      Connection Setup & Node 1 & [] & [7640092079844890364, 5401871878593356085] & 1 \\ \cline{1-5}
-       & Node 2 & [] & [7640092079844890364, 5401871878593356085] & 1 \\ \cline{1-5}
-       Connection Teardown & Node 1 & [7640092079844890364, 7640092079844890364]& [] & 1 \\ \cline{1-5}
-       & Node 2 & [7640092079844890364, 7640092079844890364] & [] & 1 \\ \cline{1-5}
+    \begin{tabular}{|c|c|} 
+      \hline
+      Parameter & Value \\ \hline \cline{1-2}
+      Total simulation time (s) &  20 \\ \cline{1-2}
+      Waiting time for the initial notification of link generation (s) &  10 \\ \cline{1-2} 
+      Interval for sending each ConnectionSetupRequest (s) &  2 \\ \cline{1-2} 
+      Number of qubits in the buffer & 100  \\  \cline{1-2}
+      Number of link-level Bell pairs required by each RuleSet &  100 \\ \cline{1-2}
+      The type of RuleSet & Tomography \\  \hline  \cline{1-2}
     \end{tabular}
-    \caption{A table for the outcome of the negotiation between two nodes in the MM simulation}
+    \caption{A table of parameters in the experiment}
+    \label{table:parameter-for-experiment1}
   \end{center}
 \end{table}
 
-\begin{table}[ht]
-  \begin{center}
-    \begin{tabular}{|m{5em}|m{5em}|m{10em}|m{10em}|m{5em}|} \hline
-      Case & Node name  & Active link allocation policy & Next link allocation policy & The sequence number of the first Bell pair \\ \hline \cline{1-5}
-      Connection Setup & Node 1 & [] & [5401871878593356085, 864743034342436556] & 1 \\ \cline{1-5}
-       & Node 2 & [] & [5401871878593356085, 864743034342436556] & 1 \\ \cline{1-5}
-       Connection Teardown & Node 1 & [7640092079844890364, 7640092079844890364] & [] & 1 \\ \cline{1-5}
-       & Node 2 & [7640092079844890364, 7640092079844890364] & [] & 1 \\ \cline{1-5}
-    \end{tabular}
-    \caption{A table for the outcome of the negotiation between two nodes in the MIM simulation}
-  \end{center}
-\end{table}
+The author performs a two-node topology with the SenderReceiver link architecture.
+\begin{figure}[H]
+  \centerline{\includegraphics[width=.6\columnwidth]{images/topology_MM.png}}
+  \caption{The figure of the network topology used in the experiment}
+\end{figure}
+
+\subsubsection{Result}
+
+\begin{figure}[H]
+  \centerline{\includegraphics[width=.6\columnwidth]{images/result1.png}}
+  \caption{The number of link-level Bell pairs allocated to each RuleSet}
+  \label{fig:result1}
+\end{figure}
+
+Fig \ref{fig:result1} shows the number of link-level Bell pairs that are allocated to each RuleSet.
+This figure shows that several RuleSets are already stored before the the generation of link-level Bell pairs is notified, and link-level Bell pairs are allocated to those RuleSet once the generation starts, which is a clear sign of multiplexing on a RuleSet-based quantum network.
+It also shows that the number of allocated link-level Bell pairs declines.  This clearly indicates that link-level Bell pairs that are allocated but not consumed by each RuleSet were released after the relevant connection is torn down.
 
 \newpage
 
-\subsection{Ratio of Bell pairs allocated to each connection}
+\subsection{The case when more link-level Bell pairs are required}
 
-The following figure compares the ratio of the Bell pairs allocated to each Bell pairs. It shows that all the Bell pairs are allocated if there is only a single connection, and half of them are allocated if there are two active connections.
+\subsubsection{Setting}
+Table \ref{table:parameter-for-experiment2} is the table of parameters that are used in this experiment.
 
+\begin{table}[ht]
+  \begin{center}
+    \begin{tabular}{|c|c|} 
+      \hline
+      Parameter & Value \\ \hline \cline{1-2}
+      Total simulation time (s) &  20 \\ \cline{1-2}
+      Waiting time for the initial notification of link generation (s) &  10 \\ \cline{1-2} 
+      Interval for sending each ConnectionSetupRequest (s) &  2 \\ \cline{1-2} 
+      Number of qubits in the buffer & 100  \\  \cline{1-2}
+      Number of link-level Bell pairs required by each RuleSet &  200 \\ \cline{1-2}
+      The type of RuleSet & Tomography \\  \hline  \cline{1-2}
+    \end{tabular}
+    \caption{A table of parameters in the experiment}
+    \label{table:parameter-for-experiment2}
+  \end{center}
+\end{table}
+
+\subsubsection{Result}
+
+% 200 bell pairs, but 100 buffers
 \begin{figure}[H]
-  \centerline{\includegraphics[width=.8\columnwidth]{images/ratio_of_bell_pairs.png}}
-  \caption{The figure of the ratio of allocated Bell pairs}
+  \centerline{\includegraphics[width=.6\columnwidth]{images/result2.png}}
+  \caption{The figure of the number of link-level Bell pairs allocated to each RuleSet}
+  \label{fig:result2}
 \end{figure}
 
-\subsection{Validation of release of the Bell pairs}
+Each RuleSet in this experiment requires twice as many link-level Bell pairs as how many Bell pairs generated in each round.
+Fig \ref{fig:result2} shows that it takes more than one thousands events to finish multiplexing, which is more than twice as many events as how many it took in the previous experiment.
 
-The following figure shows that the number of allocated Bell pairs in the entire network decreases at the end of the simulation.
-It demonstrates the fact that the Bell pairs that were allocated to but not consumed by the active connections are successfully released after the teardown of those connections.
 
+\newpage
+
+\subsection{The case when more link-level Bell pairs are generated}
+
+\subsubsection{Setting}
+Table \ref{table:parameter-for-experiment3} is the table of parameters that are used in this experiment.
+
+\begin{table}[ht]
+  \begin{center}
+    \begin{tabular}{|c|c|} 
+      \hline
+      Parameter & Value \\ \hline \cline{1-2}
+      Total simulation time (s) &  20 \\ \cline{1-2}
+      Waiting time for the initial notification of link generation (s) &  10 \\ \cline{1-2} 
+      Interval for sending each ConnectionSetupRequest (s) &  2 \\ \cline{1-2} 
+      Number of qubits in the buffer & 200  \\  \cline{1-2}
+      Number of link-level Bell pairs required by each RuleSet &  100 \\ \cline{1-2}
+      The type of RuleSet & Tomography \\  \hline  \cline{1-2}
+    \end{tabular}
+    \caption{A table of parameters in the experiment}
+    \label{table:parameter-for-experiment3}
+  \end{center}
+\end{table}
+
+\subsubsection{Result}
+% 100 bell pairs, but 200 buffers
 \begin{figure}[H]
-  \centerline{\includegraphics[width=.8\columnwidth]{images/number_of_bell_pairs.png}}
-  \caption{The figure of the total number of allocated Bell pairs in the last 40 timestamps}
+  \centerline{\includegraphics[width=.6\columnwidth]{images/result3.png}}
+  \caption{The figure of the number of link-level Bell pairs allocated to each RuleSet}
+  \label{fig:result3}
 \end{figure}
+
+The number of link-level Bell pairs generated in each round is twice as many as how many it is required by each RuleSet.
+In the two previous experiments, one hundred link-level Bell pairs are generated in each round and more than one hundred link-level Bell pairs are allocated to a single RuleSet, which means that it takes more than one round of the generation of link-level Bell pairs until the execution of each RuleSet is terminated.
+However, this experiment takes only one round of the generation of link-level Bell pairs until a single RuleSet is successfully executed.  This means that it is more time-efficient if the number of link-level Bell pairs generated in each round exceeds that of the total number of those required by a single RuleSet. 
+
 
 
 
