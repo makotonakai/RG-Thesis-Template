@@ -1,4 +1,4 @@
-\documentclass[12pt,dvipdfmx]{report}
+\documentclass[12pt,dvipdfmx,a4paper]{report}
 \usepackage{comment}
 \usepackage{./sty/eclepsf}
 \usepackage{tascmac}
@@ -30,6 +30,7 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{array}
+\usepackage{amsthm}
 
 \AtBeginDvi{\special{pdf:tounicode EUC-UCS2}}
 
@@ -42,7 +43,9 @@
 \usepackage{listings,./sty/jlisting}
 \usepackage{float}
 \usepackage{tabularx}
+\usepackage{setspace}
 \graphicspath{ {./images/} }
+\newtheorem{theorem}{Theorem}
 
 \def\lstlistingname{プログラム}
 
@@ -128,7 +131,7 @@
 \input{src/related-works}
 \input{src/evaluation}
 \input{src/conclusion}
-\input{src/appendix}
+% \input{src/appendix}
 \input{src/acknowledgement}
 
 % \renewcommand{\thechapter}{\Alph{chapter}}
